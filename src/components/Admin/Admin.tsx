@@ -8,7 +8,6 @@ import { PrintBookingAdmin } from "./PrintBookingAdmin";
 export function Admin() {
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
   const [deleteBoolean, setDeleteBoolean] = useState(false);
-  let number = 0;
   useEffect(() => {
     axios
       .get<IBooking[]>(
