@@ -95,5 +95,10 @@ export function Booking() {
       });
   }, []);
 
-  return <>Booking works.</>;
+  return (
+    <div>
+      <select name="" id="">
+      </select>
+    </div>
+  )
 }
