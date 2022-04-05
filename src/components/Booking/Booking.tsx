@@ -22,26 +22,44 @@ export function Booking() {
   //     });
   // }, []);
 
-  //   useEffect(() => {
-  //     axios
-  //       .post(
-  //         "https://school-restaurant-api.azurewebsites.net/booking/create",
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "https://school-restaurant-api.azurewebsites.net/booking/create",
 
-  //         {
-  //           restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-  //           date: new Date(),
-  //           time: "21:00",
-  //           numberOfGuests: 4,
-  //           customer: {},
+  //       {
+  //         restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+  //         date: "2022-04-07",
+  //         time: "21:00",
+  //         numberOfGuests: 4,
+  //         customer: {
+  //           name: "Husman",
+  //           lastname: "Pontus",
+  //           email: "Marcus@somedomain.com",
+  //           phone: "070-0000111",
   //         },
+  //       },
 
-  //         { headers: { "Content-Type": "application/json" } }
-  //       )
+  //       { headers: { "Content-Type": "application/json" } }
+  //     )
 
-  //       .then((response) => {
-  //         console.log(response.data);
-  //       });
-  //   }, []);
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .delete(
+  //       "https://school-restaurant-api.azurewebsites.net/booking/delete/624c265b8a44bb4d78daed56",
+
+  //       { headers: { "Content-Type": "application/json" } }
+  //     )
+
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     });
+  // }, []);
 
   //   useEffect(() => {
   //     axios
@@ -63,6 +81,19 @@ export function Booking() {
   //         console.log(response.data);
   //       });
   //   }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+
+        { headers: { "Content-Type": "application/json" } }
+      )
+
+      .then((response) => {
+        console.log(response.data);
+      });
+  }, []);
 
   return <>Booking works.</>;
 }
