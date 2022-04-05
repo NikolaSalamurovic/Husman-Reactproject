@@ -124,9 +124,10 @@ export function Booking() {
             <input type="text" placeholder="lastname" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, lastname:e.target.value}})}/>
             <input type="tel" placeholder="phone" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, phone:e.target.value}})}/>
             <input type="text" placeholder="email" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, email:e.target.value}})}/>
+            <button onClick={uploadBooking}>Boka</button> 
           </>
         }
-        <button onClick={uploadBooking}>Boka</button>
+        
       </div>
     </>
   )
