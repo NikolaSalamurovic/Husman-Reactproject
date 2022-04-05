@@ -111,8 +111,9 @@ export function Booking() {
           )
         })}
         { selectedDate.length>0 && customerInfo.time.length>0 &&
-          <>
+          <div>
             <select name="" id="" onChange={(e) => setCustomerInfo({...customerInfo, numberOfGuests:+e.target.value})}>
+              <option value="0">Number of Guests</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -125,7 +126,7 @@ export function Booking() {
             <input type="tel" placeholder="phone" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, phone:e.target.value}})}/>
             <input type="text" placeholder="email" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, email:e.target.value}})}/>
             <button onClick={uploadBooking}>Boka</button> 
-          </>
+          </div>
         }
         
       </div>
