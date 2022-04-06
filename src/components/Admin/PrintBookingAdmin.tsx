@@ -64,7 +64,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   }, []);
 
   function deleteBooking(bookingID: any) {
-    console.log(bookingID);
     props.deleteBookingAPI(bookingID);
   }
   return (

@@ -21,7 +21,7 @@ export interface IBookingCustomer {
 export function Admin() {
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
   const [deleteBoolean, setDeleteBoolean] = useState(false);
-  const [booleanTest, setBooleanTest] = useState(false);
+  const [renderBoolean, setRenderBoolean] = useState(false);
   const [printBookings, setPrintBookings] = useState<any>(<></>);
   // useEffect(() => {
   //   axios
@@ -67,19 +67,17 @@ export function Admin() {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
-        console.log(response.data);
         setBookingArray(response.data);
-        if (booleanTest === false) {
-          setBooleanTest(true);
+        if (renderBoolean === false) {
+          setRenderBoolean(true);
         } else {
-          setBooleanTest(false);
+          setRenderBoolean(false);
         }
       });
   }, [deleteBoolean]);
 
   useEffect(() => {
     let bookings = bookingArray?.map((booking) => {
-      console.log(booking);
       return (
         <PrintBookingAdmin
           key={booking._id}
@@ -89,7 +87,7 @@ export function Admin() {
       );
     });
     setPrintBookings(bookings);
-  }, [booleanTest]);
+  }, [renderBoolean]);
 
   function deleteBooking(bookingid: any) {
     for (let i = 0; i < bookingArray.length; i++) {
@@ -107,7 +105,6 @@ export function Admin() {
             { headers: { "Content-Type": "application/json" } }
           )
           .then((response) => {
-            console.log(response.data);
             if (deleteBoolean === true) {
               setDeleteBoolean(false);
             } else {
