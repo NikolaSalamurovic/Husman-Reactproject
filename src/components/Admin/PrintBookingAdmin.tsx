@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { setConstantValue } from "typescript";
 import { IBooking } from "../../models/IBooking";
 import { ICustomer } from "../../models/ICustomer";
+import { CustomerService } from "../../services/CustomerService";
 
 export interface IPrintBooking {
   booking: IBooking;
@@ -26,7 +27,21 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     useState<IBookingCustomer>() || undefined;
 
   useEffect(() => {
-    console.log("HEHEHEHEH");
+    //TILL SERVICE
+    // let service = new CustomerService();
+    // service.getCustomer(props.booking.customerId).then((customer) => {
+    //   setBookingCustomer({
+    //     _id: props.booking._id,
+    //     date: props.booking.date,
+    //     time: props.booking.time,
+    //     numberOfGuests: props.booking.numberOfGuests,
+    //     customer: {
+    //       name: customer[0].lastname,
+    //       email: customer[0].email,
+    //       phone: customer[0].phone,
+    //     },
+    //   });
+    // });
     axios
       .get<ICustomer[]>(
         "https://school-restaurant-api.azurewebsites.net/customer/" +

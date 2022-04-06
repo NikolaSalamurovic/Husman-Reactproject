@@ -36,7 +36,7 @@ export function Admin() {
   //         customer: {
   //           name: "Husman",
   //           lastname: "Felicia",
-  //           email: "Olle1234566891011@some.com",
+  //           email: "Maja123456@some.com",
   //           phone: "070-0000111",
   //         },
   //       },
@@ -48,17 +48,33 @@ export function Admin() {
   //       console.log(response.data);
   //     });
   // }, []);
+
   useEffect(() => {
-    let service = new BookingService();
-    service.getBookings().then((booking) => {
-      console.log(booking);
-      setBookingArray(booking);
-      if (booleanTest === false) {
-        setBooleanTest(true);
-      } else {
-        setBooleanTest(false);
-      }
-    });
+    //TILL SERVICE
+    //   let service = new BookingService();
+    //   service.getBookings().then((booking) => {
+    //     console.log(booking);
+    //     setBookingArray(booking);
+    //     if (booleanTest === false) {
+    //       setBooleanTest(true);
+    //     } else {
+    //       setBooleanTest(false);
+    //     }
+    //   });
+    axios
+      .get<IBooking[]>(
+        "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setBookingArray(response.data);
+        if (booleanTest === false) {
+          setBooleanTest(true);
+        } else {
+          setBooleanTest(false);
+        }
+      });
   }, [deleteBoolean]);
 
   useEffect(() => {
@@ -79,11 +95,22 @@ export function Admin() {
   function deleteBooking(bookingid: any) {
     for (let i = 0; i < bookingArray.length; i++) {
       if (bookingid === bookingArray[i]._id) {
-        let service = new BookingService();
-        service.deleteBookings(bookingid).then((response) => {
-          console.log(response);
-          setDeleteBoolean(true);
-        });
+        //TILL SERVICE
+        // let service = new BookingService();
+        // service.deleteBookings(bookingid).then((response)=>{
+        //   console.log(response);
+        //     setDeleteBoolean(true);
+        // })
+        axios
+          .delete(
+            "https://school-restaurant-api.azurewebsites.net/booking/delete/" +
+              bookingid,
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((response) => {
+            console.log(response.data);
+            setDeleteBoolean(true);
+          });
       }
     }
   }
