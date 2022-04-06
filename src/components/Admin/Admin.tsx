@@ -36,7 +36,7 @@ export function Admin() {
   //         customer: {
   //           name: "Husman",
   //           lastname: "Felicia",
-  //           email: "Maja123456@some.com",
+  //           email: "John123456@some.com",
   //           phone: "070-0000111",
   //         },
   //       },
@@ -78,12 +78,11 @@ export function Admin() {
   }, [deleteBoolean]);
 
   useEffect(() => {
-    console.log("hejhej");
-
-    let bookings = bookingArray?.map((booking, i) => {
+    let bookings = bookingArray?.map((booking) => {
+      console.log(booking);
       return (
         <PrintBookingAdmin
-          key={i}
+          key={booking._id}
           booking={booking}
           deleteBookingAPI={deleteBooking}
         ></PrintBookingAdmin>
@@ -109,7 +108,11 @@ export function Admin() {
           )
           .then((response) => {
             console.log(response.data);
-            setDeleteBoolean(true);
+            if (deleteBoolean === true) {
+              setDeleteBoolean(false);
+            } else {
+              setDeleteBoolean(true);
+            }
           });
       }
     }

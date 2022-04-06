@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { setConstantValue } from "typescript";
 import { IBooking } from "../../models/IBooking";
 import { ICustomer } from "../../models/ICustomer";
-import { CustomerService } from "../../services/CustomerService";
 
 export interface IPrintBooking {
   booking: IBooking;
@@ -64,7 +62,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         });
       });
   }, []);
-  //BUGG VID DELETE, TAR BORT RÄTT I API MEN FEL I LISTA SOM VISAS
+
   function deleteBooking(bookingID: any) {
     console.log(bookingID);
     props.deleteBookingAPI(bookingID);
@@ -89,85 +87,3 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     </>
   );
 }
-
-// import { useState } from "react";
-
-// import { IBooking } from "../../models/IBooking";
-// import { ICustomer } from "../../models/ICustomer";
-
-// export interface IBookingCustomer {
-//   booking: IBooking;
-//   customer: [ICustomer];
-// }
-
-// export interface IPrintBooking {
-//   bookingcustomer: IBookingCustomer;
-//   deleteBookingAPI(booking: any): void;
-// }
-// export interface IPrintBooking {
-//   customer: ICustomer[];
-//   booking: IBooking;
-
-//   deleteBookingAPI(booking: IBooking): void;
-// }
-// export function PrintBookingAdmin(props: IPrintBooking) {
-//   const [customer1, setCustomer1] = useState<ICustomer[]>();
-
-//   setCustomer1(props.customer);
-//   function deleteBooking(booking: IBooking) {
-//     props.deleteBookingAPI(booking);
-//   }
-
-//   let customerperson = props.customer.map((customeritem, i) => {
-//     if (props.booking.customerId === customeritem._id) {
-//       return (
-//         <li key={i}>
-//           <p>Sällskap: {customeritem.lastname}</p>
-//           <p>E-mail{customeritem.email}</p>
-//         </li>
-//       );
-//     }
-//   });
-
-//   return (
-//     <>
-//       <ul>
-//         <li>Sällskap: {props.booking._id}</li>
-//         <li>Datum: {props.booking.date}</li>
-//         <li>Tid: {props.booking.time}</li>
-//         <li>Antal gäster: {props.booking.numberOfGuests}</li>
-//         {/* <li>Sällskap: {customerItem.lastname}</li>
-//         <li>Sällskap:{customerItem.email}</li> */}
-//         {customerperson}
-//         <button
-//           onClick={() => {
-//             deleteBooking(props.booking);
-//           }}
-//         >
-//           Ta bort bokning
-//         </button>
-//       </ul>
-//     </>
-//   );
-// function deleteBooking(booking: any) {
-//   props.deleteBookingAPI(booking);
-// }
-// console.log("hej");
-// return (
-//   <>
-//     <ul>
-//       <li>Datum: {props.bookingcustomer.booking.date}</li>
-//       <li>Tid: {props.bookingcustomer.booking.time}</li>
-//       <li>Antal gäster: {props.bookingcustomer.booking.numberOfGuests}</li>
-//       <li>Gäst: {props.bookingcustomer.customer[0].lastname}</li>
-//       <button
-//         onClick={() => {
-//           deleteBooking(props.bookingcustomer);
-//         }}
-//       >
-//         Ta bort bokning
-//       </button>
-//     </ul>
-//   </>
-// );
-// }
