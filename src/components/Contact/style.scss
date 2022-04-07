@@ -1,21 +1,26 @@
 .container {
     display: flex;
     width: 1000px;
+    margin: 70px auto 0;
     justify-content: space-around;
     .sentMessage {
-        display: flex;
-        flex-direction: column;
+        width: 400px;
         p {
-            margin: 5px;
+            margin: 10px 0;
             padding: 0;
-            width: 200px;
+        }
+        .bold {
+            font-weight: 500;
+        }
+        .boldUnderline {
+            font-weight: 500;
+            border-bottom: 2px solid #f05545;
         }
     }
     .form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 400px;
         p {
             margin: 0;
             padding: 0;
@@ -24,10 +29,68 @@
         }
         input {
             margin: 4px 0 20px 0;
+            height: 30px;
+            width: 390px;
+            border: 2px solid #4f5b62;
+            border-radius: 5px;
+            background-color: white;
+            padding: 0 5px;
+            transition: ease-in-out 250ms;
+            &:focus {
+                background-color: rgb(244, 244, 244);
+                outline: none;
+            }
+            &:hover {
+                background-color: rgb(244, 244, 244);
+            }
         }
-        .messageBox {
-            margin: 20px;
+        textarea {
+            margin: 4px 0 20px 0;
+            resize: none;
             height: 100px;
+            border: 2px solid #4f5b62;
+            background-color: white;
+            border-radius: 5px;
+            width: 390px;
+            font-family: inherit;
+            padding: 5px;
+            font-size: 0.9rem;
+            transition: ease-in-out 250ms;
+            &:focus {
+                outline: none;
+                background-color: rgb(244, 244, 244);
+            }
+            &:hover {
+                background-color: rgb(244, 244, 244);
+            }
+        }
+    }
+    .restaurantInfo {
+        border-left: 2px solid #f05545;
+        padding: 0 0 0 16px;
+        height: 140px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        .bold {
+            font-weight: 500;
+        }
+        p {
+            margin: 5px 0;
+        }
+    }
+    button {
+        height: 35px;
+        background-color: #4f5b62;
+        color: white;
+        border-radius: 5px;
+        border: 2px solid #000a12;
+        cursor: pointer;
+        transition: ease-in-out 250ms;
+        &:hover {
+            border: 2px solid #4f5b62;
+            background-color: #263238;
         }
     }
 }

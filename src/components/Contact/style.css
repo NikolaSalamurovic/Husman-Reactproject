@@ -3,24 +3,27 @@
   display: -ms-flexbox;
   display: flex;
   width: 1000px;
+  margin: 70px auto 0;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
 
 .container .sentMessage {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  width: 400px;
 }
 
 .container .sentMessage p {
-  margin: 5px;
+  margin: 10px 0;
   padding: 0;
-  width: 200px;
+}
+
+.container .sentMessage .bold {
+  font-weight: 500;
+}
+
+.container .sentMessage .boldUnderline {
+  font-weight: 500;
+  border-bottom: 2px solid #f05545;
 }
 
 .container .form {
@@ -34,7 +37,6 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 400px;
 }
 
 .container .form p {
@@ -46,10 +48,89 @@
 
 .container .form input {
   margin: 4px 0 20px 0;
+  height: 30px;
+  width: 390px;
+  border: 2px solid #4f5b62;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0 5px;
+  -webkit-transition: ease-in-out 250ms;
+  transition: ease-in-out 250ms;
 }
 
-.container .form .messageBox {
-  margin: 20px;
+.container .form input:focus {
+  background-color: #f4f4f4;
+  outline: none;
+}
+
+.container .form input:hover {
+  background-color: #f4f4f4;
+}
+
+.container .form textarea {
+  margin: 4px 0 20px 0;
+  resize: none;
   height: 100px;
+  border: 2px solid #4f5b62;
+  background-color: white;
+  border-radius: 5px;
+  width: 390px;
+  font-family: inherit;
+  padding: 5px;
+  font-size: 0.9rem;
+  -webkit-transition: ease-in-out 250ms;
+  transition: ease-in-out 250ms;
+}
+
+.container .form textarea:focus {
+  outline: none;
+  background-color: #f4f4f4;
+}
+
+.container .form textarea:hover {
+  background-color: #f4f4f4;
+}
+
+.container .restaurantInfo {
+  border-left: 2px solid #f05545;
+  padding: 0 0 0 16px;
+  height: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .restaurantInfo .bold {
+  font-weight: 500;
+}
+
+.container .restaurantInfo p {
+  margin: 5px 0;
+}
+
+.container button {
+  height: 35px;
+  background-color: #4f5b62;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid #000a12;
+  cursor: pointer;
+  -webkit-transition: ease-in-out 250ms;
+  transition: ease-in-out 250ms;
+}
+
+.container button:hover {
+  border: 2px solid #4f5b62;
+  background-color: #263238;
 }
 /*# sourceMappingURL=style.css.map */
