@@ -36,7 +36,7 @@ export function Admin() {
   //         customer: {
   //           name: "Husman",
   //           lastname: "Felicia",
-  //           email: "John123456@some.com",
+  //           email: "Jessica123456@some.com",
   //           phone: "070-0000111",
   //         },
   //       },

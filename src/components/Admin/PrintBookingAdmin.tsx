@@ -82,6 +82,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         >
           Ta bort bokning
         </button>
+        <button>Ändra bokning</button>
       </ul>
     </>
   );
