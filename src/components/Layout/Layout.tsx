@@ -5,23 +5,26 @@ export function Layout() {
   return (
     <>
       <header>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/Booking">Booking</Link>
-          </li>
-          <li>
-            <Link to="/Contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/Admin">Admin</Link>
-          </li>
-          <li>
-            <Link to="/About">About us</Link>
-          </li>
-        </ul>
+        <h1>Husman</h1>
+        <nav>
+          <ul>
+            <Link to="/">
+              <li>Home</li>
+            </Link>
+            <Link to="/Booking">
+              <li>Booking</li>
+            </Link>
+            <Link to="/Contact">
+              <li>Contact</li>
+            </Link>
+            <Link to="/Admin">
+              <li>Admin</li>
+            </Link>
+            <Link to="/About">
+              <li>About us</li>
+            </Link>
+          </ul>
+        </nav>
       </header>
       <main>
         <Outlet></Outlet>
