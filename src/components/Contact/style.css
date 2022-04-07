@@ -46,27 +46,6 @@
   font-size: 0.8rem;
 }
 
-.container .form input {
-  margin: 4px 0 20px 0;
-  height: 30px;
-  width: 390px;
-  border: 2px solid #4f5b62;
-  border-radius: 5px;
-  background-color: white;
-  padding: 0 5px;
-  -webkit-transition: ease-in-out 250ms;
-  transition: ease-in-out 250ms;
-}
-
-.container .form input:focus {
-  background-color: #f4f4f4;
-  outline: none;
-}
-
-.container .form input:hover {
-  background-color: #f4f4f4;
-}
-
 .container .form textarea {
   margin: 4px 0 20px 0;
   resize: none;
@@ -118,19 +97,7 @@
   margin: 5px 0;
 }
 
-.container button {
-  height: 35px;
-  background-color: #4f5b62;
-  color: white;
-  border-radius: 5px;
-  border: 2px solid #000a12;
-  cursor: pointer;
-  -webkit-transition: ease-in-out 250ms;
-  transition: ease-in-out 250ms;
-}
-
-.container button:hover {
-  border: 2px solid #4f5b62;
-  background-color: #263238;
+.container .buttonMargin {
+  margin: 20px 0 0 0;
 }
 /*# sourceMappingURL=style.css.map */

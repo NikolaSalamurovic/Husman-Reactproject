@@ -2,6 +2,9 @@ header {
   background-color: #4f5b62;
   margin: 0;
   height: 200px;
+}
+
+header div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,9 +14,24 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
 }
 
-header nav ul {
+header div h1 {
+  color: white;
+  font-weight: 100;
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+}
+
+header div nav {
+  margin: 0 50px 0 0;
+}
+
+header div nav ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -22,8 +40,15 @@ header nav ul {
   display: flex;
 }
 
-header nav ul li {
+header div nav ul li {
   margin: 10px;
   color: white;
+  -webkit-transition: ease-in-out 250ms;
+  transition: ease-in-out 250ms;
+  border-bottom: 2px solid #4f5b62;
+}
+
+header div nav ul li:hover {
+  border-bottom: 2px solid #b71c1c;
 }
 /*# sourceMappingURL=layout.css.map */

@@ -1,4 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { StyledButton } from "../StyledComponents/StyledButton";
+import { StyledInput } from "../StyledComponents/StyledInput";
 import "./style.css";
 
 interface INewUserMessage {
@@ -55,24 +57,24 @@ export function Contact() {
           <p><span className="boldUnderline">E-mail:</span> {newUserMessage.email}</p>
           <p><span className="boldUnderline">Telefon:</span> {newUserMessage.phone}</p>
           <p><span className="boldUnderline">Meddelande:</span><br/>{newUserMessage.message}</p>
-          <button onClick={sendNewMessage}>Skicka ett till meddelande</button>
+          <StyledButton className="buttonMargin" onClick={sendNewMessage}>Skicka ett till meddelande</StyledButton>
         </div>}
 
       {!isMessageSent && 
         <form className="form">
           <p className="requiredWarning">*Obligatoriskt fält*</p>
-          <input type="text" placeholder="Namn" name="name" value={newUserMessage.name} onChange={handleInputChange}/>
+          <StyledInput type="text" placeholder="Namn" name="name" value={newUserMessage.name} onChange={handleInputChange}/>
 
           <p className="requiredWarning">*Obligatoriskt fält*</p>
-          <input type="text" placeholder="E-mail" name="email" value={newUserMessage.email} onChange={handleInputChange}/>
+          <StyledInput type="text" placeholder="E-mail" name="email" value={newUserMessage.email} onChange={handleInputChange}/>
 
           <p className="requiredWarning">*Obligatoriskt fält*</p>
-          <input type="text" placeholder="Telefon" name="phone" value={newUserMessage.phone} onChange={handleInputChange}/>
+          <StyledInput type="text" placeholder="Telefon" name="phone" value={newUserMessage.phone} onChange={handleInputChange}/>
 
           <p className="requiredWarning">*Obligatoriskt fält*</p>
           <textarea placeholder="Meddelande" name="message" value={newUserMessage.message} onChange={handleTextAreaChange}/>
 
-          <button onClick={sendMessage}>Skicka meddelande</button>
+          <StyledButton onClick={sendMessage}>Skicka meddelande</StyledButton>
         </form>}
 
       <div className="restaurantInfo">
