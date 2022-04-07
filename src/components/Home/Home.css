@@ -23,44 +23,44 @@
 
 @-webkit-keyframes slidebd {
   0% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   30% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   31% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   63% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   66% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   97% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   100% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -68,44 +68,44 @@
 
 @keyframes slidebd {
   0% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   30% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   31% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   63% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   66% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   97% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
   100% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(225, 27, 27, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(225, 27, 27, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
