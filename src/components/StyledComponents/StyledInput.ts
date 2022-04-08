@@ -16,4 +16,7 @@ export const StyledInput = styled.input`
     :hover {
         background-color: rgb(244, 244, 244);
     }
+    ::placeholder {
+        color: lightgrey;
+    }
 `

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { StyledButton } from "../StyledComponents/StyledButton";
 import { StyledInput } from "../StyledComponents/StyledInput";
 import "./style.css";
@@ -17,25 +17,25 @@ export function Contact() {
     email: "",
     phone:"",
     message:""
-   });
+  });
   
-   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setNewUserMessage({...newUserMessage, [e.target.name]: e.target.value});
-   };
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+   setNewUserMessage({...newUserMessage, [e.target.name]: e.target.value});
+  };
 
-   function handleTextAreaChange(e: ChangeEvent<HTMLTextAreaElement>) {
-    setNewUserMessage({...newUserMessage, [e.target.name]: e.target.value})
-   }
-
-   function sendMessage() {
+  function handleTextAreaChange(e: ChangeEvent<HTMLTextAreaElement>) {
+   setNewUserMessage({...newUserMessage, [e.target.name]: e.target.value})
+  };
+  
+  function sendMessage() {
     if (
        newUserMessage.name === "" ||
        newUserMessage.email === "" ||
        newUserMessage.phone === "" ||
        newUserMessage.message === ""
-     ) return
-     setIsMessageSent(!isMessageSent)
-   };
+      ) return
+      setIsMessageSent(!isMessageSent)
+  };
 
    function sendNewMessage() {
      setNewUserMessage({
@@ -62,16 +62,29 @@ export function Contact() {
 
       {!isMessageSent && 
         <form className="form">
-          <p className="requiredWarning">*Obligatoriskt fält*</p>
+
+          <div>
+            <label>Namn</label>
+            {!newUserMessage.name && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+          </div>
           <StyledInput type="text" placeholder="Namn" name="name" value={newUserMessage.name} onChange={handleInputChange}/>
 
-          <p className="requiredWarning">*Obligatoriskt fält*</p>
+          <div>
+            <label>E-mail</label>
+            {!newUserMessage.email && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+          </div>
           <StyledInput type="text" placeholder="E-mail" name="email" value={newUserMessage.email} onChange={handleInputChange}/>
 
-          <p className="requiredWarning">*Obligatoriskt fält*</p>
+          <div>
+            <label>Telefon</label>
+            {!newUserMessage.phone && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+          </div>
           <StyledInput type="text" placeholder="Telefon" name="phone" value={newUserMessage.phone} onChange={handleInputChange}/>
 
-          <p className="requiredWarning">*Obligatoriskt fält*</p>
+          <div>
+            <label>Meddelande</label>
+            {!newUserMessage.message && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+          </div>
           <textarea placeholder="Meddelande" name="message" value={newUserMessage.message} onChange={handleTextAreaChange}/>
 
           <StyledButton onClick={sendMessage}>Skicka meddelande</StyledButton>

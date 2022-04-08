@@ -39,11 +39,22 @@
           justify-content: center;
 }
 
+.container .form div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .form div label {
+  font-size: 0.9rem;
+}
+
 .container .form p {
   margin: 0;
   padding: 0;
   color: red;
   font-size: 0.8rem;
+  margin: 0 0 0 10px;
 }
 
 .container .form textarea {

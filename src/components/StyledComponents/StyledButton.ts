@@ -6,6 +6,7 @@ export const StyledButton = styled.button`
     color: white;
     border-radius: 5px;
     border: 2px solid #000a12;
+    padding: 0 10px;
     cursor: pointer;
     transition: ease-in-out 250ms;
     :hover {
