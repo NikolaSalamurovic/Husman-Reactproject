@@ -1,0 +1,17 @@
+.containerBooking {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px;
+  padding: 10px;
+  border: 5px solid purple;
+}
+
+.nameBooking {
+  font-weight: 800;
+}
+
+.buttonTime:focus {
+  background-color: yellow;
+}
+/*# sourceMappingURL=PrintBooking.css.map */

@@ -1,34 +1,37 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Home.css";
-
+import image1 from "./assets/honey-gf7e3a6d22_1280.jpg";
+import image2 from "./assets/vegetable-g54055c845_1280.jpg";
+import image3 from "./assets/spaghetti-g8ceb99e6c_1280.jpg";
+import image4 from "./assets/pexels-lisa-fotios-918327.jpg";
+import image5 from "./assets/pexels-jonathan-borba-2983101.jpg";
 export function Home() {
-  const navigation = useNavigate();
-  function navigateAbout() {
-    navigation("/About");
-  }
-  function navigateBooking() {
-    navigation("/Booking");
-  }
-  function navigateContact() {
-    navigation("/Contact");
-  }
-
   return (
     <>
       <section>
-        <div className="container_home">
+        {/* <div className="container_home">
           <div className="slide_show">
-            <article className="welcome_card">
-              <h1>Välkommen till Husman</h1>
-              <p>Fine-dining Husman av bästa kvalitet!</p>
-              <div className="container_buttons">
-                <button onClick={navigateAbout}>Om oss</button>
-                <button onClick={navigateBooking}>Bokning</button>
-                <button onClick={navigateContact}>Contact</button>
-              </div>
-            </article>
+            <div class="slide first"></div>
           </div>
+        </div> */}
+        <h1>HUSMAN</h1>
+        <div className="slider">
+          <figure>
+            <div className="slide">
+              <img src={image1} alt="" />
+            </div>
+            <div className="slide">
+              <img src={image2} alt="" />
+            </div>
+            <div className="slide">
+              <img src={image3} alt="" />
+            </div>
+            <div className="slide">
+              <img src={image4} alt="" />
+            </div>
+            <div className="slide">
+              <img src={image5} alt="" />
+            </div>
+          </figure>
         </div>
       </section>
     </>

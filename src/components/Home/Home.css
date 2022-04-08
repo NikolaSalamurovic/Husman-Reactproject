@@ -1,169 +1,182 @@
-.slide_show {
-  height: 80vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-animation-name: slidebd;
-          animation-name: slidebd;
-  -webkit-animation-duration: 20s;
-          animation-duration: 20s;
-  -webkit-animation-timing-function: forwards;
-          animation-timing-function: forwards;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-@-webkit-keyframes slidebd {
-  0% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  30% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  31% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  63% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  66% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  97% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  100% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-}
-
-@keyframes slidebd {
-  0% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  30% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  31% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  63% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/spaghetti-g8ceb99e6c_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  66% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  97% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/vegetable-g54055c845_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/vegetable-g54055c845_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  100% {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(183, 28, 28, 0.5))), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(183, 28, 28, 0.5)), url("assets/honey-gf7e3a6d22_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-}
-
-.welcome_card {
-  width: 40%;
-  padding: 30px;
-  height: auto;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.797);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-shadow: 0px 0px 39px 20px rgba(255, 255, 255, 0.79);
-          box-shadow: 0px 0px 39px 20px rgba(255, 255, 255, 0.79);
-}
-
-.welcome_card h1 {
-  color: #263238;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 2rem;
-}
-
-.welcome_card p {
-  font-family: "Courier New", Courier, monospace;
-}
-
-.welcome_card .container_buttons {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.welcome_card .container_buttons button {
-  background-color: #b71c1c;
+h1 {
+  position: absolute;
+  opacity: 0;
+  top: 400px;
+  left: 330px;
+  z-index: 1;
+  font-size: 10rem;
   color: white;
-  padding: 5px 10px 5px 10px;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px #4f5b627c;
-          box-shadow: 2px 2px #4f5b627c;
+  text-shadow: 2px 2px 16px #ffffff;
   font-family: "Courier New", Courier, monospace;
+  -webkit-animation-delay: 5s;
+          animation-delay: 5s;
+  -webkit-animation: heading 15s;
+          animation: heading 15s;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+.slider figure div {
+  float: left;
+  width: 20%;
+}
+
+.slider figure img {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  float: left;
+}
+
+.slider figure {
+  position: relative;
+  width: 500%;
+  margin: 0;
+  -webkit-animation: animate 40s infinite;
+          animation: animate 40s infinite;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    left: 0%;
+  }
+  10% {
+    left: 0%;
+  }
+  16% {
+    left: -100%;
+  }
+  22% {
+    left: -100%;
+  }
+  28% {
+    left: -200%;
+  }
+  34% {
+    left: -200%;
+  }
+  40% {
+    left: -300%;
+  }
+  46% {
+    left: -300%;
+  }
+  54% {
+    left: -400%;
+  }
+  58% {
+    left: -400%;
+  }
+  64% {
+    left: -300%;
+  }
+  70% {
+    left: -300%;
+  }
+  76% {
+    left: -200%;
+  }
+  82% {
+    left: -200%;
+  }
+  88% {
+    left: -100%;
+  }
+  94% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes animate {
+  0% {
+    left: 0%;
+  }
+  10% {
+    left: 0%;
+  }
+  16% {
+    left: -100%;
+  }
+  22% {
+    left: -100%;
+  }
+  28% {
+    left: -200%;
+  }
+  34% {
+    left: -200%;
+  }
+  40% {
+    left: -300%;
+  }
+  46% {
+    left: -300%;
+  }
+  54% {
+    left: -400%;
+  }
+  58% {
+    left: -400%;
+  }
+  64% {
+    left: -300%;
+  }
+  70% {
+    left: -300%;
+  }
+  76% {
+    left: -200%;
+  }
+  82% {
+    left: -200%;
+  }
+  88% {
+    left: -100%;
+  }
+  94% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@-webkit-keyframes heading {
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes heading {
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 /*# sourceMappingURL=Home.css.map */
