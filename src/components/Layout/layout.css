@@ -14,7 +14,7 @@ header div {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 1000px;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto;
 }
@@ -23,7 +23,7 @@ header div h1 {
   color: white;
   font-weight: 100;
   font-size: 4rem;
-  margin: 0;
+  margin: 0 0 0 50px;
   padding: 0;
 }
 
@@ -50,5 +50,49 @@ header div nav ul li {
 
 header div nav ul li:hover {
   border-bottom: 2px solid #b71c1c;
+}
+
+.tempIcon {
+  display: none;
+}
+
+.mobileMenuDeactive {
+  display: none;
+}
+
+.mobileMenuActive {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    height: 100px;
+  }
+  header nav {
+    display: none;
+  }
+  header .tempIcon {
+    display: block;
+    margin: 0 50px 0 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #6464af;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-transition: ease-in-out 250ms;
+    transition: ease-in-out 250ms;
+    cursor: pointer;
+  }
+  header .tempIcon:hover {
+    background-color: red;
+  }
 }
 /*# sourceMappingURL=layout.css.map */

@@ -159,7 +159,7 @@ export function Contact() {
         <p>Åregatan 1</p>
         <p>123 45</p>
         <p>Åre</p>
-        <p><span className="bold">Telefon:</span> 08 123 456 78</p>
+        <p><span className="bold">Telefon:</span> 123 456 78 90</p>
       </div>
 
     </div>
