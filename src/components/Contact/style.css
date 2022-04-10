@@ -17,15 +17,6 @@
   padding: 0;
 }
 
-.container .sentMessage .bold {
-  font-weight: 500;
-}
-
-.container .sentMessage .boldUnderline {
-  font-weight: 500;
-  border-bottom: 2px solid #f05545;
-}
-
 .container .form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,12 +40,20 @@
   font-size: 0.9rem;
 }
 
-.container .form p {
+.container .form .requiredWarning {
   margin: 0;
   padding: 0;
   color: red;
   font-size: 0.8rem;
   margin: 0 0 0 10px;
+}
+
+.container .form .requiredWarningForm {
+  margin: 10px 0 0 0;
+  padding: 0;
+  color: red;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .container .form textarea {
@@ -81,10 +80,26 @@
   background-color: #f4f4f4;
 }
 
+.container .form textarea::-webkit-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea:-ms-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea::-ms-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea::placeholder {
+  color: lightgray;
+}
+
 .container .restaurantInfo {
   border-left: 2px solid #f05545;
   padding: 0 0 0 16px;
-  height: 140px;
+  height: 180px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -110,5 +125,9 @@
 
 .container .buttonMargin {
   margin: 20px 0 0 0;
+}
+
+.bold {
+  font-weight: 500;
 }
 /*# sourceMappingURL=style.css.map */

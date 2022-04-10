@@ -9,13 +9,6 @@
             margin: 10px 0;
             padding: 0;
         }
-        .bold {
-            font-weight: 500;
-        }
-        .boldUnderline {
-            font-weight: 500;
-            border-bottom: 2px solid #f05545;
-        }
     }
     .form {
         display: flex;
@@ -27,12 +20,19 @@
                 font-size: 0.9rem;
             }
         }
-        p {
+        .requiredWarning {
             margin: 0;
             padding: 0;
             color: red;
             font-size: 0.8rem;
             margin: 0 0 0 10px;
+        }
+        .requiredWarningForm {
+            margin: 10px 0 0 0;
+            padding: 0;
+            color: red;
+            font-size: 0.8rem;
+            text-align: center;
         }
         textarea {
             margin: 4px 0 20px 0;
@@ -53,12 +53,15 @@
             &:hover {
                 background-color: rgb(244, 244, 244);
             }
+            &::placeholder {
+                color: lightgray;
+            }
         }
     }
     .restaurantInfo {
         border-left: 2px solid #f05545;
         padding: 0 0 0 16px;
-        height: 140px;
+        height: 180px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -73,4 +76,8 @@
     .buttonMargin {
         margin: 20px 0 0 0;
     }
+}
+
+.bold {
+    font-weight: 500;
 }

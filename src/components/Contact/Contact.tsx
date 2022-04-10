@@ -12,6 +12,11 @@ interface INewUserMessage {
 
 export function Contact() {
   const [isMessageSent, setIsMessageSent] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [isMessageValid, setIsMessageValid] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(true);
   const [newUserMessage, setNewUserMessage] = useState<INewUserMessage>({
     name: "",
     email: "",
@@ -26,16 +31,6 @@ export function Contact() {
   function handleTextAreaChange(e: ChangeEvent<HTMLTextAreaElement>) {
    setNewUserMessage({...newUserMessage, [e.target.name]: e.target.value})
   };
-  
-  function sendMessage() {
-    if (
-       newUserMessage.name === "" ||
-       newUserMessage.email === "" ||
-       newUserMessage.phone === "" ||
-       newUserMessage.message === ""
-      ) return
-      setIsMessageSent(!isMessageSent)
-  };
 
    function sendNewMessage() {
      setNewUserMessage({
@@ -43,8 +38,9 @@ export function Contact() {
       email: "",
       phone:"",
       message:""
-     })
-     setIsMessageSent(!isMessageSent)
+     });
+     setIsFormValid(true);
+     setIsMessageSent(!isMessageSent);
    };
 
   return (
@@ -53,48 +49,117 @@ export function Contact() {
       {isMessageSent && 
         <div className="sentMessage">
           <p className="bold">Tack för ditt meddelande!<br/>Vi återkopplar så snart som möjligt.</p>
-          <p><span className="boldUnderline">Namn:</span> {newUserMessage.name}</p>
-          <p><span className="boldUnderline">E-mail:</span> {newUserMessage.email}</p>
-          <p><span className="boldUnderline">Telefon:</span> {newUserMessage.phone}</p>
-          <p><span className="boldUnderline">Meddelande:</span><br/>{newUserMessage.message}</p>
+          <p><span className="bold">Namn:</span> {newUserMessage.name}</p>
+          <p><span className="bold">E-mail:</span> {newUserMessage.email}</p>
+          <p><span className="bold">Telefon:</span> {newUserMessage.phone}</p>
+          <p><span className="bold">Meddelande:</span><br/>{newUserMessage.message}</p>
           <StyledButton className="buttonMargin" onClick={sendNewMessage}>Skicka ett till meddelande</StyledButton>
         </div>}
 
       {!isMessageSent && 
-        <form className="form">
+        <form 
+        className="form" 
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          if(newUserMessage.name === "") { 
+            setIsNameValid(false);
+          } else {
+            setIsNameValid(true);
+          };
+
+          if(newUserMessage.email === "") { 
+            setIsEmailValid(false);
+          } else {
+            setIsEmailValid(true);
+          };
+
+          if(newUserMessage.phone === "") { 
+            setIsPhoneValid(false);
+          } else {
+            setIsPhoneValid(true);
+          };
+
+          if(newUserMessage.message === "") { 
+            setIsMessageValid(false);
+          } else {
+            setIsMessageValid(true);
+          };
+          
+          if(
+            newUserMessage.name === "" ||
+            newUserMessage.email === "" ||
+            newUserMessage.phone === "" ||
+            newUserMessage.message === ""
+          ) {
+            setIsFormValid(false);
+            return
+          };
+
+          setIsMessageSent(true)
+        }}>
 
           <div>
             <label>Namn</label>
-            {!newUserMessage.name && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+            {!isNameValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
           </div>
-          <StyledInput type="text" placeholder="Namn" name="name" value={newUserMessage.name} onChange={handleInputChange}/>
+          <StyledInput 
+            type="text" 
+            placeholder="Namn" 
+            name="name" 
+            value={newUserMessage.name} 
+            onChange={handleInputChange}
+            maxLength={40}
+          />
 
           <div>
             <label>E-mail</label>
-            {!newUserMessage.email && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+            {!isEmailValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
           </div>
-          <StyledInput type="text" placeholder="E-mail" name="email" value={newUserMessage.email} onChange={handleInputChange}/>
+          <StyledInput 
+            type="email" 
+            placeholder="E-mail" 
+            name="email" 
+            value={newUserMessage.email} 
+            onChange={handleInputChange}
+            maxLength={60}
+          />
 
           <div>
             <label>Telefon</label>
-            {!newUserMessage.phone && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+            {!isPhoneValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
           </div>
-          <StyledInput type="text" placeholder="Telefon" name="phone" value={newUserMessage.phone} onChange={handleInputChange}/>
+          <StyledInput 
+            type="text" 
+            placeholder="Telefon" 
+            name="phone" 
+            value={newUserMessage.phone} 
+            onChange={handleInputChange}
+            maxLength={12}
+          />
 
           <div>
             <label>Meddelande</label>
-            {!newUserMessage.message && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+            {!isMessageValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
           </div>
-          <textarea placeholder="Meddelande" name="message" value={newUserMessage.message} onChange={handleTextAreaChange}/>
+          <textarea 
+            placeholder="Meddelande" 
+            name="message" 
+            value={newUserMessage.message} 
+            onChange={handleTextAreaChange}
+            maxLength={200}
+          />
 
-          <StyledButton onClick={sendMessage}>Skicka meddelande</StyledButton>
+          <StyledButton>Skicka meddelande</StyledButton>
+          {!isFormValid && <p className="requiredWarningForm">*Fyll i obligatoriska fält*</p>}
         </form>}
 
       <div className="restaurantInfo">
-        <p className="bold">Du hittar oss på:</p>
+        <p className="bold">Kontaktinformation:</p>
         <p>Åregatan 1</p>
         <p>123 45</p>
         <p>Åre</p>
+        <p><span className="bold">Telefon:</span> 08 123 456 78</p>
       </div>
 
     </div>
