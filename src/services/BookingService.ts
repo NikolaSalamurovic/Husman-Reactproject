@@ -33,6 +33,29 @@ export class BookingService {
     return console.log(response.data);
   }
 
+  // async changeBookings() {
+  //   let restaurantid="624ac35fdf8a9fb11c3ea8ba"
+  //   let response = await axios.put<IBooking[]>(
+  //     "https://school-restaurant-api.azurewebsites.net/booking/update/624ac35fdf8a9fb11c3ea8ba",
+
+  //     {
+  //       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+  //       date: "2022-04-07",
+  //       time: "21:00",
+  //       numberOfGuests: 4,
+  //       customer: {
+  //         name: "Husman",
+  //         lastname: "Pontus",
+  //         email: "Marcus@somedomain.com",
+  //         phone: "070-0000111",
+  //       },
+  //     },
+
+  //     { headers: { "Content-Type": "application/json" } }
+  //   );
+  //   return console.log(response.data);
+  // }
+
   async deleteBookings(id: string) {
     let response = await axios.delete<IBooking[]>(
       "https://school-restaurant-api.azurewebsites.net/booking/delete/" + id,
