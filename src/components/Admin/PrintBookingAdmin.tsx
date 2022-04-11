@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
 import { ICustomer } from "../../models/ICustomer";
+import { StyledButton } from "../StyledComponents/StyledButton";
 import "./PrintBooking.css";
 
 export interface IPrintBooking {
@@ -138,14 +139,14 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           return dateItem.time == "21:00";
         });
         console.log(resultTime18.length);
-        if (resultTime18.length >= 2) {
+        if (resultTime18.length >= 15) {
           setFullTable18(true);
         } else {
           setFullTable18(false);
           setDateBooking(valueFromCalendar);
           setAbleButton(true);
         }
-        if (resultTime21.length >= 2) {
+        if (resultTime21.length >= 15) {
           setFullTable21(true);
         } else {
           setFullTable21(false);
@@ -172,13 +173,13 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           <li>Email: {bookingCustomer?.customer.email}</li>
           <li>Telefon: {bookingCustomer?.customer.phone}</li>
           <li>
-            <button
+            <StyledButton
               onClick={() => {
                 deleteBooking(bookingCustomer?._id);
               }}
             >
               Ta bort bokning
-            </button>
+            </StyledButton>
           </li>
           <li>
             <div>
@@ -228,7 +229,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   onChange={handleChange}
                 />
 
-                <button
+                <StyledButton
                   className="buttonSubmit"
                   disabled={!ableButton || !ableButton2 || !ableButton3}
                   onClick={(e) => {
@@ -242,7 +243,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   }}
                 >
                   Skicka ändring
-                </button>
+                </StyledButton>
               </form>
             </div>
           </li>

@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-h1 {
+.husmanTitle {
   position: absolute;
   opacity: 0;
   top: 40%;
@@ -23,7 +23,7 @@ h1 {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100vh;
+  height: 85vh;
 }
 
 .slider figure div {
@@ -189,7 +189,7 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-  h1 {
+  .husmanTitle {
     top: 50%;
     left: 20%;
     font-size: 4rem;

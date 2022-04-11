@@ -1,7 +1,8 @@
 header {
   background-color: #4f5b62;
   margin: 0;
-  height: 200px;
+  min-height: 100px;
+  height: 15vh;
 }
 
 header div {
