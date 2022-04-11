@@ -9,6 +9,7 @@ import "./Booking.css";
 import { useForm } from "react-hook-form";
 import { StyledButton } from "../StyledComponents/StyledButton";
 import { StyledInput } from "../StyledComponents/StyledInput";
+import { BookingService } from "../../services/BookingService";
 
 export function Booking() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -34,16 +35,20 @@ export function Booking() {
   }
 
   useEffect(() => {
-    axios
-      .get<IBooking[]>(
-        "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      setBookingArray(response);
+    });
+    // axios
+    //   .get<IBooking[]>(
+    //     "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
 
-        { headers: { "Content-Type": "application/json" } }
-      )
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
 
-      .then((response) => {
-        setBookingArray(response.data);
-      });
+    //   .then((response) => {
+    //     setBookingArray(response.data);
+    //   });
   }, []);
   useEffect(() => {
     renderTimeSlots();
@@ -87,33 +92,53 @@ export function Booking() {
   }
 
   function uploadBooking() {
-    axios
-      .post(
-        "https://school-restaurant-api.azurewebsites.net/booking/create",
+    let bookinginfo: IBookingUpload = {
+      restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+      date: customerInfo.date,
+      time: customerInfo.time,
+      numberOfGuests: customerInfo.numberOfGuests,
+      customer: {
+        name: customerInfo.customer.name,
+        lastname: customerInfo.customer.lastname,
+        email: customerInfo.customer.email,
+        phone: customerInfo.customer.phone,
+      },
+    };
+    let service = new BookingService();
+    service.postBookings(bookinginfo).then((response) => {
+      console.log(response);
+      alert(
+        "Du har nu bokat ett bord och kommer att skickas vidare till startsidan."
+      );
+      navigate("/");
+    });
+    // axios
+    //   .post(
+    //     "https://school-restaurant-api.azurewebsites.net/booking/create",
 
-        {
-          restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-          date: customerInfo.date,
-          time: customerInfo.time,
-          numberOfGuests: customerInfo.numberOfGuests,
-          customer: {
-            name: customerInfo.customer.name,
-            lastname: customerInfo.customer.lastname,
-            email: customerInfo.customer.email,
-            phone: customerInfo.customer.phone,
-          },
-        },
+    //     {
+    //       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+    //       date: customerInfo.date,
+    //       time: customerInfo.time,
+    //       numberOfGuests: customerInfo.numberOfGuests,
+    //       customer: {
+    //         name: customerInfo.customer.name,
+    //         lastname: customerInfo.customer.lastname,
+    //         email: customerInfo.customer.email,
+    //         phone: customerInfo.customer.phone,
+    //       },
+    //     },
 
-        { headers: { "Content-Type": "application/json" } }
-      )
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
 
-      .then((response) => {
-        console.log(response.data);
-        alert(
-          "Du har nu bokat ett bord och kommer att skickas vidare till startsidan."
-        );
-        navigate("/");
-      });
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     alert(
+    //       "Du har nu bokat ett bord och kommer att skickas vidare till startsidan."
+    //     );
+    //     navigate("/");
+    //   });
   }
 
   const {

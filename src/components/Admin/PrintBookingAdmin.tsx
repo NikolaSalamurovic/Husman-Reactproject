@@ -2,6 +2,8 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
 import { ICustomer } from "../../models/ICustomer";
+import { BookingService } from "../../services/BookingService";
+import { CustomerService } from "../../services/CustomerService";
 import { StyledButton } from "../StyledComponents/StyledButton";
 import "./PrintBooking.css";
 
@@ -55,42 +57,43 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   useEffect(() => {
     //TILL SERVICE
-    // let service = new CustomerService();
-    // service.getCustomer(props.booking.customerId).then((customer) => {
-    //   setBookingCustomer({
-    //     _id: props.booking._id,
-    //     date: props.booking.date,
-    //     time: props.booking.time,
-    //     numberOfGuests: props.booking.numberOfGuests,
-    //     customer: {
-    //       name: customer[0].lastname,
-    //       email: customer[0].email,
-    //       phone: customer[0].phone,
-    //     },
-    //   });
-    // });
-    axios
-      .get<ICustomer[]>(
-        "https://school-restaurant-api.azurewebsites.net/customer/" +
-          props.booking.customerId,
-
-        { headers: { "Content-Type": "application/json" } }
-      )
-
-      .then((response) => {
-        setBookingCustomer({
-          _id: props.booking._id,
-          date: props.booking.date,
-          time: props.booking.time,
-          numberOfGuests: props.booking.numberOfGuests,
-          customerId: props.booking.customerId,
-          customer: {
-            name: response.data[0].lastname,
-            email: response.data[0].email,
-            phone: response.data[0].phone,
-          },
-        });
+    let service = new CustomerService();
+    service.getCustomer(props.booking.customerId).then((customer) => {
+      setBookingCustomer({
+        _id: props.booking._id,
+        date: props.booking.date,
+        time: props.booking.time,
+        numberOfGuests: props.booking.numberOfGuests,
+        customerId: props.booking.customerId,
+        customer: {
+          name: customer[0].lastname,
+          email: customer[0].email,
+          phone: customer[0].phone,
+        },
       });
+    });
+    // axios
+    //   .get<ICustomer[]>(
+    //     "https://school-restaurant-api.azurewebsites.net/customer/" +
+    //       props.booking.customerId,
+
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
+
+    //   .then((response) => {
+    //     setBookingCustomer({
+    //       _id: props.booking._id,
+    //       date: props.booking.date,
+    //       time: props.booking.time,
+    //       numberOfGuests: props.booking.numberOfGuests,
+    //       customerId: props.booking.customerId,
+    //       customer: {
+    //         name: response.data[0].lastname,
+    //         email: response.data[0].email,
+    //         phone: response.data[0].phone,
+    //       },
+    //     });
+    //   });
   }, []);
 
   function deleteBooking(bookingID: string | undefined) {
@@ -120,44 +123,78 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     );
   }
   const changeDateCalendar = (valueFromCalendar: string) => {
-    axios
-      .get<IBooking[]>(
-        "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        console.log(response.data);
-        let bookingarray: IBooking[] = response.data;
-        let resultDate = bookingarray.filter(
-          (booking) => booking.date === valueFromCalendar
-        );
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      console.log(response);
+      let bookingarray: IBooking[] = response;
+      let resultDate = bookingarray.filter(
+        (booking) => booking.date === valueFromCalendar
+      );
 
-        let resultTime18 = resultDate.filter((dateItem) => {
-          return dateItem.time == "18:00";
-        });
-        let resultTime21 = resultDate.filter((dateItem) => {
-          return dateItem.time == "21:00";
-        });
-        console.log(resultTime18.length);
-        if (resultTime18.length >= 15) {
-          setFullTable18(true);
-        } else {
-          setFullTable18(false);
-          setDateBooking(valueFromCalendar);
-          setAbleButton(true);
-        }
-        if (resultTime21.length >= 15) {
-          setFullTable21(true);
-        } else {
-          setFullTable21(false);
-          setDateBooking(valueFromCalendar);
-          setAbleButton(true);
-        }
-        console.log(resultTime18);
-        console.log(resultTime21);
-        console.log(fullTable18);
-        console.log(fullTable21);
+      let resultTime18 = resultDate.filter((dateItem) => {
+        return dateItem.time == "18:00";
       });
+      let resultTime21 = resultDate.filter((dateItem) => {
+        return dateItem.time == "21:00";
+      });
+      console.log(resultTime18.length);
+      if (resultTime18.length >= 1) {
+        setFullTable18(true);
+      } else {
+        setFullTable18(false);
+        setDateBooking(valueFromCalendar);
+        setAbleButton(true);
+      }
+      if (resultTime21.length >= 1) {
+        setFullTable21(true);
+      } else {
+        setFullTable21(false);
+        setDateBooking(valueFromCalendar);
+        setAbleButton(true);
+      }
+      console.log(resultTime18);
+      console.log(resultTime21);
+      console.log(fullTable18);
+      console.log(fullTable21);
+    });
+    // axios
+    //   .get<IBooking[]>(
+    //     "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     let bookingarray: IBooking[] = response.data;
+    //     let resultDate = bookingarray.filter(
+    //       (booking) => booking.date === valueFromCalendar
+    //     );
+
+    //     let resultTime18 = resultDate.filter((dateItem) => {
+    //       return dateItem.time == "18:00";
+    //     });
+    //     let resultTime21 = resultDate.filter((dateItem) => {
+    //       return dateItem.time == "21:00";
+    //     });
+    //     console.log(resultTime18.length);
+    //     if (resultTime18.length >= 15) {
+    //       setFullTable18(true);
+    //     } else {
+    //       setFullTable18(false);
+    //       setDateBooking(valueFromCalendar);
+    //       setAbleButton(true);
+    //     }
+    //     if (resultTime21.length >= 15) {
+    //       setFullTable21(true);
+    //     } else {
+    //       setFullTable21(false);
+    //       setDateBooking(valueFromCalendar);
+    //       setAbleButton(true);
+    //     }
+    //     console.log(resultTime18);
+    //     console.log(resultTime21);
+    //     console.log(fullTable18);
+    //     console.log(fullTable21);
+    //   });
   };
   return (
     <>
@@ -218,6 +255,31 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                     </button>
                   </>
                 )}
+                {fullTable18 && !fullTable21 ? (
+                  <>
+                    <button
+                      className="buttonTime"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTimeBooking("21:00");
+                      }}
+                    >
+                      21:00
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="buttonTime"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTimeBooking("18:00");
+                      }}
+                    >
+                      18:00
+                    </button>
+                  </>
+                )}
 
                 <label htmlFor="numberOfGuests">Antal gäster:</label>
                 <input
@@ -229,7 +291,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   onChange={handleChange}
                 />
 
-                <StyledButton
+                <button
                   className="buttonSubmit"
                   disabled={!ableButton || !ableButton2 || !ableButton3}
                   onClick={(e) => {
@@ -243,7 +305,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   }}
                 >
                   Skicka ändring
-                </StyledButton>
+                </button>
               </form>
             </div>
           </li>

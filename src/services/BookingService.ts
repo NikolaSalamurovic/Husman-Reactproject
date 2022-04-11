@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IBooking } from "../models/IBooking";
+import { IBookingUpload } from "../models/IBookingUpload";
 
 export class BookingService {
   async getBookings() {
@@ -11,50 +12,28 @@ export class BookingService {
     return response.data;
   }
 
-  async postBookings() {
+  async postBookings(bookinginfo: IBookingUpload) {
     let response = await axios.post<IBooking[]>(
-      "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+      "https://school-restaurant-api.azurewebsites.net/booking/create",
 
-      {
-        restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-        date: "2022-04-07",
-        time: "21:00",
-        numberOfGuests: 4,
-        customer: {
-          name: "Husman",
-          lastname: "Pontus",
-          email: "Marcus@somedomain.com",
-          phone: "070-0000111",
-        },
-      },
+      bookinginfo,
 
       { headers: { "Content-Type": "application/json" } }
     );
     return console.log(response.data);
   }
 
-  // async changeBookings() {
-  //   let restaurantid="624ac35fdf8a9fb11c3ea8ba"
-  //   let response = await axios.put<IBooking[]>(
-  //     "https://school-restaurant-api.azurewebsites.net/booking/update/624ac35fdf8a9fb11c3ea8ba",
+  async changeBookings(updatedbooking: any, bookingid: any) {
+    let response = await axios.put<IBooking[]>(
+      "https://school-restaurant-api.azurewebsites.net/booking/update/" +
+        bookingid,
 
-  //     {
-  //       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-  //       date: "2022-04-07",
-  //       time: "21:00",
-  //       numberOfGuests: 4,
-  //       customer: {
-  //         name: "Husman",
-  //         lastname: "Pontus",
-  //         email: "Marcus@somedomain.com",
-  //         phone: "070-0000111",
-  //       },
-  //     },
+      updatedbooking,
 
-  //     { headers: { "Content-Type": "application/json" } }
-  //   );
-  //   return console.log(response.data);
-  // }
+      { headers: { "Content-Type": "application/json" } }
+    );
+    return response;
+  }
 
   async deleteBookings(id: string) {
     let response = await axios.delete<IBooking[]>(

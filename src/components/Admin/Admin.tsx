@@ -52,30 +52,30 @@ export function Admin() {
 
   useEffect(() => {
     //TILL SERVICE
-    //   let service = new BookingService();
-    //   service.getBookings().then((booking) => {
-    //     console.log(booking);
-    //     setBookingArray(booking);
-    //     if (booleanTest === false) {
-    //       setBooleanTest(true);
+    let service = new BookingService();
+    service.getBookings().then((booking) => {
+      console.log(booking);
+      setBookingArray(booking);
+      if (renderBoolean === false) {
+        setRenderBoolean(true);
+      } else {
+        setRenderBoolean(false);
+      }
+    });
+    // axios
+    //   .get<IBooking[]>(
+    //     "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
+    //   .then((response) => {
+    //     setBookingArray(response.data);
+
+    //     if (renderBoolean === false) {
+    //       setRenderBoolean(true);
     //     } else {
-    //       setBooleanTest(false);
+    //       setRenderBoolean(false);
     //     }
     //   });
-    axios
-      .get<IBooking[]>(
-        "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        setBookingArray(response.data);
-
-        if (renderBoolean === false) {
-          setRenderBoolean(true);
-        } else {
-          setRenderBoolean(false);
-        }
-      });
   }, [deleteBoolean]);
 
   useEffect(() => {
@@ -107,57 +107,78 @@ export function Admin() {
     console.log(date);
     console.log(bookingtime);
     console.log(numberofguests);
+    let updatedBooking = {
+      id: bookingid,
+      restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+      date: date,
+      time: bookingtime,
+      numberOfGuests: Number(numberofguests),
+      customerId: bookingcustomerid,
+    };
+    let service = new BookingService();
+    service.changeBookings(updatedBooking, bookingid).then((response) => {
+      console.log(response);
+      if (response.statusText === "OK") {
+        alert("Bokningen har uppdateras, du skickas till startsidan");
+        navigation("/");
+      } else {
+        alert("Oj, något gick fel. Försök igen!");
+      }
+    });
+    // axios
+    //   .put<IBooking[]>(
+    //     "https://school-restaurant-api.azurewebsites.net/booking/update/" +
+    //       bookingid,
 
-    axios
-      .put<IBooking[]>(
-        "https://school-restaurant-api.azurewebsites.net/booking/update/" +
-          bookingid,
+    //     {
+    //       id: bookingid,
+    //       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+    //       date: date,
+    //       time: bookingtime,
+    //       numberOfGuests: Number(numberofguests),
+    //       customerId: bookingcustomerid,
+    //     },
 
-        {
-          id: bookingid,
-          restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-          date: date,
-          time: bookingtime,
-          numberOfGuests: Number(numberofguests),
-          customerId: bookingcustomerid,
-        },
-
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        console.log(response.statusText);
-        if (response.statusText === "OK") {
-          alert("Bokningen har uppdateras, du skickas till startsidan");
-          navigation("/");
-        } else {
-          alert("Oj, något gick fel. Försök igen!");
-        }
-      });
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
+    //   .then((response) => {
+    //     console.log(response.statusText);
+    //     if (response.statusText === "OK") {
+    //       alert("Bokningen har uppdateras, du skickas till startsidan");
+    //       navigation("/");
+    //     } else {
+    //       alert("Oj, något gick fel. Försök igen!");
+    //     }
+    //   });
   }
 
   function deleteBooking(bookingid: string | undefined) {
     for (let i = 0; i < bookingArray.length; i++) {
       if (bookingid === bookingArray[i]._id) {
         //TILL SERVICE
-        // let service = new BookingService();
-        // service.deleteBookings(bookingid).then((response)=>{
-        //   console.log(response);
-        //     setDeleteBoolean(true);
-        // })
-        axios
-          .delete(
-            "https://school-restaurant-api.azurewebsites.net/booking/delete/" +
-              bookingid,
-            { headers: { "Content-Type": "application/json" } }
-          )
-          .then((response) => {
-            if (deleteBoolean === true) {
-              setDeleteBoolean(false);
-            } else {
-              setDeleteBoolean(true);
-            }
-          });
+        let service = new BookingService();
+        service.deleteBookings(bookingid).then((response) => {
+          if (deleteBoolean === true) {
+            setDeleteBoolean(false);
+          } else {
+            setDeleteBoolean(true);
+          }
+        });
       }
+      //   axios
+      //     .delete(
+      //       "https://school-restaurant-api.azurewebsites.net/booking/delete/" +
+      //         bookingid,
+      //       { headers: { "Content-Type": "application/json" } }
+      //     )
+      //     .then((response) => {
+      //       if (deleteBoolean === true) {
+      //         setDeleteBoolean(false);
+      //       } else {
+      //         setDeleteBoolean(true);
+      //       }
+      //     });
+      // }
     }
   }
 
