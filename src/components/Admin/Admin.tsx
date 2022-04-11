@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IBooking } from "../../models/IBooking";
 import { BookingService } from "../../services/BookingService";
-
+import "./Admin.css";
 import { PrintBookingAdmin } from "./PrintBookingAdmin";
 
 export interface IBookingCustomer {
@@ -161,5 +161,12 @@ export function Admin() {
     }
   }
 
-  return <>{printBookings}</>;
+  return (
+    <>
+      <div className="containerAdmin">
+        <h2 className="headingAdmin">Bokningar</h2>
+        <section className="sectionAdmin">{printBookings}</section>
+      </div>
+    </>
+  );
 }

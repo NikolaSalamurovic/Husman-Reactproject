@@ -2,13 +2,31 @@
   width: fit-content;
   margin: 10px;
   padding: 10px;
-  border: 5px solid purple;
+  border: 5px solid #4f5b6261;
+  background-color: rgba(255, 255, 255, 0.708);
+  background-size: cover;
+  border-radius: 10p;
+}
+.bookingList {
+  list-style-type: none;
 }
 .nameBooking {
   font-weight: 800;
+  color: #000a12;
 }
 .buttonTime {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
   &:focus {
-    background-color: yellow;
+    background-color: #b71c1c;
   }
+}
+.buttonSubmit {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+li {
+  padding-bottom: 7px;
 }

@@ -161,86 +161,91 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   return (
     <>
       <article className="containerBooking">
-        <ul>
+        <ul className="bookingList">
           <li className="nameBooking">
             Sällskap: {bookingCustomer?.customer.name}
           </li>
           <li>Datum: {bookingCustomer?.date}</li>
-          <li>Tid: {bookingCustomer?.time}</li>
+          <li>Tid: Kl:{bookingCustomer?.time}</li>
           <li>Antal gäster: {bookingCustomer?.numberOfGuests}</li>
 
           <li>Email: {bookingCustomer?.customer.email}</li>
           <li>Telefon: {bookingCustomer?.customer.phone}</li>
-          <button
-            onClick={() => {
-              deleteBooking(bookingCustomer?._id);
-            }}
-          >
-            Ta bort bokning
-          </button>
-          <div>
-            <p>Ändra i bokningen nedan: (Fyll i samtliga fält)</p>
-            <form>
-              <input
-                type="date"
-                onChange={(e) => {
-                  changeDateCalendar(e.target.value);
-                  setAbleButton3(true);
-                }}
-              />
-              {fullTable18 && fullTable21 ? (
-                <>
-                  <p>Det finns inga tider</p>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="buttonTime"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setTimeBooking("18:00");
-                    }}
-                  >
-                    18:00
-                  </button>
-                  <button
-                    className="buttonTime"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setTimeBooking("21:00");
-                    }}
-                  >
-                    21:00
-                  </button>
-                </>
-              )}
+          <li>
+            <button
+              onClick={() => {
+                deleteBooking(bookingCustomer?._id);
+              }}
+            >
+              Ta bort bokning
+            </button>
+          </li>
+          <li>
+            <div>
+              <p>Ändra i bokningen nedan: (Fyll i samtliga fält)</p>
+              <form>
+                <input
+                  type="date"
+                  onChange={(e) => {
+                    changeDateCalendar(e.target.value);
+                    setAbleButton3(true);
+                  }}
+                />
+                {fullTable18 && fullTable21 ? (
+                  <>
+                    <p>Det finns inga tider</p>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="buttonTime"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTimeBooking("18:00");
+                      }}
+                    >
+                      18:00
+                    </button>
+                    <button
+                      className="buttonTime"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTimeBooking("21:00");
+                      }}
+                    >
+                      21:00
+                    </button>
+                  </>
+                )}
 
-              <label htmlFor="numberOfGuests">Antal gäster:</label>
-              <input
-                type="number"
-                min="1"
-                max="6"
-                name="numberOfGuests"
-                value={changeObject.numberOfGuests}
-                onChange={handleChange}
-              />
+                <label htmlFor="numberOfGuests">Antal gäster:</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="6"
+                  name="numberOfGuests"
+                  value={changeObject.numberOfGuests}
+                  onChange={handleChange}
+                />
 
-              <button
-                disabled={!ableButton || !ableButton2 || !ableButton3}
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log(valueFromCalendar);
-                  addChange(
-                    bookingCustomer?._id,
-                    bookingCustomer?.customerId,
-                    changeObject.numberOfGuests
-                  );
-                }}
-              >
-                Skicka ändring
-              </button>
-            </form>
-          </div>
+                <button
+                  className="buttonSubmit"
+                  disabled={!ableButton || !ableButton2 || !ableButton3}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log(valueFromCalendar);
+                    addChange(
+                      bookingCustomer?._id,
+                      bookingCustomer?.customerId,
+                      changeObject.numberOfGuests
+                    );
+                  }}
+                >
+                  Skicka ändring
+                </button>
+              </form>
+            </div>
+          </li>
           {/* <button
           onClick={() => {
             changeBooking(bookingCustomer?._id);
