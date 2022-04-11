@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
-import { ICustomer } from "../../models/ICustomer";
 import { BookingService } from "../../services/BookingService";
 import { CustomerService } from "../../services/CustomerService";
 import { StyledButton } from "../StyledComponents/StyledButton";
@@ -40,23 +39,28 @@ export interface IBookingCustomer {
 export function PrintBookingAdmin(props: IPrintBooking) {
   const [bookingCustomer, setBookingCustomer] =
     useState<IBookingCustomer>() || undefined;
-  // const [changeInput, setChangeInput] = useState(<></>);
   const [changeObject, setChangeObject] = useState<IChange>({
     date: "",
     time: "",
     numberOfGuests: 0,
   });
   const [valueFromCalendar, setValueFromCalendar] = useState("");
-  const [fullTable18, setFullTable18] = useState(false);
-  const [fullTable21, setFullTable21] = useState(false);
   const [dateBooking, setDateBooking] = useState<string>("");
   const [timeBooking, setTimeBooking] = useState<string>("");
-  const [ableButton, setAbleButton] = useState(false);
-  const [ableButton2, setAbleButton2] = useState(false);
-  const [ableButton3, setAbleButton3] = useState(false);
-  const [notFull18, setNotFull18] = useState(false);
-  const [notFull21, setNotFull21] = useState(false);
 
+  //Booleaner för att visa korrekta tider utefter hur många bord som är bokade/datum
+  const [fullTable18, setFullTable18] = useState(false);
+  const [fullTable21, setFullTable21] = useState(false);
+  const [notFullTable18, setNotFullTable18] = useState(false);
+  const [notFullTable21, setNotFullTable21] = useState(false);
+
+  //Booleaner för att submitknapp ändringar ska vara disabled
+  const [ableButtonTime, setAbleButtonTime] = useState(false);
+  const [ableButtonNumberOfGuests, setAbleButtonNumberOfGuests] =
+    useState(false);
+  const [ableButtonDate, setAbleButtonDate] = useState(false);
+
+  //Hämtning av bokningar från bokningsservice
   useEffect(() => {
     //TILL SERVICE
     let service = new CustomerService();
@@ -98,19 +102,20 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     //   });
   }, []);
 
+  //funktion för att ta bort bokningar
   function deleteBooking(bookingID: string | undefined) {
     props.deleteBookingAPI(bookingID);
   }
+
+  //funktion för att fånga ändring input antalet gäster
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setAbleButton2(true);
+    setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
 
     setChangeObject({ ...changeObject, [name]: e.target.value });
   }
-  // function changeBooking(bookingID: string | undefined) {
-  //   setChangeInput(<></>);
-  // }
 
+  //funktion för att ändra bokning
   function addChange(
     bookingID: string | undefined,
     bookingcustomerID: string | undefined,
@@ -124,9 +129,12 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       numberofguests
     );
   }
+
+  //function för att ändra datum i kalender som avstämmer med
+  //api att det inte finns fler än 15 bokningar per tidpunkt/kväll
   const changeDateCalendar = (valueFromCalendar: string) => {
-    setNotFull18(false);
-    setNotFull21(false);
+    setNotFullTable18(false);
+    setNotFullTable21(false);
     let service = new BookingService();
     service.getBookings().then((response) => {
       console.log(response);
@@ -146,7 +154,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         setFullTable18(true);
       } else {
         setFullTable18(false);
-        setNotFull18(true);
+        setNotFullTable18(true);
         setDateBooking(valueFromCalendar);
       }
       if (resultTime21.length >= 15) {
@@ -154,7 +162,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       } else {
         setFullTable21(false);
         setDateBooking(valueFromCalendar);
-        setNotFull21(true);
+        setNotFullTable21(true);
       }
       console.log(resultTime18);
       console.log(resultTime21);
@@ -233,7 +241,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   type="date"
                   onChange={(e) => {
                     changeDateCalendar(e.target.value);
-                    setAbleButton3(true);
+                    setAbleButtonDate(true);
                   }}
                 />
                 {fullTable18 && fullTable21 ? (
@@ -244,14 +252,14 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   <></>
                 )}
 
-                {notFull18 ? (
+                {notFullTable18 ? (
                   <>
                     <button
                       className="buttonTime"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("18:00");
-                        setAbleButton(true);
+                        setAbleButtonTime(true);
                       }}
                     >
                       18:00
@@ -260,14 +268,14 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                 ) : (
                   <></>
                 )}
-                {notFull21 ? (
+                {notFullTable21 ? (
                   <>
                     <button
                       className="buttonTime"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("21:00");
-                        setAbleButton(true);
+                        setAbleButtonTime(true);
                       }}
                     >
                       21:00
@@ -295,7 +303,11 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
                 <button
                   className="buttonSubmit"
-                  disabled={!ableButton || !ableButton2 || !ableButton3}
+                  disabled={
+                    !ableButtonTime ||
+                    !ableButtonNumberOfGuests ||
+                    !ableButtonDate
+                  }
                   onClick={(e) => {
                     e.preventDefault();
                     console.log(valueFromCalendar);
@@ -311,14 +323,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
               </form>
             </div>
           </li>
-          {/* <button
-          onClick={() => {
-            changeBooking(bookingCustomer?._id);
-          }}
-        >
-          Ändra bokning
-        </button>
-        {changeInput} */}
         </ul>
       </article>
     </>

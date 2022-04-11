@@ -10,7 +10,7 @@ export function About() {
           <p className="aboutParagraph">
             Koncept: Husman är en Åre-besökares dröm! Inrett för semester men
             smakar som hemma! Konceptet är enkelt, fine-dining husmanskost som
-            är traditionellt lagad men modernt presenterat! Lägg till några
+            är traditionellt tillagad men modernt presenterad! Lägg till några
             härliga cocktails till din mat eller drick din favorit-lager.
           </p>
           <p className="aboutEvents">Missa inte våra kommande event:</p>
