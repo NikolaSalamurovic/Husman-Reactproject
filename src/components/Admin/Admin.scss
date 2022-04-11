@@ -1,0 +1,24 @@
+.containerAdmin {
+  background-image: url("5683239.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sectionAdmin {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.headingAdmin {
+  color: white;
+  font-size: 4rem;
+  text-shadow: 2px 2px 16px black;
+}

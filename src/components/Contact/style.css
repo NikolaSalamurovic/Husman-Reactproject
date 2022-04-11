@@ -1,0 +1,133 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1000px;
+  margin: 70px auto 0;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.container .sentMessage {
+  width: 400px;
+}
+
+.container .sentMessage p {
+  margin: 10px 0;
+  padding: 0;
+}
+
+.container .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .form div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .form div label {
+  font-size: 0.9rem;
+}
+
+.container .form .requiredWarning {
+  margin: 0;
+  padding: 0;
+  color: red;
+  font-size: 0.8rem;
+  margin: 0 0 0 10px;
+}
+
+.container .form .requiredWarningForm {
+  margin: 10px 0 0 0;
+  padding: 0;
+  color: red;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.container .form textarea {
+  margin: 4px 0 20px 0;
+  resize: none;
+  height: 100px;
+  border: 2px solid #4f5b62;
+  background-color: white;
+  border-radius: 5px;
+  width: 390px;
+  font-family: inherit;
+  padding: 5px;
+  font-size: 0.9rem;
+  -webkit-transition: ease-in-out 250ms;
+  transition: ease-in-out 250ms;
+}
+
+.container .form textarea:focus {
+  outline: none;
+  background-color: #f4f4f4;
+}
+
+.container .form textarea:hover {
+  background-color: #f4f4f4;
+}
+
+.container .form textarea::-webkit-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea:-ms-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea::-ms-input-placeholder {
+  color: lightgray;
+}
+
+.container .form textarea::placeholder {
+  color: lightgray;
+}
+
+.container .restaurantInfo {
+  border-left: 2px solid #f05545;
+  padding: 0 0 0 16px;
+  height: 180px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .restaurantInfo .bold {
+  font-weight: 500;
+}
+
+.container .restaurantInfo p {
+  margin: 5px 0;
+}
+
+.container .buttonMargin {
+  margin: 20px 0 0 0;
+}
+
+.bold {
+  font-weight: 500;
+}
+/*# sourceMappingURL=style.css.map */

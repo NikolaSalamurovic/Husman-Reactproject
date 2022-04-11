@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    max-width: 1000px;
+    margin: 70px auto 0;
+    justify-content: space-around;
+    .sentMessage {
+        width: 400px;
+        p {
+            margin: 10px 0;
+            padding: 0;
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        div {
+            display: flex;
+            label {
+                font-size: 0.9rem;
+            }
+        }
+        .requiredWarning {
+            margin: 0;
+            padding: 0;
+            color: red;
+            font-size: 0.8rem;
+            margin: 0 0 0 10px;
+        }
+        .requiredWarningForm {
+            margin: 10px 0 0 0;
+            padding: 0;
+            color: red;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        textarea {
+            margin: 4px 0 20px 0;
+            resize: none;
+            height: 100px;
+            border: 2px solid #4f5b62;
+            background-color: white;
+            border-radius: 5px;
+            width: 390px;
+            font-family: inherit;
+            padding: 5px;
+            font-size: 0.9rem;
+            transition: ease-in-out 250ms;
+            &:focus {
+                outline: none;
+                background-color: rgb(244, 244, 244);
+            }
+            &:hover {
+                background-color: rgb(244, 244, 244);
+            }
+            &::placeholder {
+                color: lightgray;
+            }
+        }
+    }
+    .restaurantInfo {
+        border-left: 2px solid #f05545;
+        padding: 0 0 0 16px;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        .bold {
+            font-weight: 500;
+        }
+        p {
+            margin: 5px 0;
+        }
+    }
+    .buttonMargin {
+        margin: 20px 0 0 0;
+    }
+}
+
+.bold {
+    font-weight: 500;
+}

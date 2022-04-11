@@ -1,27 +1,66 @@
-import { Link, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { StyledLink } from "../StyledComponents/StyledLink";
 import "./layout.css";
 
 export function Layout() {
+  const [openMenu, setOpenMenu] = useState("mobileMenuDeactive")
+
+  function toggleClass() {
+    if(openMenu === "mobileMenuDeactive") {
+      setOpenMenu("mobileMenuActive");
+    } else {
+      setOpenMenu("mobileMenuDeactive");
+    };
+    console.log(openMenu);
+    
+  }
+
   return (
     <>
       <header>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/Booking">Booking</Link>
-          </li>
-          <li>
-            <Link to="/Contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/Admin">Admin</Link>
-          </li>
-          <li>
-            <Link to="/About">About us</Link>
-          </li>
-        </ul>
+        <div>
+          <h1>Husman</h1>
+          <nav>
+            <ul>
+              <StyledLink to="/">
+                <li>Home</li>
+              </StyledLink>
+              <StyledLink to="/Booking">
+                <li>Booking</li>
+              </StyledLink>
+              <StyledLink to="/Contact">
+                <li>Contact</li>
+              </StyledLink>
+              <StyledLink to="/Admin">
+                <li>Admin</li>
+              </StyledLink>
+              <StyledLink to="/About">
+                <li>About us</li>
+              </StyledLink>
+            </ul>
+          </nav>
+          <p className="tempIcon" onClick={toggleClass}>*ikon*</p>
+          <div className={openMenu}>
+            <ul>
+              <StyledLink to="/">
+                <li>Home</li>
+              </StyledLink>
+              <StyledLink to="/Booking">
+                <li>Booking</li>
+              </StyledLink>
+              <StyledLink to="/Contact">
+                <li>Contact</li>
+              </StyledLink>
+              <StyledLink to="/Admin">
+                <li>Admin</li>
+              </StyledLink>
+              <StyledLink to="/About">
+                <li>About us</li>
+              </StyledLink>
+            </ul>
+          </div>
+        </div>
       </header>
       <main>
         <Outlet></Outlet>
