@@ -164,12 +164,11 @@ function uploadBooking(){
                 <input type="text" {...register("lastName", {required: 'this is required', min: 4})}placeholder="Efternamn" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, lastname:e.target.value}})}/>
                 <input type="tel" {...register("phone")} placeholder="Telefon-nummer" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, phone:e.target.value}})}/>
                 <input type="text" {...register("email")} placeholder="Email" onChange={(e) => setCustomerInfo({...customerInfo, customer:{...customerInfo.customer, email:e.target.value}})}/>
-                <input type="submit" value={"test"} onClick={() => {
+                <input type="submit" value={"Boka"} onClick={uploadBooking} />
+                <button onClick={() => {
                   reset();
                   cancelBooking();
-                }}/>
-                <input type="submit" value={"Boka"} onClick={uploadBooking} />
-                <button onClick={cancelBooking}>Avbryt</button>
+                }}>Avbryt</button>
             </div>
           }
           
