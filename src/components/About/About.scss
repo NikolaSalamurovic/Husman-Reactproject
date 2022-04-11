@@ -1,17 +1,18 @@
 .blurredBackground {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 15vh;
   min-height: 85vh;
   width: 100%;
   background-image: url("../.././assets/photo-1542878232-0cb63077e944.jpeg");
   background-repeat: repeat;
+  background-position: center center;
   background-size: cover;
   filter: blur(5px);
 }
 
 .containerAbout {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 15vh;
   min-height: 85vh;
@@ -56,5 +57,34 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .blurredBackground {
+    height: 120vh;
+  }
+  .containerAbout {
+    padding: 0;
+    .aboutCard {
+      margin-top: 70px;
+      width: 50%;
+      padding: 30px;
+
+      .aboutTitle {
+        font-size: 1.1rem;
+      }
+      .aboutParagraph {
+        font-size: 0.9rem;
+      }
+      .aboutEvents {
+        font-size: 1.1rem;
+      }
+      ul {
+        .listItemEvents {
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
 }
