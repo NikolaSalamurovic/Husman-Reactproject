@@ -18,7 +18,7 @@ export function Home() {
             <div class="slide first"></div>
           </div>
         </div> */}
-        <h1 className="husmanTitle">HUSMAN</h1>
+        <h1 className="pageTitle">HUSMAN</h1>
         <div className="slider">
           <figure>
             <div className="slide">

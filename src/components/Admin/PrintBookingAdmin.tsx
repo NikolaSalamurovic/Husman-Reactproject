@@ -54,6 +54,8 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   const [ableButton, setAbleButton] = useState(false);
   const [ableButton2, setAbleButton2] = useState(false);
   const [ableButton3, setAbleButton3] = useState(false);
+  const [notFull18, setNotFull18] = useState(false);
+  const [notFull21, setNotFull21] = useState(false);
 
   useEffect(() => {
     //TILL SERVICE
@@ -123,6 +125,8 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     );
   }
   const changeDateCalendar = (valueFromCalendar: string) => {
+    setNotFull18(false);
+    setNotFull21(false);
     let service = new BookingService();
     service.getBookings().then((response) => {
       console.log(response);
@@ -138,19 +142,19 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         return dateItem.time == "21:00";
       });
       console.log(resultTime18.length);
-      if (resultTime18.length >= 1) {
+      if (resultTime18.length >= 15) {
         setFullTable18(true);
       } else {
         setFullTable18(false);
+        setNotFull18(true);
         setDateBooking(valueFromCalendar);
-        setAbleButton(true);
       }
-      if (resultTime21.length >= 1) {
+      if (resultTime21.length >= 15) {
         setFullTable21(true);
       } else {
         setFullTable21(false);
         setDateBooking(valueFromCalendar);
-        setAbleButton(true);
+        setNotFull21(true);
       }
       console.log(resultTime18);
       console.log(resultTime21);
@@ -220,7 +224,10 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           </li>
           <li>
             <div>
-              <p>Ändra i bokningen nedan: (Fyll i samtliga fält)</p>
+              <h2 className="changeBookingHeading">
+                Ändra i bokningen nedan:{" "}
+              </h2>
+              <p className="changeBookingParagraph">(Fyll i samtliga fält)</p>
               <form>
                 <input
                   type="date"
@@ -234,62 +241,57 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                     <p>Det finns inga tider</p>
                   </>
                 ) : (
+                  <></>
+                )}
+
+                {notFull18 ? (
                   <>
                     <button
                       className="buttonTime"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("18:00");
+                        setAbleButton(true);
                       }}
                     >
                       18:00
                     </button>
-                    <button
-                      className="buttonTime"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTimeBooking("21:00");
-                      }}
-                    >
-                      21:00
-                    </button>
                   </>
+                ) : (
+                  <></>
                 )}
-                {fullTable18 && !fullTable21 ? (
+                {notFull21 ? (
                   <>
                     <button
                       className="buttonTime"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("21:00");
+                        setAbleButton(true);
                       }}
                     >
                       21:00
                     </button>
                   </>
                 ) : (
-                  <>
-                    <button
-                      className="buttonTime"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTimeBooking("18:00");
-                      }}
-                    >
-                      18:00
-                    </button>
-                  </>
+                  <></>
                 )}
-
-                <label htmlFor="numberOfGuests">Antal gäster:</label>
-                <input
-                  type="number"
-                  min="1"
-                  max="6"
-                  name="numberOfGuests"
-                  value={changeObject.numberOfGuests}
-                  onChange={handleChange}
-                />
+                <div className="containerInputAdmin">
+                  <label
+                    className="labelNumberOfGuests"
+                    htmlFor="numberOfGuests"
+                  >
+                    {`Antal gäster: `}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="6"
+                    name="numberOfGuests"
+                    value={changeObject.numberOfGuests}
+                    onChange={handleChange}
+                  />
+                </div>
 
                 <button
                   className="buttonSubmit"

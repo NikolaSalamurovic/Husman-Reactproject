@@ -1,7 +1,5 @@
 .containerBooking {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 25%;
   margin: 10px;
   padding: 10px;
   border: 5px solid #4f5b6261;
@@ -14,28 +12,50 @@
   list-style-type: none;
 }
 
+.changeBookingHeading {
+  padding-top: 10px;
+  font-size: 1rem;
+}
+
+.changeBookingParagraph {
+  padding-top: 7px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
 .nameBooking {
+  font-size: 1.2rem;
   font-weight: 800;
   color: #000a12;
+}
+
+.containerInputAdmin {
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 .buttonTime {
   padding-left: 5px;
   padding-right: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .buttonTime:focus {
   background-color: #b71c1c;
 }
 
-.buttonSubmit {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 li {
   padding-bottom: 7px;
+}
+
+p {
+  padding-bottom: 7px;
+}
+
+@media screen and (max-width: 768px) {
+  .containerBooking {
+    width: 80%;
+  }
 }
 /*# sourceMappingURL=PrintBooking.css.map */

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 }
-.husmanTitle {
+.pageTitle {
   position: absolute;
   opacity: 0;
   top: 40%;
@@ -117,9 +117,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .husmanTitle {
+  .pageTitle {
     top: 50%;
-    left: 20%;
+    left: 10%;
     font-size: 4rem;
   }
   .imageDesktop {
