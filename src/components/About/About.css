@@ -1,0 +1,88 @@
+.blurredBackground {
+  position: fixed;
+  left: 0;
+  top: 15vh;
+  min-height: 85vh;
+  width: 100%;
+  background-image: url("../.././assets/photo-1542878232-0cb63077e944.jpeg");
+  background-repeat: repeat;
+  background-size: cover;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
+}
+
+.containerAbout {
+  position: fixed;
+  left: 0;
+  top: 15vh;
+  min-height: 85vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation: opacityCard 5s;
+          animation: opacityCard 5s;
+}
+
+.containerAbout .aboutCard {
+  width: 50%;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.763);
+  -webkit-box-shadow: 5px 5px 30px 15px #ffffff;
+          box-shadow: 5px 5px 30px 15px #ffffff;
+  border-radius: 5px;
+}
+
+.containerAbout .aboutCard .aboutTitle {
+  padding-bottom: 10px;
+  font-size: 2rem;
+}
+
+.containerAbout .aboutCard .aboutParagraph {
+  padding-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.containerAbout .aboutCard .aboutEvents {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.containerAbout .aboutCard ul {
+  list-style: none;
+}
+
+.containerAbout .aboutCard ul .listItemEvents {
+  font-size: 1.3rem;
+}
+
+@-webkit-keyframes opacityCard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacityCard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=About.css.map */
