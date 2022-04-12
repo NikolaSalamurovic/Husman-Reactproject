@@ -69,10 +69,13 @@ header div nav ul li:hover {
   header {
     height: 100px;
   }
-  header nav {
+  header div h1 {
+    font-size: 3rem;
+  }
+  header div nav {
     display: none;
   }
-  header .tempIcon {
+  header div .tempIcon {
     display: block;
     margin: 0 50px 0 0;
     height: 50px;
@@ -92,7 +95,7 @@ header div nav ul li:hover {
     transition: ease-in-out 250ms;
     cursor: pointer;
   }
-  header .tempIcon:hover {
+  header div .tempIcon:hover {
     background-color: red;
   }
 }

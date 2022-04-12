@@ -10,12 +10,14 @@
             padding: 0;
         }
     }
-    .form {
+    form {
         display: flex;
         flex-direction: column;
         justify-content: center;
         div {
             display: flex;
+            width: 85vw;
+            max-width: 390px;
             label {
                 font-size: 0.9rem;
             }
@@ -41,7 +43,8 @@
             border: 2px solid #4f5b62;
             background-color: white;
             border-radius: 5px;
-            width: 390px;
+            max-width: 390px;
+            width: 85vw;
             font-family: inherit;
             padding: 5px;
             font-size: 0.9rem;
@@ -80,4 +83,22 @@
 
 .bold {
     font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        margin-top: 30px;
+        align-items: center;
+        form {
+            justify-content: center;
+            align-items: center;
+            textarea {
+                width: 85vw;
+            }
+        }
+        .restaurantInfo {
+            margin: 40px 0;
+        }
+    }
 }

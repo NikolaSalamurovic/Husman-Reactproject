@@ -17,7 +17,7 @@
   padding: 0;
 }
 
-.container .form {
+.container form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,17 +30,19 @@
           justify-content: center;
 }
 
-.container .form div {
+.container form div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 85vw;
+  max-width: 390px;
 }
 
-.container .form div label {
+.container form div label {
   font-size: 0.9rem;
 }
 
-.container .form .requiredWarning {
+.container form .requiredWarning {
   margin: 0;
   padding: 0;
   color: red;
@@ -48,7 +50,7 @@
   margin: 0 0 0 10px;
 }
 
-.container .form .requiredWarningForm {
+.container form .requiredWarningForm {
   margin: 10px 0 0 0;
   padding: 0;
   color: red;
@@ -56,14 +58,15 @@
   text-align: center;
 }
 
-.container .form textarea {
+.container form textarea {
   margin: 4px 0 20px 0;
   resize: none;
   height: 100px;
   border: 2px solid #4f5b62;
   background-color: white;
   border-radius: 5px;
-  width: 390px;
+  max-width: 390px;
+  width: 85vw;
   font-family: inherit;
   padding: 5px;
   font-size: 0.9rem;
@@ -71,28 +74,28 @@
   transition: ease-in-out 250ms;
 }
 
-.container .form textarea:focus {
+.container form textarea:focus {
   outline: none;
   background-color: #f4f4f4;
 }
 
-.container .form textarea:hover {
+.container form textarea:hover {
   background-color: #f4f4f4;
 }
 
-.container .form textarea::-webkit-input-placeholder {
+.container form textarea::-webkit-input-placeholder {
   color: lightgray;
 }
 
-.container .form textarea:-ms-input-placeholder {
+.container form textarea:-ms-input-placeholder {
   color: lightgray;
 }
 
-.container .form textarea::-ms-input-placeholder {
+.container form textarea::-ms-input-placeholder {
   color: lightgray;
 }
 
-.container .form textarea::placeholder {
+.container form textarea::placeholder {
   color: lightgray;
 }
 
@@ -129,5 +132,32 @@
 
 .bold {
   font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 30px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .container form {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .container form textarea {
+    width: 85vw;
+  }
+  .container .restaurantInfo {
+    margin: 40px 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

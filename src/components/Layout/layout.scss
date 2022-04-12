@@ -52,7 +52,11 @@ header {
 @media screen and (max-width: 768px) {
   header {
     height: 100px;
-    nav {
+    div {
+      h1 {
+        font-size: 3rem;
+      }
+      nav {
       display: none;
     }
     .tempIcon {
@@ -71,5 +75,7 @@ header {
         background-color: red;
       }
     }
+    }
+    
   }
 }

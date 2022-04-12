@@ -58,7 +58,6 @@ export function Contact() {
 
       {!isMessageSent && 
         <form 
-        className="form" 
         onSubmit={(e) => {
           e.preventDefault();
 
