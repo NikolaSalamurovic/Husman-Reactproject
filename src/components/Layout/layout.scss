@@ -29,6 +29,7 @@ header {
           color: white;
           transition: ease-in-out 250ms;
           border-bottom: 2px solid #4f5b62;
+          padding: 0;
           &:hover {
             border-bottom: 2px solid #b71c1c;
           }
@@ -36,46 +37,58 @@ header {
       }
     }
   }
-}
-
-.tempIcon {
-  display: none;
+  .faBars {
+    display: none;
+  }
 }
 
 .mobileMenuDeactive {
   display: none;
 }
 .mobileMenuActive {
-  display: block;
+  display: none;
 }
+
 
 @media screen and (max-width: 768px) {
   header {
-    height: 100px;
+    min-height: 80px;
+    height: 80px;
     div {
       h1 {
         font-size: 3rem;
+        margin-left: 6vw;
       }
       nav {
       display: none;
-    }
-    .tempIcon {
+      }
+      .faBars {
       display: block;
-      margin: 0 50px 0 0;
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      background-color: rgb(100, 100, 175);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: ease-in-out 250ms;
+      font-size: 2.2rem;
+      color: white;
+      margin-right: 30px;
       cursor: pointer;
-      &:hover {
-        background-color: red;
       }
     }
+    .mobileMenuActive {
+      display: flex;
+      justify-content: end;
+      height: 215px;
+      ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        li {
+          color: white;
+          padding: 0;
+          background-color: #4f5b62;
+          padding: 10px;
+          width: 150px;
+          border-top: 2px solid #263238;
+        }
+      }
     }
-    
   }
 }
