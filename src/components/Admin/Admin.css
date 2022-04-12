@@ -43,4 +43,12 @@
   font-size: 4rem;
   text-shadow: 2px 2px 16px black;
 }
+
+@media screen and (max-width: 768px) {
+  .headingAdmin {
+    font-size: 3rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
 /*# sourceMappingURL=Admin.css.map */

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IBooking } from "../../models/IBooking";
@@ -50,6 +48,7 @@ export function Admin() {
   //     });
   // }, []);
 
+  //Funktion för att hämta bokningar från service
   useEffect(() => {
     //TILL SERVICE
     let service = new BookingService();
@@ -78,6 +77,7 @@ export function Admin() {
     //   });
   }, [deleteBoolean]);
 
+  //Funktion för att rendera ut bokningar
   useEffect(() => {
     console.log(bookingArray);
     let bookings = bookingArray?.map((booking) => {
@@ -94,6 +94,7 @@ export function Admin() {
     setPrintBookings(bookings);
   }, [renderBoolean]);
 
+  //funktion för att ändra bokning genom api-anrop genom service
   const navigation = useNavigate();
   function changeBooking(
     bookingid: string | undefined,
@@ -151,6 +152,8 @@ export function Admin() {
     //     }
     //   });
   }
+
+  //funktion för att ta bort bokning genom api-anrop till serveice
 
   function deleteBooking(bookingid: string | undefined) {
     for (let i = 0; i < bookingArray.length; i++) {
