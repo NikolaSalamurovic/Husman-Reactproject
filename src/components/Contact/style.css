@@ -102,7 +102,7 @@
 .container .restaurantInfo {
   border-left: 2px solid #f05545;
   padding: 0 0 0 16px;
-  height: 180px;
+  height: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -157,7 +157,7 @@
     width: 85vw;
   }
   .container .restaurantInfo {
-    margin: 40px 0;
+    margin: 70px 0;
   }
 }
 /*# sourceMappingURL=style.css.map */

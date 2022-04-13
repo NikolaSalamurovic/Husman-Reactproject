@@ -80,6 +80,7 @@ header {
         justify-content: center;
         flex-direction: column;
         position: absolute;
+        z-index: 100;
         li {
           color: white;
           padding: 0;

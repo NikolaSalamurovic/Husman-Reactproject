@@ -107,6 +107,7 @@ header .faBars {
         -ms-flex-direction: column;
             flex-direction: column;
     position: absolute;
+    z-index: 100;
   }
   header .mobileMenuActive ul li {
     color: white;
