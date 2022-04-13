@@ -58,7 +58,6 @@ export function Contact() {
 
       {!isMessageSent && 
         <form 
-        className="form" 
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -160,6 +159,10 @@ export function Contact() {
         <p>123 45</p>
         <p>Åre</p>
         <p><span className="bold">Telefon:</span> 123 456 78 90</p>
+        <p><span className="bold">Öppettider:</span></p>
+        <p><span className="bold">Måndag:</span> Stängt</p>
+        <p><span className="bold">Tisdag-Torsdag:</span> 11:30-21:30</p>
+        <p><span className="bold">Fredag-Söndag:</span> 11:30-23:30</p>
       </div>
 
     </div>
