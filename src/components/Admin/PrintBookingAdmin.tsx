@@ -47,6 +47,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   const [valueFromCalendar, setValueFromCalendar] = useState("");
   const [dateBooking, setDateBooking] = useState<string>("");
   const [timeBooking, setTimeBooking] = useState<string>("");
+  const [changeInputChange, setChangeInputChange] = useState(false);
 
   //Booleaner för att visa korrekta tider utefter hur många bord som är bokade/datum
   const [fullTable18, setFullTable18] = useState(false);
@@ -135,6 +136,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   const changeDateCalendar = (valueFromCalendar: string) => {
     setNotFullTable18(false);
     setNotFullTable21(false);
+    setAbleButtonTime(false);
     let service = new BookingService();
     service.getBookings().then((response) => {
       console.log(response);
@@ -169,6 +171,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       console.log(fullTable18);
       console.log(fullTable21);
     });
+
     // axios
     //   .get<IBooking[]>(
     //     "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
@@ -208,6 +211,15 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     //     console.log(fullTable21);
     //   });
   };
+
+  function changeBooking(bookingID: string | undefined) {
+    if (changeInputChange === true) {
+      setChangeInputChange(false);
+    } else {
+      setChangeInputChange(true);
+    }
+  }
+
   return (
     <>
       <article className="containerBooking">
@@ -223,6 +235,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           <li>Telefon: {bookingCustomer?.customer.phone}</li>
           <li>
             <StyledButton
+              className="buttonDeleteChange"
               onClick={() => {
                 deleteBooking(bookingCustomer?._id);
               }}
@@ -230,6 +243,17 @@ export function PrintBookingAdmin(props: IPrintBooking) {
               Ta bort bokning
             </StyledButton>
           </li>
+        </ul>
+        <StyledButton
+          className="buttonDeleteChange"
+          onClick={() => {
+            changeBooking(bookingCustomer?._id);
+          }}
+        >
+          Ändra bokning
+        </StyledButton>
+
+        <ul className={changeInputChange ? "showingChange" : "hiddenChange"}>
           <li>
             <div>
               <h2 className="changeBookingHeading">
