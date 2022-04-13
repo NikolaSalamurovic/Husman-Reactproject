@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 }
-.husmanTitle {
+.pageTitle {
   position: absolute;
   opacity: 0;
   top: 40%;
@@ -12,7 +12,7 @@
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px 16px #ffffff;
   font-family: "Courier New", Courier, monospace;
-  animation-delay: 5s;
+  animation-delay: 3s;
   animation: heading 15s;
 }
 .slider {
@@ -36,6 +36,8 @@
   background-position: center;
   background-repeat: no-repeat;
   float: left;
+  animation-delay: 0s;
+  animation: imageblur 8s;
 }
 
 .imageMobile {
@@ -116,10 +118,31 @@
   }
 }
 
+@keyframes imageblur {
+  20% {
+    filter: blur(8px);
+  }
+
+  40% {
+    filter: blur(6px);
+  }
+
+  60% {
+    filter: blur(4px);
+  }
+
+  80% {
+    filter: blur(2px);
+  }
+  100% {
+    filter: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .husmanTitle {
+  .pageTitle {
     top: 50%;
-    left: 20%;
+    left: 10%;
     font-size: 4rem;
   }
   .imageDesktop {
