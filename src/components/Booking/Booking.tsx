@@ -6,12 +6,13 @@ import { IBooking } from "../../models/IBooking";
 import { IBookingUpload } from "../../models/IBookingUpload";
 import { useNavigate } from "react-router-dom";
 import "./Booking.css";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { StyledButton } from "../StyledComponents/StyledButton";
 import { StyledInput } from "../StyledComponents/StyledInput";
 import { BookingService } from "../../services/BookingService";
 
 export function Booking() {
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [selectedDate, setSelectedDate] = useState("");
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
   const [availableBookings, setAvailableBookings] = useState<string[]>([]);
@@ -66,9 +67,6 @@ export function Booking() {
     });
   }, [selectedDate]);
 
-  if (customerInfo.time === "") {
-    customerInfo.time = "Välj tid";
-  }
 
   useEffect(() => {
     console.log(customerInfo);
@@ -141,175 +139,120 @@ export function Booking() {
     //   });
   }
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, control, reset, formState: {errors} } = useForm({
+    mode: "onChange"
+  });
+  const onSubmit = handleSubmit(data => console.log(errors))
 
-  console.log(errors);
+
+ function clickclick(){
+   console.log(123)
+ }
+ function resetInputs(){
+   reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      numberOfGuests: 0, 
+      selectedTime: "",
+    })
+    var select = document.getElementById("selectedTime") as HTMLSelectElement;
+    if(select){
+      select.value = "0";
+    }
+    console.log(select)
+    
+ }
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
-        <input
-          type="date"
-          onChange={(e) => setSelectedDate(e.target.value)}
-        ></input>
-        <div>
-          {selectedDate.length > 0 && (
-            <div className="dropdown">
-              <input type="checkbox" id="dropcheck" className="dropcheck" />
-              <label
-                htmlFor="dropcheck"
-                className="dropbtn"
-                placeholder="Välj tid"
-              >
-                {customerInfo.time}
-              </label>
-              <div className="dropdown-content">
-                {selectedDate.length > 0 &&
-                  availableBookings.filter((timeslot) => timeslot === "18:00")
-                    .length > 0 && (
-                    <div>
-                      <StyledButton
-                        onClick={() =>
-                          setCustomerInfo({
-                            ...customerInfo,
-                            time: "18:00",
-                            date: selectedDate,
-                          })
-                        }
-                      >
-                        {"18:00"}
-                      </StyledButton>
-                    </div>
-                  )}
-                {selectedDate.length > 0 &&
-                  availableBookings.filter((timeslot) => timeslot === "21:00")
-                    .length > 0 && (
-                    <div>
-                      <StyledButton
-                        onClick={() =>
-                          setCustomerInfo({
-                            ...customerInfo,
-                            time: "21:00",
-                            date: selectedDate,
-                          })
-                        }
-                      >
-                        {"21:00"}
-                      </StyledButton>
-                    </div>
-                  )}
-              </div>
-            </div>
-          )}
+      <h1 className="bookingTitle">Bokning</h1>
+      <div className="bookingBorder">
+        <form onSubmit={onSubmit}
+        >
+          <input type="date" className="bookingDate" onClick={resetInputs} onChange={(e) => {setSelectedDate(e.target.value)}} ></input>
+          <div>
+            {selectedDate.length > 0 && (
+              <div className="timeDiv">
+                <select name="" id="selectedTime" onChange={(e) => setCustomerInfo({...customerInfo, time: e.target.value, date: selectedDate})}>
+                        {!(customerInfo.time === "18:00" ||customerInfo.time === "21:00") && 
+                        <option value={"0"}>Välj tid*</option>}
+                  {selectedDate.length > 0 && availableBookings.filter((timeslot) => timeslot === "18:00").length > 0 && (
+                        <option value={"18:00"}>18:00</option>
+                    )}
+                  {selectedDate.length > 0 && availableBookings.filter((timeslot) => timeslot === "21:00").length > 0 && (
+                        <option value={"21:00"}>21:00</option>
+                    )}
+                </select>
+              </div>  
+            )}
 
-          {selectedDate.length > 0 && customerInfo.time.length < 8 && (
-            <div>
-              <select
-                {...register("numberOfGuests", {
-                  required: "this is required",
-                  min: 1,
-                })}
-                name="numberOfGuests"
-                id=""
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    numberOfGuests: +e.target.value,
-                  })
-                }
-              >
-                <option value="0">Antal gäster</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-              <StyledInput
-                type="text"
-                {...register("firstName", { required: "this is required" })}
-                placeholder="Förnamn"
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    customer: {
-                      ...customerInfo.customer,
-                      name: e.target.value,
-                    },
-                  })
-                }
-              />
-              <StyledInput
-                type="text"
-                {...register("lastName", {
-                  required: "this is required",
-                  min: 4,
-                })}
-                placeholder="Efternamn"
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    customer: {
-                      ...customerInfo.customer,
-                      lastname: e.target.value,
-                    },
-                  })
-                }
-              />
-              <StyledInput
-                type="tel"
-                {...register("phone")}
-                placeholder="Telefon-nummer"
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    customer: {
-                      ...customerInfo.customer,
-                      phone: e.target.value,
-                    },
-                  })
-                }
-              />
-              <StyledInput
-                type="text"
-                {...register("email")}
-                placeholder="Email"
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    customer: {
-                      ...customerInfo.customer,
-                      email: e.target.value,
-                    },
-                  })
-                }
-              />
-              <StyledButton type="submit" onClick={uploadBooking}>
-                Boka
-              </StyledButton>
-              <StyledButton
-                onClick={() => {
-                  reset();
-                  cancelBooking();
-                }}
-              >
-                Avbryt
-              </StyledButton>
-            </div>
-          )}
-        </div>
-      </form>
+            {selectedDate.length > 0 && (customerInfo.time=== "18:00" || customerInfo.time === "21:00") && (
+              <div>
+                <div className="formGuests">
+                  <select
+                    {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests"id="" onChange={(e) =>
+                      setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value,})
+                    }
+                  >
+                    <option value="0">Antal gäster*</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </div>
+                <div className="formInput">
+                  <StyledInput className="formInputs"
+                    type="text" {...register("firstName")} placeholder="Förnamn" onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn"onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer"onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="email" {...register("email", {required: true})} placeholder="Email" onChange={(e) =>
+                      {
+                      clickclick(); setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
+                      })
+                    }
+                    }
+                  />
+                </div>
+                  <button type="submit" className="submitBtn" 
+                  disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests}
+                  onClick={uploadBooking}>
+                    Boka
+                  </button>
+                  <button className="cancelBtn" onClick={() => {
+                      reset();
+                      cancelBooking();
+                    }}
+                  >
+                    Avbryt
+                  </button>
+              </div>
+            )}
+          </div>
+        </form>
+      </div>
     </>
   );
 }
