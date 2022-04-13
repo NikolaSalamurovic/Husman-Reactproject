@@ -1,9 +1,10 @@
+
 * {
   margin: 0;
   padding: 0;
 }
 
-.husmanTitle {
+.pageTitle {
   position: absolute;
   opacity: 0;
   top: 40%;
@@ -13,8 +14,8 @@
   color: white;
   text-shadow: 2px 2px 16px #ffffff;
   font-family: "Courier New", Courier, monospace;
-  -webkit-animation-delay: 5s;
-          animation-delay: 5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation: heading 15s;
           animation: heading 15s;
 }
@@ -42,6 +43,10 @@
   background-position: center;
   background-repeat: no-repeat;
   float: left;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation: imageblur 8s;
+          animation: imageblur 8s;
 }
 
 .imageMobile {
@@ -188,10 +193,56 @@
   }
 }
 
+@-webkit-keyframes imageblur {
+  20% {
+    -webkit-filter: blur(8px);
+            filter: blur(8px);
+  }
+  40% {
+    -webkit-filter: blur(6px);
+            filter: blur(6px);
+  }
+  60% {
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+  }
+  80% {
+    -webkit-filter: blur(2px);
+            filter: blur(2px);
+  }
+  100% {
+    -webkit-filter: none;
+            filter: none;
+  }
+}
+
+@keyframes imageblur {
+  20% {
+    -webkit-filter: blur(8px);
+            filter: blur(8px);
+  }
+  40% {
+    -webkit-filter: blur(6px);
+            filter: blur(6px);
+  }
+  60% {
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+  }
+  80% {
+    -webkit-filter: blur(2px);
+            filter: blur(2px);
+  }
+  100% {
+    -webkit-filter: none;
+            filter: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .husmanTitle {
+  .pageTitle {
     top: 50%;
-    left: 20%;
+    left: 10%;
     font-size: 4rem;
   }
   .imageDesktop {
