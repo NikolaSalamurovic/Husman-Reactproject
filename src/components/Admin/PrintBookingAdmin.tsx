@@ -117,13 +117,16 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       let counter21: number = 0;
       if (props.booking.numberOfGuests <= 6) {
         counter18 = -2;
+        counter21 = -2;
       } else if (
         props.booking.numberOfGuests < 6 &&
         props.booking.numberOfGuests <= 12
       ) {
         counter18 = -3;
+        counter21 = -3;
       } else if (props.booking.numberOfGuests > 12) {
         counter18 = -4;
+        counter21 = -4;
       }
       let bookingArray = response;
       let resultDate = bookingArray.filter(
