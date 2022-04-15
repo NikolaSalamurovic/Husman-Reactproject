@@ -47,6 +47,9 @@ export function Admin() {
   const [ableButtonLastName, setAbleButtonLastName] = useState(false);
   const [ableButtonEmail, setAbleButtonEmail] = useState(false);
   const [ableButtonPhone, setAbleButtonPhone] = useState(false);
+  const [valueFromCalendar, setValueFromCalendar] = useState("");
+  const [valueFromNumberOfGuests, setValueFromNumberOfGuests] =
+    useState<number>(0);
   const [changeObject, setChangeObject] = useState<any>({
     restaurantId: "624ac35fdf8a9fb11c3ea8ba",
     date: dateBooking,
@@ -195,7 +198,128 @@ export function Admin() {
     //     }
     //   });
   }
-
+  useEffect(() => {
+    setNotFullTable18(false);
+    setNotFullTable21(false);
+    setAbleButtonTime(false);
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      let counter18: number = 0;
+      let counter21: number = 0;
+      let bookingArray = response;
+      let resultDate = bookingArray.filter(
+        (booking) => booking.date === valueFromCalendar
+      );
+      let resultTime18 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "18:00";
+      });
+      let resultTime21 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "21:00";
+      });
+      if (resultTime18.length === 0) {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+        console.log("hejhejhej");
+      } else {
+        resultTime18.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter18 = counter18 + 3;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter18 = counter18 + 2;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter18 = counter18 + 1;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          }
+        });
+        console.log(counter18);
+      }
+      if (resultTime21.length === 0) {
+        setFullTable21(false);
+        setNotFullTable21(true);
+        setDateBooking(valueFromCalendar);
+        console.log("hejhejhej");
+      } else {
+        resultTime21.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter21 = counter21 + 3;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests < 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter21 = counter21 + 2;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter21 = counter21 + 1;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+              console.log("hejhej");
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          }
+        });
+        console.log(counter21);
+      }
+    });
+  }, [valueFromCalendar, valueFromNumberOfGuests]);
   //funktion för att ta bort bokning genom api-anrop till serveice
 
   function deleteBooking(bookingid: string | undefined) {
@@ -241,6 +365,7 @@ export function Admin() {
     let name: string = e.target.name;
     console.log(e.target.value);
     setChangeObject({ ...changeObject, [name]: e.target.value });
+    setValueFromNumberOfGuests(Number(e.target.value));
   }
   function handleChangeCustomer(e: ChangeEvent<HTMLInputElement>) {
     let name: string = e.target.name;
@@ -248,43 +373,160 @@ export function Admin() {
     setChangeCustomer({ ...changeCustomer, [name]: e.target.value });
   }
   const changeDateCalendar = (valueFromCalendar: string) => {
-    setNotFullTable18(false);
-    setNotFullTable21(false);
-    setAbleButtonTime(false);
-    let service = new BookingService();
-    service.getBookings().then((response) => {
-      console.log(response);
-      let bookingarray: IBooking[] = response;
-      let resultDate = bookingarray.filter(
-        (booking) => booking.date === valueFromCalendar
-      );
+    setValueFromCalendar(valueFromCalendar);
+    // setNotFullTable18(false);
+    // setNotFullTable21(false);
+    // setAbleButtonTime(false);
+    // let service = new BookingService();
+    // service.getBookings().then((response) => {
+    //   let counter18: number = 0;
+    //   let counter21: number = 0;
+    //   let bookingArray = response;
+    //   let resultDate = bookingArray.filter(
+    //     (booking) => booking.date === valueFromCalendar
+    //   );
+    //   let resultTime18 = resultDate.filter((bookingtime) => {
+    //     return bookingtime.time === "18:00";
+    //   });
+    //   let resultTime21 = resultDate.filter((bookingtime) => {
+    //     return bookingtime.time === "21:00";
+    //   });
+    //   if (resultTime18.length === 0) {
+    //     setFullTable18(false);
+    //     setNotFullTable18(true);
+    //     setDateBooking(valueFromCalendar);
+    //     console.log("hejhejhej");
+    //   } else {
+    //     resultTime18.map((booking) => {
+    //       if (booking.numberOfGuests > 12) {
+    //         counter18 = counter18 + 3;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (
+    //         booking.numberOfGuests > 6 &&
+    //         booking.numberOfGuests < 12
+    //       ) {
+    //         counter18 = counter18 + 2;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (booking.numberOfGuests < 6) {
+    //         counter18 = counter18 + 1;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       }
+    //     });
+    //     console.log(counter18);
+    //   }
+    //   if (resultTime21.length === 0) {
+    //     setFullTable21(false);
+    //     setNotFullTable21(true);
+    //     setDateBooking(valueFromCalendar);
+    //     console.log("hejhejhej");
+    //   } else {
+    //     resultTime21.map((booking) => {
+    //       if (booking.numberOfGuests > 12) {
+    //         counter21 = counter21 + 3;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (
+    //         booking.numberOfGuests > 6 &&
+    //         booking.numberOfGuests < 12
+    //       ) {
+    //         counter21 = counter21 + 2;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (booking.numberOfGuests < 6) {
+    //         counter21 = counter21 + 1;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       }
+    //     });
+    //     console.log(counter21);
+    //   }
+    // });
 
-      let resultTime18 = resultDate.filter((dateItem) => {
-        return dateItem.time == "18:00";
-      });
-      let resultTime21 = resultDate.filter((dateItem) => {
-        return dateItem.time == "21:00";
-      });
-      console.log(resultTime18.length);
-      if (resultTime18.length >= 15) {
-        setFullTable18(true);
-      } else {
-        setFullTable18(false);
-        setNotFullTable18(true);
-        setDateBooking(valueFromCalendar);
-      }
-      if (resultTime21.length >= 15) {
-        setFullTable21(true);
-      } else {
-        setFullTable21(false);
-        setDateBooking(valueFromCalendar);
-        setNotFullTable21(true);
-      }
-      console.log(resultTime18);
-      console.log(resultTime21);
-      console.log(fullTable18);
-      console.log(fullTable21);
-    });
+    // let service = new BookingService();
+    // service.getBookings().then((response) => {
+    //   console.log(response);
+    //   let bookingarray: IBooking[] = response;
+    //   let resultDate = bookingarray.filter(
+    //     (booking) => booking.date === valueFromCalendar
+    //   );
+
+    //   let resultTime18 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "18:00";
+    //   });
+    //   let resultTime21 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "21:00";
+    //   });
+    //   console.log(resultTime18.length);
+    //   if (resultTime18.length >= 15) {
+    //     setFullTable18(true);
+    //   } else {
+    //     setFullTable18(false);
+    //     setNotFullTable18(true);
+    //     setDateBooking(valueFromCalendar);
+    //   }
+    //   if (resultTime21.length >= 15) {
+    //     setFullTable21(true);
+    //   } else {
+    //     setFullTable21(false);
+    //     setDateBooking(valueFromCalendar);
+    //     setNotFullTable21(true);
+    //   }
+    //   console.log(resultTime18);
+    //   console.log(resultTime21);
+    //   console.log(fullTable18);
+    //   console.log(fullTable21);
+    // });
   };
 
   function printNewBooking() {
@@ -397,7 +639,7 @@ export function Admin() {
                   <input
                     type="number"
                     min="1"
-                    max="6"
+                    max="18"
                     name="numberOfGuests"
                     value={changeObject.numberOfGuests}
                     onChange={handleChange}

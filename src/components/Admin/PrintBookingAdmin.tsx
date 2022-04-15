@@ -45,6 +45,8 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     numberOfGuests: 0,
   });
   const [valueFromCalendar, setValueFromCalendar] = useState("");
+  const [valueFromNumberOfGuests, setValueFromNumberOfGuests] =
+    useState<number>(0);
   const [dateBooking, setDateBooking] = useState<string>("");
   const [timeBooking, setTimeBooking] = useState<string>("");
   const [changeInputChange, setChangeInputChange] = useState(false);
@@ -103,6 +105,140 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     //   });
   }, []);
 
+  useEffect(() => {
+    setNotFullTable18(false);
+    setNotFullTable21(false);
+    setAbleButtonTime(false);
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      //för att man ska kunna ändra sitt bord till fler utefter hur många man faktiskt
+      //vill boka in tar jag bort antal bord som de redan har bokat först.
+      let counter18: number = 0;
+      let counter21: number = 0;
+      if (props.booking.numberOfGuests <= 6) {
+        counter18 = -2;
+      } else if (
+        props.booking.numberOfGuests < 6 &&
+        props.booking.numberOfGuests <= 12
+      ) {
+        counter18 = -3;
+      } else if (props.booking.numberOfGuests > 12) {
+        counter18 = -4;
+      }
+      let bookingArray = response;
+      let resultDate = bookingArray.filter(
+        (booking) => booking.date === valueFromCalendar
+      );
+      let resultTime18 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "18:00";
+      });
+      let resultTime21 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "21:00";
+      });
+      if (resultTime18.length === 0) {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+        console.log("hejhejhej");
+      } else {
+        resultTime18.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter18 = counter18 + 3;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter18 = counter18 + 2;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter18 = counter18 + 1;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+              console.log("hejhej");
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          }
+        });
+        console.log(counter18);
+      }
+      if (resultTime21.length === 0) {
+        setFullTable21(false);
+        setNotFullTable21(true);
+        setDateBooking(valueFromCalendar);
+        console.log("hejhejhej");
+      } else {
+        resultTime21.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter21 = counter21 + 3;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests < 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter21 = counter21 + 2;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter21 = counter21 + 1;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+              console.log("hejhej");
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhej");
+            }
+          }
+        });
+        console.log(counter21);
+      }
+    });
+  }, [valueFromCalendar, valueFromNumberOfGuests]);
   //funktion för att ta bort bokningar
   function deleteBooking(bookingID: string | undefined) {
     props.deleteBookingAPI(bookingID);
@@ -114,6 +250,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     let name: string = e.target.name;
 
     setChangeObject({ ...changeObject, [name]: e.target.value });
+    setValueFromNumberOfGuests(Number(e.target.value));
   }
 
   //funktion för att ändra bokning
@@ -134,43 +271,45 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   //function för att ändra datum i kalender som avstämmer med
   //api att det inte finns fler än 15 bokningar per tidpunkt/kväll
   const changeDateCalendar = (valueFromCalendar: string) => {
-    setNotFullTable18(false);
-    setNotFullTable21(false);
-    setAbleButtonTime(false);
-    let service = new BookingService();
-    service.getBookings().then((response) => {
-      console.log(response);
-      let bookingarray: IBooking[] = response;
-      let resultDate = bookingarray.filter(
-        (booking) => booking.date === valueFromCalendar
-      );
+    setValueFromCalendar(valueFromCalendar);
 
-      let resultTime18 = resultDate.filter((dateItem) => {
-        return dateItem.time == "18:00";
-      });
-      let resultTime21 = resultDate.filter((dateItem) => {
-        return dateItem.time == "21:00";
-      });
-      console.log(resultTime18.length);
-      if (resultTime18.length >= 15) {
-        setFullTable18(true);
-      } else {
-        setFullTable18(false);
-        setNotFullTable18(true);
-        setDateBooking(valueFromCalendar);
-      }
-      if (resultTime21.length >= 15) {
-        setFullTable21(true);
-      } else {
-        setFullTable21(false);
-        setDateBooking(valueFromCalendar);
-        setNotFullTable21(true);
-      }
-      console.log(resultTime18);
-      console.log(resultTime21);
-      console.log(fullTable18);
-      console.log(fullTable21);
-    });
+    // setNotFullTable18(false);
+    // setNotFullTable21(false);
+    // setAbleButtonTime(false);
+    // let service = new BookingService();
+    // service.getBookings().then((response) => {
+    //   console.log(response);
+    //   let bookingarray: IBooking[] = response;
+    //   let resultDate = bookingarray.filter(
+    //     (booking) => booking.date === valueFromCalendar
+    //   );
+
+    //   let resultTime18 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "18:00";
+    //   });
+    //   let resultTime21 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "21:00";
+    //   });
+    //   console.log(resultTime18.length);
+    //   if (resultTime18.length >= 15) {
+    //     setFullTable18(true);
+    //   } else {
+    //     setFullTable18(false);
+    //     setNotFullTable18(true);
+    //     setDateBooking(valueFromCalendar);
+    //   }
+    //   if (resultTime21.length >= 15) {
+    //     setFullTable21(true);
+    //   } else {
+    //     setFullTable21(false);
+    //     setDateBooking(valueFromCalendar);
+    //     setNotFullTable21(true);
+    //   }
+    //   console.log(resultTime18);
+    //   console.log(resultTime21);
+    //   console.log(fullTable18);
+    //   console.log(fullTable21);
+    // });
 
     // axios
     //   .get<IBooking[]>(
@@ -318,7 +457,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                   <input
                     type="number"
                     min="1"
-                    max="6"
+                    max="18"
                     name="numberOfGuests"
                     value={changeObject.numberOfGuests}
                     onChange={handleChange}
