@@ -43,6 +43,10 @@ export function Admin() {
   const [ableButtonNumberOfGuests, setAbleButtonNumberOfGuests] =
     useState(false);
   const [ableButtonDate, setAbleButtonDate] = useState(false);
+  const [ableButtonName, setAbleButtonName] = useState(false);
+  const [ableButtonLastName, setAbleButtonLastName] = useState(false);
+  const [ableButtonEmail, setAbleButtonEmail] = useState(false);
+  const [ableButtonPhone, setAbleButtonPhone] = useState(false);
   const [changeObject, setChangeObject] = useState<any>({
     restaurantId: "624ac35fdf8a9fb11c3ea8ba",
     date: dateBooking,
@@ -56,7 +60,11 @@ export function Admin() {
     email: "",
     phone: "",
   });
-
+  const [validationMessageName, setValidationMessageName] = useState("");
+  const [validationMessageLastname, setValidationMessageLastname] =
+    useState("");
+  const [validationMessageEmail, setValidationMessageEmail] = useState("");
+  const [validationMessagePhone, setValidationMessagePhone] = useState("");
   // useEffect(() => {
   //   axios
   //     .post(
@@ -235,10 +243,9 @@ export function Admin() {
     setChangeObject({ ...changeObject, [name]: e.target.value });
   }
   function handleChangeCustomer(e: ChangeEvent<HTMLInputElement>) {
-    setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
     console.log(e.target.value);
-    setChangeObject({ ...changeObject, [name]: e.target.value });
+    setChangeCustomer({ ...changeCustomer, [name]: e.target.value });
   }
   const changeDateCalendar = (valueFromCalendar: string) => {
     setNotFullTable18(false);
@@ -281,23 +288,36 @@ export function Admin() {
   };
 
   function printNewBooking() {
-    let bookingObject: IBookingUpload = {
-      restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-      date: dateBooking,
-      time: timeBooking,
-      numberOfGuests: changeObject.numberOfGuests,
-      customer: {
-        name: changeCustomer.name,
-        lastname: changeCustomer.lastname,
-        email: changeCustomer.email,
-        phone: changeCustomer.phone,
-      },
-    };
-    console.log(bookingObject);
-    // let service = new BookingService();
-    // service
-    //   .postBookings(changeObject)
-    //   .then((response) => console.log(response));
+    console.log(changeCustomer.phone);
+    if (changeCustomer.name.length < 2) {
+      setValidationMessageName("Minst 2 tecken");
+    } else if (changeCustomer.lastname.length < 2) {
+      setValidationMessageLastname("Minst 2 tecken");
+    } else if (changeCustomer.email.includes("@") === false) {
+      setValidationMessageEmail("Måste vara en email");
+    } else if (changeCustomer.phone.length < 5) {
+      setValidationMessagePhone("Telefonnummer krävs");
+    } else {
+      let bookingObject: IBookingUpload = {
+        restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+        date: dateBooking,
+        time: timeBooking,
+        numberOfGuests: changeObject.numberOfGuests,
+        customer: {
+          name: changeCustomer.name,
+          lastname: changeCustomer.lastname,
+          email: changeCustomer.email,
+          phone: changeCustomer.phone.toString(),
+        },
+      };
+      console.log(bookingObject);
+      let service = new BookingService();
+      service.postBookings(bookingObject).then((response) => {
+        console.log(response);
+        alert("Tack för bokningen, du skickas till startsidan");
+        navigation("/");
+      });
+    }
   }
   return (
     <>
@@ -395,7 +415,12 @@ export function Admin() {
                     name="name"
                     value={changeCustomer.name}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonName(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessageName}</p>
                   <StyledInput
                     type="text"
                     placeholder="Efternamn"
@@ -403,29 +428,53 @@ export function Admin() {
                     className="styledInputAdmin"
                     value={changeCustomer.lastname}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonLastName(true);
+                    // }}
                   />
+                  <p className="validationMessage">
+                    {validationMessageLastname}
+                  </p>
                   <StyledInput
-                    type="text"
+                    type="email"
                     placeholder="E-mail"
                     name="email"
                     className="styledInputAdmin"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title="please enter valid email [test@test.com]."
+                    required
                     value={changeCustomer.email}
                     onChange={handleChangeCustomer}
+                    // onClick={() => {
+                    //   setAbleButtonEmail(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessageEmail}</p>
                   <StyledInput
-                    type="text"
+                    type="number"
                     placeholder="Telefon"
                     name="phone"
                     className="styledInputAdmin"
                     value={changeCustomer.phone}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonPhone(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessagePhone}</p>
                   <button
+                    type="submit"
                     className="bookNewButton"
                     disabled={
                       !ableButtonDate ||
                       !ableButtonTime ||
                       !ableButtonNumberOfGuests
+                      // !ableButtonName ||
+                      // !ableButtonLastName ||
+                      // !ableButtonEmail ||
+                      // ableButtonPhone
                     }
                     onClick={(e) => {
                       e.preventDefault();
