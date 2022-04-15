@@ -115,19 +115,54 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       //vill boka in tar jag bort antal bord som de redan har bokat först.
       let counter18: number = 0;
       let counter21: number = 0;
-      if (props.booking.numberOfGuests <= 6) {
-        counter18 = -2;
-        counter21 = -2;
-      } else if (
-        props.booking.numberOfGuests < 6 &&
-        props.booking.numberOfGuests <= 12
-      ) {
-        counter18 = -3;
-        counter21 = -3;
-      } else if (props.booking.numberOfGuests > 12) {
-        counter18 = -4;
-        counter21 = -4;
-      }
+      if (bookingCustomer!)
+        if (
+          bookingCustomer.time === "18:00" &&
+          bookingCustomer.numberOfGuests <= 6
+        ) {
+          counter18 = -2;
+
+          console.log("är här i iffen");
+        } else if (
+          (bookingCustomer.time === "18:00" &&
+            bookingCustomer.numberOfGuests < 6 &&
+            bookingCustomer.numberOfGuests <= 12) ||
+          (bookingCustomer.time === "18:00" &&
+            bookingCustomer.numberOfGuests === 12)
+        ) {
+          counter18 = -3;
+
+          console.log("är här i iffen");
+        } else if (
+          bookingCustomer.time === "18:00" &&
+          bookingCustomer.numberOfGuests > 12
+        ) {
+          counter18 = -4;
+          console.log("är här i iffen");
+        } else if (
+          bookingCustomer.time === "21:00" &&
+          bookingCustomer.numberOfGuests <= 6
+        ) {
+          counter21 = -2;
+
+          console.log("är här i iffen");
+        } else if (
+          (bookingCustomer.time === "21:00" &&
+            bookingCustomer.numberOfGuests < 6 &&
+            bookingCustomer.numberOfGuests <= 12) ||
+          (bookingCustomer.time === "21:00" &&
+            bookingCustomer.numberOfGuests === 12)
+        ) {
+          counter21 = -3;
+
+          console.log("är här i iffen");
+        } else if (
+          bookingCustomer.time === "21:00" &&
+          bookingCustomer.numberOfGuests > 12
+        ) {
+          counter21 = -4;
+          console.log("är här i iffen");
+        }
       let bookingArray = response;
       let resultDate = bookingArray.filter(
         (booking) => booking.date === valueFromCalendar
@@ -354,7 +389,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     //   });
   };
 
-  function changeBooking(bookingID: string | undefined) {
+  function changeBooking() {
     if (changeInputChange === true) {
       setChangeInputChange(false);
     } else {
@@ -389,7 +424,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         <StyledButton
           className="buttonDeleteChange"
           onClick={() => {
-            changeBooking(bookingCustomer?._id);
+            changeBooking();
           }}
         >
           Ändra bokning
@@ -410,6 +445,22 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                     setAbleButtonDate(true);
                   }}
                 />
+                <div className="containerInputAdmin">
+                  <label
+                    className="labelNumberOfGuests"
+                    htmlFor="numberOfGuests"
+                  >
+                    {`Antal gäster: `}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="18"
+                    name="numberOfGuests"
+                    value={changeObject.numberOfGuests}
+                    onChange={handleChange}
+                  />
+                </div>
                 {fullTable18 && fullTable21 ? (
                   <>
                     <p>Det finns inga tider</p>
@@ -450,22 +501,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                 ) : (
                   <></>
                 )}
-                <div className="containerInputAdmin">
-                  <label
-                    className="labelNumberOfGuests"
-                    htmlFor="numberOfGuests"
-                  >
-                    {`Antal gäster: `}
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="18"
-                    name="numberOfGuests"
-                    value={changeObject.numberOfGuests}
-                    onChange={handleChange}
-                  />
-                </div>
 
                 <button
                   className="buttonSubmit"

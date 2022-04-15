@@ -1,4 +1,3 @@
-
 .containerAdmin {
   background-image: url("../.././assets/5683239.jpg");
   background-repeat: repeat;
@@ -76,6 +75,10 @@ ul li div form .containerCustomer .bookNewButton {
 
 ul li div form .hiddenCustomer {
   display: none;
+}
+
+.validationMessage {
+  font-style: italic;
 }
 
 @media screen and (max-width: 768px) {

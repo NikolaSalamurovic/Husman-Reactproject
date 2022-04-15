@@ -1,6 +1,7 @@
-
 .containerBooking {
-  width: 25%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   margin: 10px;
   padding: 10px;
   border: 5px solid #4f5b6261;
@@ -42,8 +43,8 @@
 .buttonTime {
   padding-left: 5px;
   padding-right: 5px;
-  margin-left: 5px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .buttonTime:focus {
@@ -58,12 +59,15 @@ p {
   padding-bottom: 7px;
 }
 
+.buttonSubmit {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .containerBooking {
     width: 80%;
   }
 }
-
 
 .hiddenChange,
 .hiddenNew {
@@ -75,5 +79,4 @@ p {
   display: block;
   list-style-type: none;
 }
-
 /*# sourceMappingURL=PrintBooking.css.map */

@@ -43,10 +43,6 @@ export function Admin() {
   const [ableButtonNumberOfGuests, setAbleButtonNumberOfGuests] =
     useState(false);
   const [ableButtonDate, setAbleButtonDate] = useState(false);
-  const [ableButtonName, setAbleButtonName] = useState(false);
-  const [ableButtonLastName, setAbleButtonLastName] = useState(false);
-  const [ableButtonEmail, setAbleButtonEmail] = useState(false);
-  const [ableButtonPhone, setAbleButtonPhone] = useState(false);
   const [valueFromCalendar, setValueFromCalendar] = useState("");
   const [valueFromNumberOfGuests, setValueFromNumberOfGuests] =
     useState<number>(0);
@@ -225,6 +221,13 @@ export function Admin() {
         resultTime18.map((booking) => {
           if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
             counter18 = counter18 + 3;
+            if (
+              counter18 === 14 &&
+              valueFromNumberOfGuests > 6 &&
+              valueFromNumberOfGuests <= 12
+            ) {
+              counter18 = counter18 + 1;
+            }
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
@@ -240,10 +243,10 @@ export function Admin() {
             (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
           ) {
             counter18 = counter18 + 2;
-            if (counter18 >= 15) {
+            if (counter18 >= 15 || counter18 === 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
+              console.log("hejhejhoppsan");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
@@ -258,12 +261,12 @@ export function Admin() {
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
+              console.log("hejhejhoppsan");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
+              console.log("hejhejajdå");
             }
           }
         });
@@ -273,27 +276,37 @@ export function Admin() {
         setFullTable21(false);
         setNotFullTable21(true);
         setDateBooking(valueFromCalendar);
-        console.log("hejhejhej");
       } else {
         resultTime21.map((booking) => {
           if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
             counter21 = counter21 + 3;
+            if (
+              counter21 === 14 &&
+              valueFromNumberOfGuests > 6 &&
+              valueFromNumberOfGuests <= 12
+            ) {
+              counter21 = counter21 + 1;
+            }
+
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
+              console.log("hejhejhoppsan111");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
+              console.log("hejhejhoppsan222");
             }
           } else if (
-            (booking.numberOfGuests > 6 && booking.numberOfGuests < 12) ||
+            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
             (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
           ) {
             counter21 = counter21 + 2;
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
+              console.log("hejhejhoppsan");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
@@ -307,12 +320,12 @@ export function Admin() {
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
-              console.log("hejhej");
+              console.log("hejhejhoppsan3333");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
+              console.log("hejhejhe44444");
             }
           }
         });
@@ -333,6 +346,8 @@ export function Admin() {
           } else {
             setDeleteBoolean(true);
           }
+          alert("Bokningen är borttagen, du skickas till startsidan");
+          navigation("/");
         });
       }
       //   axios
@@ -544,7 +559,7 @@ export function Admin() {
         restaurantId: "624ac35fdf8a9fb11c3ea8ba",
         date: dateBooking,
         time: timeBooking,
-        numberOfGuests: changeObject.numberOfGuests,
+        numberOfGuests: Number(changeObject.numberOfGuests),
         customer: {
           name: changeCustomer.name,
           lastname: changeCustomer.lastname,
@@ -552,8 +567,11 @@ export function Admin() {
           phone: changeCustomer.phone.toString(),
         },
       };
-      console.log(bookingObject);
+
       let service = new BookingService();
+      // service.getBookings().then((response) => {
+      //   let dates = response.filter(() => {});
+      // });
       service.postBookings(bookingObject).then((response) => {
         console.log(response);
         alert("Tack för bokningen, du skickas till startsidan");
@@ -589,6 +607,22 @@ export function Admin() {
                     setAbleButtonDate(true);
                   }}
                 />
+                <div className="containerInputAdmin">
+                  <label
+                    className="labelNumberOfGuests"
+                    htmlFor="numberOfGuests"
+                  >
+                    {`Antal gäster: `}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="18"
+                    name="numberOfGuests"
+                    value={changeObject.numberOfGuests}
+                    onChange={handleChange}
+                  />
+                </div>
                 {fullTable18 && fullTable21 ? (
                   <>
                     <p>Det finns inga tider</p>
@@ -629,22 +663,7 @@ export function Admin() {
                 ) : (
                   <></>
                 )}
-                <div className="containerInputAdmin">
-                  <label
-                    className="labelNumberOfGuests"
-                    htmlFor="numberOfGuests"
-                  >
-                    {`Antal gäster: `}
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="18"
-                    name="numberOfGuests"
-                    value={changeObject.numberOfGuests}
-                    onChange={handleChange}
-                  />
-                </div>
+
                 <div
                   className={
                     ableButtonTime ? "containerCustomer" : "hiddenCustomer"
