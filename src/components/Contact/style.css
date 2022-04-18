@@ -3,7 +3,7 @@
   display: -ms-flexbox;
   display: flex;
   max-width: 1000px;
-  margin: 70px auto 0;
+  margin: 70px auto 150px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
