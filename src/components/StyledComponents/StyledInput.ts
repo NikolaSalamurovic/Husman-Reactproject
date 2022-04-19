@@ -5,8 +5,9 @@ export const StyledInput = styled.input`
     height: 30px;
     width: 85vw;
     max-width: 390px;
-    border: 2px solid #4f5b62;
-    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    outline: 0;
+    border-radius: 3px;
     background-color: white;
     padding: 0 5px;
     transition: ease-in-out 250ms;
@@ -18,6 +19,6 @@ export const StyledInput = styled.input`
         background-color: rgb(244, 244, 244);
     }
     ::placeholder {
-        color: lightgrey;
+        color: rgb(190, 190, 190);
     }
 `
