@@ -216,7 +216,6 @@ export function Admin() {
         setFullTable18(false);
         setNotFullTable18(true);
         setDateBooking(valueFromCalendar);
-        console.log("hejhejhej");
       } else {
         resultTime18.map((booking) => {
           if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
@@ -231,12 +230,10 @@ export function Admin() {
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
             }
           } else if (
             (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
@@ -246,12 +243,10 @@ export function Admin() {
             if (counter18 >= 15 || counter18 === 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhejhoppsan");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
             }
           } else if (
             booking.numberOfGuests <= 6 ||
@@ -261,12 +256,10 @@ export function Admin() {
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhejhoppsan");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejajdå");
             }
           }
         });
@@ -346,8 +339,6 @@ export function Admin() {
           } else {
             setDeleteBoolean(true);
           }
-          alert("Bokningen är borttagen, du skickas till startsidan");
-          navigation("/");
         });
       }
       //   axios
