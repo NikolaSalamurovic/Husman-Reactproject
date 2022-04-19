@@ -12,7 +12,7 @@ import { StyledInput } from "../StyledComponents/StyledInput";
 import { BookingService } from "../../services/BookingService";
 
 export function Booking() {
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
   const [availableBookings, setAvailableBookings] = useState<string[]>([]);
@@ -164,9 +164,17 @@ export function Booking() {
     console.log(select)
     
  }
+ function checkedValid(){
+  if (buttonDisabled === false){
+    setButtonDisabled(true)} 
+    else {
+      setButtonDisabled(false)
+    }
+ }
 
   return (
     <>
+      <div className="backgroundPicture"></div>
       <h1 className="bookingTitle">Bokning</h1>
       <div className="bookingBorder">
         <form onSubmit={onSubmit}
@@ -192,7 +200,7 @@ export function Booking() {
               <div>
                 <div className="formGuests">
                   <select
-                    {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests"id="" onChange={(e) =>
+                    {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests" className="guestNumber" onChange={(e) =>
                       setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value,})
                     }
                   >
@@ -207,28 +215,28 @@ export function Booking() {
                 </div>
                 <div className="formInput">
                   <StyledInput className="formInputs"
-                    type="text" {...register("firstName")} placeholder="Förnamn" onChange={(e) =>
+                    type="text" {...register("firstName")} placeholder="Förnamn*" onChange={(e) =>
                       setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
                         },
                       })
                     }
                   />
                   <StyledInput className="formInputs"
-                    type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn"onChange={(e) =>
+                    type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn*"onChange={(e) =>
                       setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
                         },
                       })
                     }
                   />
                   <StyledInput className="formInputs"
-                    type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer"onChange={(e) =>
+                    type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer*"onChange={(e) =>
                       setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
                         },
                       })
                     }
                   />
                   <StyledInput className="formInputs"
-                    type="email" {...register("email", {required: true})} placeholder="Email" onChange={(e) =>
+                    type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
                       {
                       clickclick(); setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
                       })
@@ -236,8 +244,11 @@ export function Booking() {
                     }
                   />
                 </div>
+                <div>
+                  <input type="checkbox" className="gdprInput" onClick={checkedValid}/> Genom att klicka i rutan godkänner jag <a href="https://gdprinfo.eu/sv/sv-article-6" target="_blank">villkoren</a> och samtycker härmed att Husman lagrar de personliga uppgifterna skrivna ovan.* 
+                </div>
                   <button type="submit" className="submitBtn" 
-                  disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests}
+                  disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests || !buttonDisabled}
                   onClick={uploadBooking}>
                     Boka
                   </button>

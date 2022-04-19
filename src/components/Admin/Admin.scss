@@ -3,6 +3,7 @@
   background-repeat: repeat;
   background-size: cover;
   min-height: 100vh;
+  max-height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,6 +22,50 @@
   color: white;
   font-size: 4rem;
   text-shadow: 2px 2px 16px black;
+}
+
+.newBooking {
+  width: 25%;
+  margin: 10px;
+  padding: 10px;
+  border: 5px solid #4f5b6261;
+  background-color: rgba(255, 255, 255, 0.708);
+  background-size: cover;
+  border-radius: 10p;
+}
+
+ul {
+  li {
+    div {
+      form {
+        .containerCustomer {
+          display: block;
+          .styledInputAdmin {
+            width: 200px;
+          }
+          .bookNewButton {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+ul {
+  li {
+    div {
+      form {
+        .hiddenCustomer {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
