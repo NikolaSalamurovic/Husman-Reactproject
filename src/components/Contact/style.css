@@ -1,23 +1,38 @@
-.container {
+.backgroundImage {
+  height: 100vh;
+  padding-top: 100px;
+  background-image: url("../../assets/contactBlurr.png");
+  background-size: cover;
+}
+
+.backgroundImage .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   max-width: 1000px;
-  margin: 70px auto 0;
+  margin: auto;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(231, 231, 231, 0.65);
+  padding: 75px 0 75px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.2);
 }
 
-.container .sentMessage {
+.backgroundImage .container .sentMessage {
   width: 400px;
 }
 
-.container .sentMessage p {
+.backgroundImage .container .sentMessage p {
   margin: 10px 0;
   padding: 0;
 }
 
-.container form {
+.backgroundImage .container form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,7 +45,7 @@
           justify-content: center;
 }
 
-.container form div {
+.backgroundImage .container form div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,11 +53,11 @@
   max-width: 390px;
 }
 
-.container form div label {
+.backgroundImage .container form div label {
   font-size: 0.9rem;
 }
 
-.container form .requiredWarning {
+.backgroundImage .container form .requiredWarning {
   margin: 0;
   padding: 0;
   color: red;
@@ -50,7 +65,7 @@
   margin: 0 0 0 10px;
 }
 
-.container form .requiredWarningForm {
+.backgroundImage .container form .requiredWarningForm {
   margin: 10px 0 0 0;
   padding: 0;
   color: red;
@@ -58,13 +73,13 @@
   text-align: center;
 }
 
-.container form textarea {
+.backgroundImage .container form textarea {
   margin: 4px 0 20px 0;
   resize: none;
   height: 100px;
-  border: 2px solid #4f5b62;
+  border: 1px solid #d1d1d1;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 3px;
   max-width: 390px;
   width: 85vw;
   font-family: inherit;
@@ -74,35 +89,35 @@
   transition: ease-in-out 250ms;
 }
 
-.container form textarea:focus {
+.backgroundImage .container form textarea:focus {
   outline: none;
   background-color: #f4f4f4;
 }
 
-.container form textarea:hover {
+.backgroundImage .container form textarea:hover {
   background-color: #f4f4f4;
 }
 
-.container form textarea::-webkit-input-placeholder {
-  color: lightgray;
+.backgroundImage .container form textarea::-webkit-input-placeholder {
+  color: #bebebe;
 }
 
-.container form textarea:-ms-input-placeholder {
-  color: lightgray;
+.backgroundImage .container form textarea:-ms-input-placeholder {
+  color: #bebebe;
 }
 
-.container form textarea::-ms-input-placeholder {
-  color: lightgray;
+.backgroundImage .container form textarea::-ms-input-placeholder {
+  color: #bebebe;
 }
 
-.container form textarea::placeholder {
-  color: lightgray;
+.backgroundImage .container form textarea::placeholder {
+  color: #bebebe;
 }
 
-.container .restaurantInfo {
+.backgroundImage .container .restaurantInfo {
   border-left: 2px solid #f05545;
   padding: 0 0 0 16px;
-  height: 300px;
+  height: 350px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -118,15 +133,15 @@
           justify-content: center;
 }
 
-.container .restaurantInfo .bold {
+.backgroundImage .container .restaurantInfo .bold {
   font-weight: 500;
 }
 
-.container .restaurantInfo p {
+.backgroundImage .container .restaurantInfo p {
   margin: 5px 0;
 }
 
-.container .buttonMargin {
+.backgroundImage .container .buttonMargin {
   margin: 20px 0 0 0;
 }
 
@@ -135,17 +150,22 @@
 }
 
 @media screen and (max-width: 768px) {
-  .container {
+  .backgroundImage {
+    padding: 0;
+  }
+  .backgroundImage .container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    margin-top: 30px;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
   }
-  .container form {
+  .backgroundImage .container form {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -153,11 +173,11 @@
         -ms-flex-align: center;
             align-items: center;
   }
-  .container form textarea {
+  .backgroundImage .container form textarea {
     width: 85vw;
   }
-  .container .restaurantInfo {
-    margin: 70px 0;
+  .backgroundImage .container .restaurantInfo {
+    display: none;
   }
 }
 /*# sourceMappingURL=style.css.map */

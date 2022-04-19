@@ -66,6 +66,34 @@ export function Layout() {
       <main>
         <Outlet></Outlet>
       </main>
+      <footer>
+        <div className="footerContainer">
+          <div className="footerContact">
+            <p className="bold">Kontaktinformation:</p>
+            <p>Åregatan 1</p>
+            <p>123 45</p>
+            <p>Åre</p>
+            <p><span className="bold">Telefon:</span> 123 456 78 90</p>
+          </div>
+          <div className="footerOpen"> 
+            <p><span className="bold">Öppettider:</span></p>
+            <p><span className="bold">Måndag:</span> Stängt</p>
+            <p><span className="bold">Tisdag-Torsdag:</span> 11:30-21:30</p>
+            <p><span className="bold">Fredag-Söndag:</span> 11:30-23:30</p>
+          </div>
+          <div className="footerMobile">
+            <p className="bold">Kontaktinformation:</p>
+            <p>Åregatan 1</p>
+            <p>123 45</p>
+            <p>Åre</p>
+            <p><span className="bold">Telefon:</span> 123 456 78 90</p>
+            <p><span className="bold">Öppettider:</span></p>
+            <p><span className="bold">Måndag:</span> Stängt</p>
+            <p><span className="bold">Tisdag-Torsdag:</span> 11:30-21:30</p>
+            <p><span className="bold">Fredag-Söndag:</span> 11:30-23:30</p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
