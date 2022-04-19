@@ -44,128 +44,132 @@ export function Contact() {
    };
 
   return (
-    <div className="container">
+    <>
+      <div className="backgroundImage">
+        <div className="container">
 
-      {isMessageSent && 
-        <div className="sentMessage">
-          <p className="bold">Tack för ditt meddelande!<br/>Vi återkopplar så snart som möjligt.</p>
-          <p><span className="bold">Namn:</span> {newUserMessage.name}</p>
-          <p><span className="bold">E-mail:</span> {newUserMessage.email}</p>
-          <p><span className="bold">Telefon:</span> {newUserMessage.phone}</p>
-          <p><span className="bold">Meddelande:</span><br/>{newUserMessage.message}</p>
-          <StyledButton className="buttonMargin" onClick={sendNewMessage}>Skicka ett till meddelande</StyledButton>
-        </div>}
+          {isMessageSent && 
+            <div className="sentMessage">
+              <p className="bold">Tack för ditt meddelande!<br/>Vi återkopplar så snart som möjligt.</p>
+              <p><span className="bold">Namn:</span> {newUserMessage.name}</p>
+              <p><span className="bold">E-mail:</span> {newUserMessage.email}</p>
+              <p><span className="bold">Telefon:</span> {newUserMessage.phone}</p>
+              <p><span className="bold">Meddelande:</span><br/>{newUserMessage.message}</p>
+              <StyledButton className="buttonMargin" onClick={sendNewMessage}>Skicka ett till meddelande</StyledButton>
+            </div>}
 
-      {!isMessageSent && 
-        <form 
-        onSubmit={(e) => {
-          e.preventDefault();
+          {!isMessageSent && 
+            <form 
+            onSubmit={(e) => {
+              e.preventDefault();
 
-          if(newUserMessage.name === "") { 
-            setIsNameValid(false);
-          } else {
-            setIsNameValid(true);
-          };
+              if(newUserMessage.name === "") { 
+                setIsNameValid(false);
+              } else {
+                setIsNameValid(true);
+              };
 
-          if(newUserMessage.email === "") { 
-            setIsEmailValid(false);
-          } else {
-            setIsEmailValid(true);
-          };
+              if(newUserMessage.email === "") { 
+                setIsEmailValid(false);
+              } else {
+                setIsEmailValid(true);
+              };
 
-          if(newUserMessage.phone === "") { 
-            setIsPhoneValid(false);
-          } else {
-            setIsPhoneValid(true);
-          };
+              if(newUserMessage.phone === "") { 
+                setIsPhoneValid(false);
+              } else {
+                setIsPhoneValid(true);
+              };
 
-          if(newUserMessage.message === "") { 
-            setIsMessageValid(false);
-          } else {
-            setIsMessageValid(true);
-          };
-          
-          if(
-            newUserMessage.name === "" ||
-            newUserMessage.email === "" ||
-            newUserMessage.phone === "" ||
-            newUserMessage.message === ""
-          ) {
-            setIsFormValid(false);
-            return
-          };
+              if(newUserMessage.message === "") { 
+                setIsMessageValid(false);
+              } else {
+                setIsMessageValid(true);
+              };
 
-          setIsMessageSent(true)
-        }}>
+              if(
+                newUserMessage.name === "" ||
+                newUserMessage.email === "" ||
+                newUserMessage.phone === "" ||
+                newUserMessage.message === ""
+              ) {
+                setIsFormValid(false);
+                return
+              };
 
-          <div>
-            <label>Namn</label>
-            {!isNameValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
+              setIsMessageSent(true)
+            }}>
+
+              <div>
+                <label>Namn</label>
+                {!isNameValid && <p className="requiredWarning">*Obligatoriskt fält</p>}
+              </div>
+              <StyledInput 
+                type="text" 
+                placeholder="Husman Restaurang" 
+                name="name" 
+                value={newUserMessage.name} 
+                onChange={handleInputChange}
+                maxLength={40}
+              />
+
+              <div>
+                <label>E-mail</label>
+                {!isEmailValid && <p className="requiredWarning">*Obligatoriskt fält</p>}
+              </div>
+              <StyledInput 
+                type="email" 
+                placeholder="exempel@husman.se" 
+                name="email" 
+                value={newUserMessage.email} 
+                onChange={handleInputChange}
+                maxLength={60}
+              />
+
+              <div>
+                <label>Telefon</label>
+                {!isPhoneValid && <p className="requiredWarning">*Obligatoriskt fält</p>}
+              </div>
+              <StyledInput 
+                type="text" 
+                placeholder="+(46) 70 xxx-xx-xx" 
+                name="phone" 
+                value={newUserMessage.phone} 
+                onChange={handleInputChange}
+                maxLength={12}
+              />
+
+              <div>
+                <label>Meddelande</label>
+                {!isMessageValid && <p className="requiredWarning">*Obligatoriskt fält</p>}
+              </div>
+              <textarea 
+                placeholder="Här skriver du ditt meddelande..." 
+                name="message" 
+                value={newUserMessage.message} 
+                onChange={handleTextAreaChange}
+                maxLength={200}
+              />
+
+              <StyledButton>Skicka meddelande</StyledButton>
+              {!isFormValid && <p className="requiredWarningForm">*Fyll i obligatoriska fält</p>}
+            </form>}
+
+          <div className="restaurantInfo">
+            <p className="bold">Kontaktinformation:</p>
+            <p>Åregatan 1</p>
+            <p>123 45</p>
+            <p>Åre</p>
+            <p><span className="bold">Telefon:</span> 123 456 78 90</p>
+            <p><span className="bold">Öppettider:</span></p>
+            <p><span className="bold">Måndag:</span> Stängt</p>
+            <p><span className="bold">Tisdag-Torsdag:</span> 11:30-21:30</p>
+            <p><span className="bold">Fredag-Söndag:</span> 11:30-23:30</p>
           </div>
-          <StyledInput 
-            type="text" 
-            placeholder="Namn" 
-            name="name" 
-            value={newUserMessage.name} 
-            onChange={handleInputChange}
-            maxLength={40}
-          />
 
-          <div>
-            <label>E-mail</label>
-            {!isEmailValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
-          </div>
-          <StyledInput 
-            type="email" 
-            placeholder="E-mail" 
-            name="email" 
-            value={newUserMessage.email} 
-            onChange={handleInputChange}
-            maxLength={60}
-          />
-
-          <div>
-            <label>Telefon</label>
-            {!isPhoneValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
-          </div>
-          <StyledInput 
-            type="text" 
-            placeholder="Telefon" 
-            name="phone" 
-            value={newUserMessage.phone} 
-            onChange={handleInputChange}
-            maxLength={12}
-          />
-
-          <div>
-            <label>Meddelande</label>
-            {!isMessageValid && <p className="requiredWarning">*Obligatoriskt fält*</p>}
-          </div>
-          <textarea 
-            placeholder="Meddelande" 
-            name="message" 
-            value={newUserMessage.message} 
-            onChange={handleTextAreaChange}
-            maxLength={200}
-          />
-
-          <StyledButton>Skicka meddelande</StyledButton>
-          {!isFormValid && <p className="requiredWarningForm">*Fyll i obligatoriska fält*</p>}
-        </form>}
-
-      <div className="restaurantInfo">
-        <p className="bold">Kontaktinformation:</p>
-        <p>Åregatan 1</p>
-        <p>123 45</p>
-        <p>Åre</p>
-        <p><span className="bold">Telefon:</span> 123 456 78 90</p>
-        <p><span className="bold">Öppettider:</span></p>
-        <p><span className="bold">Måndag:</span> Stängt</p>
-        <p><span className="bold">Tisdag-Torsdag:</span> 11:30-21:30</p>
-        <p><span className="bold">Fredag-Söndag:</span> 11:30-23:30</p>
+        </div>
       </div>
-
-    </div>
+    </>
   );
 }
 
