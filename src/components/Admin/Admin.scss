@@ -68,6 +68,9 @@ ul {
   }
 }
 
+.validationMessage {
+  font-style: italic;
+}
 @media screen and (max-width: 768px) {
   .headingAdmin {
     font-size: 3rem;

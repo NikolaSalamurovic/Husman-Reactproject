@@ -16,7 +16,7 @@ export function About() {
           <p className="aboutEvents">Missa inte våra kommande event:</p>
           <ul>
             <li className="listItemEvents">
-              <h3>23/-2022</h3>
+              <h3>23/4-2022</h3>
               <p>After-ski med köttbullar och lingon!</p>
             </li>
             <li className="listItemEvents">

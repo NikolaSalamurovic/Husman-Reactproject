@@ -43,6 +43,9 @@ export function Admin() {
   const [ableButtonNumberOfGuests, setAbleButtonNumberOfGuests] =
     useState(false);
   const [ableButtonDate, setAbleButtonDate] = useState(false);
+  const [valueFromCalendar, setValueFromCalendar] = useState("");
+  const [valueFromNumberOfGuests, setValueFromNumberOfGuests] =
+    useState<number>(0);
   const [changeObject, setChangeObject] = useState<any>({
     restaurantId: "624ac35fdf8a9fb11c3ea8ba",
     date: dateBooking,
@@ -56,7 +59,11 @@ export function Admin() {
     email: "",
     phone: "",
   });
-
+  const [validationMessageName, setValidationMessageName] = useState("");
+  const [validationMessageLastname, setValidationMessageLastname] =
+    useState("");
+  const [validationMessageEmail, setValidationMessageEmail] = useState("");
+  const [validationMessagePhone, setValidationMessagePhone] = useState("");
   // useEffect(() => {
   //   axios
   //     .post(
@@ -187,7 +194,138 @@ export function Admin() {
     //     }
     //   });
   }
+  useEffect(() => {
+    setNotFullTable18(false);
+    setNotFullTable21(false);
+    setAbleButtonTime(false);
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      let counter18: number = 0;
+      let counter21: number = 0;
+      let bookingArray = response;
+      let resultDate = bookingArray.filter(
+        (booking) => booking.date === valueFromCalendar
+      );
+      let resultTime18 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "18:00";
+      });
+      let resultTime21 = resultDate.filter((bookingtime) => {
+        return bookingtime.time === "21:00";
+      });
+      if (resultTime18.length === 0) {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+      } else {
+        resultTime18.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter18 = counter18 + 3;
+            if (
+              counter18 === 14 &&
+              valueFromNumberOfGuests > 6 &&
+              valueFromNumberOfGuests <= 12
+            ) {
+              counter18 = counter18 + 1;
+            }
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter18 = counter18 + 2;
+            if (counter18 >= 15 || counter18 === 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter18 = counter18 + 1;
+            if (counter18 >= 15) {
+              setFullTable18(true);
+              setNotFullTable18(false);
+            } else {
+              setFullTable18(false);
+              setNotFullTable18(true);
+              setDateBooking(valueFromCalendar);
+            }
+          }
+        });
+        console.log(counter18);
+      }
+      if (resultTime21.length === 0) {
+        setFullTable21(false);
+        setNotFullTable21(true);
+        setDateBooking(valueFromCalendar);
+      } else {
+        resultTime21.map((booking) => {
+          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+            counter21 = counter21 + 3;
+            if (
+              counter21 === 14 &&
+              valueFromNumberOfGuests > 6 &&
+              valueFromNumberOfGuests <= 12
+            ) {
+              counter21 = counter21 + 1;
+            }
 
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+              console.log("hejhejhoppsan111");
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhoppsan222");
+            }
+          } else if (
+            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
+            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+          ) {
+            counter21 = counter21 + 2;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+              console.log("hejhejhoppsan");
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+            }
+          } else if (
+            booking.numberOfGuests <= 6 ||
+            valueFromNumberOfGuests <= 6
+          ) {
+            counter21 = counter21 + 1;
+            if (counter21 >= 15) {
+              setFullTable21(true);
+              setNotFullTable21(false);
+              console.log("hejhejhoppsan3333");
+            } else {
+              setFullTable21(false);
+              setNotFullTable21(true);
+              setDateBooking(valueFromCalendar);
+              console.log("hejhejhe44444");
+            }
+          }
+        });
+        console.log(counter21);
+      }
+    });
+  }, [valueFromCalendar, valueFromNumberOfGuests]);
   //funktion för att ta bort bokning genom api-anrop till serveice
 
   function deleteBooking(bookingid: string | undefined) {
@@ -233,71 +371,204 @@ export function Admin() {
     let name: string = e.target.name;
     console.log(e.target.value);
     setChangeObject({ ...changeObject, [name]: e.target.value });
+    setValueFromNumberOfGuests(Number(e.target.value));
   }
   function handleChangeCustomer(e: ChangeEvent<HTMLInputElement>) {
-    setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
     console.log(e.target.value);
-    setChangeObject({ ...changeObject, [name]: e.target.value });
+    setChangeCustomer({ ...changeCustomer, [name]: e.target.value });
   }
   const changeDateCalendar = (valueFromCalendar: string) => {
-    setNotFullTable18(false);
-    setNotFullTable21(false);
-    setAbleButtonTime(false);
-    let service = new BookingService();
-    service.getBookings().then((response) => {
-      console.log(response);
-      let bookingarray: IBooking[] = response;
-      let resultDate = bookingarray.filter(
-        (booking) => booking.date === valueFromCalendar
-      );
+    setValueFromCalendar(valueFromCalendar);
+    // setNotFullTable18(false);
+    // setNotFullTable21(false);
+    // setAbleButtonTime(false);
+    // let service = new BookingService();
+    // service.getBookings().then((response) => {
+    //   let counter18: number = 0;
+    //   let counter21: number = 0;
+    //   let bookingArray = response;
+    //   let resultDate = bookingArray.filter(
+    //     (booking) => booking.date === valueFromCalendar
+    //   );
+    //   let resultTime18 = resultDate.filter((bookingtime) => {
+    //     return bookingtime.time === "18:00";
+    //   });
+    //   let resultTime21 = resultDate.filter((bookingtime) => {
+    //     return bookingtime.time === "21:00";
+    //   });
+    //   if (resultTime18.length === 0) {
+    //     setFullTable18(false);
+    //     setNotFullTable18(true);
+    //     setDateBooking(valueFromCalendar);
+    //     console.log("hejhejhej");
+    //   } else {
+    //     resultTime18.map((booking) => {
+    //       if (booking.numberOfGuests > 12) {
+    //         counter18 = counter18 + 3;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (
+    //         booking.numberOfGuests > 6 &&
+    //         booking.numberOfGuests < 12
+    //       ) {
+    //         counter18 = counter18 + 2;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (booking.numberOfGuests < 6) {
+    //         counter18 = counter18 + 1;
+    //         if (counter18 >= 15) {
+    //           setFullTable18(true);
+    //           setNotFullTable18(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable18(false);
+    //           setNotFullTable18(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       }
+    //     });
+    //     console.log(counter18);
+    //   }
+    //   if (resultTime21.length === 0) {
+    //     setFullTable21(false);
+    //     setNotFullTable21(true);
+    //     setDateBooking(valueFromCalendar);
+    //     console.log("hejhejhej");
+    //   } else {
+    //     resultTime21.map((booking) => {
+    //       if (booking.numberOfGuests > 12) {
+    //         counter21 = counter21 + 3;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (
+    //         booking.numberOfGuests > 6 &&
+    //         booking.numberOfGuests < 12
+    //       ) {
+    //         counter21 = counter21 + 2;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       } else if (booking.numberOfGuests < 6) {
+    //         counter21 = counter21 + 1;
+    //         if (counter21 >= 15) {
+    //           setFullTable21(true);
+    //           setNotFullTable21(false);
+    //           console.log("hejhej");
+    //         } else {
+    //           setFullTable21(false);
+    //           setNotFullTable21(true);
+    //           setDateBooking(valueFromCalendar);
+    //           console.log("hejhejhej");
+    //         }
+    //       }
+    //     });
+    //     console.log(counter21);
+    //   }
+    // });
 
-      let resultTime18 = resultDate.filter((dateItem) => {
-        return dateItem.time == "18:00";
-      });
-      let resultTime21 = resultDate.filter((dateItem) => {
-        return dateItem.time == "21:00";
-      });
-      console.log(resultTime18.length);
-      if (resultTime18.length >= 15) {
-        setFullTable18(true);
-      } else {
-        setFullTable18(false);
-        setNotFullTable18(true);
-        setDateBooking(valueFromCalendar);
-      }
-      if (resultTime21.length >= 15) {
-        setFullTable21(true);
-      } else {
-        setFullTable21(false);
-        setDateBooking(valueFromCalendar);
-        setNotFullTable21(true);
-      }
-      console.log(resultTime18);
-      console.log(resultTime21);
-      console.log(fullTable18);
-      console.log(fullTable21);
-    });
+    // let service = new BookingService();
+    // service.getBookings().then((response) => {
+    //   console.log(response);
+    //   let bookingarray: IBooking[] = response;
+    //   let resultDate = bookingarray.filter(
+    //     (booking) => booking.date === valueFromCalendar
+    //   );
+
+    //   let resultTime18 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "18:00";
+    //   });
+    //   let resultTime21 = resultDate.filter((dateItem) => {
+    //     return dateItem.time == "21:00";
+    //   });
+    //   console.log(resultTime18.length);
+    //   if (resultTime18.length >= 15) {
+    //     setFullTable18(true);
+    //   } else {
+    //     setFullTable18(false);
+    //     setNotFullTable18(true);
+    //     setDateBooking(valueFromCalendar);
+    //   }
+    //   if (resultTime21.length >= 15) {
+    //     setFullTable21(true);
+    //   } else {
+    //     setFullTable21(false);
+    //     setDateBooking(valueFromCalendar);
+    //     setNotFullTable21(true);
+    //   }
+    //   console.log(resultTime18);
+    //   console.log(resultTime21);
+    //   console.log(fullTable18);
+    //   console.log(fullTable21);
+    // });
   };
 
   function printNewBooking() {
-    let bookingObject: IBookingUpload = {
-      restaurantId: "624ac35fdf8a9fb11c3ea8ba",
-      date: dateBooking,
-      time: timeBooking,
-      numberOfGuests: changeObject.numberOfGuests,
-      customer: {
-        name: changeCustomer.name,
-        lastname: changeCustomer.lastname,
-        email: changeCustomer.email,
-        phone: changeCustomer.phone,
-      },
-    };
-    console.log(bookingObject);
-    // let service = new BookingService();
-    // service
-    //   .postBookings(changeObject)
-    //   .then((response) => console.log(response));
+    console.log(changeCustomer.phone);
+    if (changeCustomer.name.length < 2) {
+      setValidationMessageName("Minst 2 tecken");
+    } else if (changeCustomer.lastname.length < 2) {
+      setValidationMessageLastname("Minst 2 tecken");
+    } else if (changeCustomer.email.includes("@") === false) {
+      setValidationMessageEmail("Måste vara en email");
+    } else if (changeCustomer.phone.length < 5) {
+      setValidationMessagePhone("Telefonnummer krävs");
+    } else {
+      let bookingObject: IBookingUpload = {
+        restaurantId: "624ac35fdf8a9fb11c3ea8ba",
+        date: dateBooking,
+        time: timeBooking,
+        numberOfGuests: Number(changeObject.numberOfGuests),
+        customer: {
+          name: changeCustomer.name,
+          lastname: changeCustomer.lastname,
+          email: changeCustomer.email,
+          phone: changeCustomer.phone.toString(),
+        },
+      };
+
+      let service = new BookingService();
+      // service.getBookings().then((response) => {
+      //   let dates = response.filter(() => {});
+      // });
+      service.postBookings(bookingObject).then((response) => {
+        console.log(response);
+        alert("Tack för bokningen, du skickas till startsidan");
+        navigation("/");
+      });
+    }
   }
   return (
     <>
@@ -327,6 +598,22 @@ export function Admin() {
                     setAbleButtonDate(true);
                   }}
                 />
+                <div className="containerInputAdmin">
+                  <label
+                    className="labelNumberOfGuests"
+                    htmlFor="numberOfGuests"
+                  >
+                    {`Antal gäster: `}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="18"
+                    name="numberOfGuests"
+                    value={changeObject.numberOfGuests}
+                    onChange={handleChange}
+                  />
+                </div>
                 {fullTable18 && fullTable21 ? (
                   <>
                     <p>Det finns inga tider</p>
@@ -367,22 +654,7 @@ export function Admin() {
                 ) : (
                   <></>
                 )}
-                <div className="containerInputAdmin">
-                  <label
-                    className="labelNumberOfGuests"
-                    htmlFor="numberOfGuests"
-                  >
-                    {`Antal gäster: `}
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="6"
-                    name="numberOfGuests"
-                    value={changeObject.numberOfGuests}
-                    onChange={handleChange}
-                  />
-                </div>
+
                 <div
                   className={
                     ableButtonTime ? "containerCustomer" : "hiddenCustomer"
@@ -395,7 +667,12 @@ export function Admin() {
                     name="name"
                     value={changeCustomer.name}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonName(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessageName}</p>
                   <StyledInput
                     type="text"
                     placeholder="Efternamn"
@@ -403,29 +680,53 @@ export function Admin() {
                     className="styledInputAdmin"
                     value={changeCustomer.lastname}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonLastName(true);
+                    // }}
                   />
+                  <p className="validationMessage">
+                    {validationMessageLastname}
+                  </p>
                   <StyledInput
-                    type="text"
+                    type="email"
                     placeholder="E-mail"
                     name="email"
                     className="styledInputAdmin"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title="please enter valid email [test@test.com]."
+                    required
                     value={changeCustomer.email}
                     onChange={handleChangeCustomer}
+                    // onClick={() => {
+                    //   setAbleButtonEmail(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessageEmail}</p>
                   <StyledInput
-                    type="text"
+                    type="number"
                     placeholder="Telefon"
                     name="phone"
                     className="styledInputAdmin"
                     value={changeCustomer.phone}
                     onChange={handleChangeCustomer}
+                    required
+                    // onClick={() => {
+                    //   setAbleButtonPhone(true);
+                    // }}
                   />
+                  <p className="validationMessage">{validationMessagePhone}</p>
                   <button
+                    type="submit"
                     className="bookNewButton"
                     disabled={
                       !ableButtonDate ||
                       !ableButtonTime ||
                       !ableButtonNumberOfGuests
+                      // !ableButtonName ||
+                      // !ableButtonLastName ||
+                      // !ableButtonEmail ||
+                      // ableButtonPhone
                     }
                     onClick={(e) => {
                       e.preventDefault();
