@@ -98,6 +98,10 @@ footer .footerContainer div p {
   color: #e0e0e0;
 }
 
+footer .footerContainer .footerMobile {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   header {
     min-height: 80px;
@@ -148,6 +152,18 @@ footer .footerContainer div p {
     padding: 10px;
     width: 150px;
     border-top: 2px solid #263238;
+  }
+  footer {
+    height: 400px;
+  }
+  footer .footerContainer .footerContact {
+    display: none;
+  }
+  footer .footerContainer .footerOpen {
+    display: none;
+  }
+  footer .footerContainer .footerMobile {
+    display: block;
   }
 }
 /*# sourceMappingURL=layout.css.map */
