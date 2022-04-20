@@ -136,40 +136,49 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     //vill boka in tas antal bord som de redan är i bokningen bort först.
 
     if (bookingCustomer!)
-      if (bookingCustomer.date === valueFromCalendar) {
+      if (bookingCustomer.date == valueFromCalendar) {
+        console.log(bookingCustomer.date + " " + valueFromCalendar);
+        console.log(typeof bookingCustomer.date);
+        console.log(typeof valueFromCalendar);
         if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 0 &&
           bookingCustomer.numberOfGuests < 7
         ) {
+          console.log("är jag här?");
           counter18 = counter18 - 1;
         } else if (
           bookingCustomer.time === "18:00" &&
-          bookingCustomer.numberOfGuests < 6 &&
+          bookingCustomer.numberOfGuests > 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
+          console.log("är jag här?");
           counter18 = counter18 - 2;
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
+          console.log("är jag här?");
           counter18 = counter18 - 3;
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 0 &&
           bookingCustomer.numberOfGuests < 7
         ) {
+          console.log("är jag här?");
           counter21 = counter21 - 1;
         } else if (
           bookingCustomer.time === "21:00" &&
-          bookingCustomer.numberOfGuests < 6 &&
+          bookingCustomer.numberOfGuests > 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
+          console.log("är jag här?");
           counter21 = counter21 - 2;
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
+          console.log("är jag här?");
           counter21 = counter21 - 3;
         }
       }
@@ -238,7 +247,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         setCountingTables21(0);
       } else {
         resultTime21.map((booking) => {
-          console.log(booking);
           if (booking.numberOfGuests > 12) {
             counter21 = counter21 + 3;
             if (counter21 >= 15) {
@@ -320,6 +328,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   useEffect(() => {
     let counter21 = countingTables21;
+    console.log(counter21);
     if (valueFromNumberOfGuests >= 0 && valueFromNumberOfGuests < 7) {
       counter21 = counter21 + 1;
       if (counter21 > 15) {

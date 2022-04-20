@@ -75,7 +75,6 @@ export function Admin() {
   //Funktion för att hämta bokningar från service
   useEffect(() => {
     if (new Date().getMonth() + 1 <= 9 && new Date().getDate() <= 9) {
-      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
@@ -86,8 +85,6 @@ export function Admin() {
           Number(new Date().getDate())
       );
     } else if (new Date().getMonth() + 1 <= 9 && new Date().getDate() >= 10) {
-      console.log(new Date().getMonth());
-      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
@@ -97,7 +94,6 @@ export function Admin() {
           new Date().getDate()
       );
     } else if (new Date().getDate() <= 9 && new Date().getMonth() + 1 >= 10) {
-      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
@@ -107,7 +103,6 @@ export function Admin() {
           Number(new Date().getDate())
       );
     } else {
-      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
@@ -391,6 +386,7 @@ export function Admin() {
   }
   //input för antal gäster
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setAbleButtonTime(false);
     setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
     console.log(e.target.value);
@@ -549,9 +545,6 @@ export function Admin() {
                     value={changeCustomer.name}
                     onChange={handleChangeCustomer}
                     required
-                    // onClick={() => {
-                    //   setAbleButtonName(true);
-                    // }}
                   />
                   <p className="validationMessage">{validationMessageName}</p>
                   <StyledInput
@@ -562,9 +555,6 @@ export function Admin() {
                     value={changeCustomer.lastname}
                     onChange={handleChangeCustomer}
                     required
-                    // onClick={() => {
-                    //   setAbleButtonLastName(true);
-                    // }}
                   />
                   <p className="validationMessage">
                     {validationMessageLastname}
@@ -592,9 +582,6 @@ export function Admin() {
                     value={changeCustomer.phone}
                     onChange={handleChangeCustomer}
                     required
-                    // onClick={() => {
-                    //   setAbleButtonPhone(true);
-                    // }}
                   />
                   <p className="validationMessage">{validationMessagePhone}</p>
                   <button
@@ -604,10 +591,6 @@ export function Admin() {
                       !ableButtonDate ||
                       !ableButtonTime ||
                       !ableButtonNumberOfGuests
-                      // !ableButtonName ||
-                      // !ableButtonLastName ||
-                      // !ableButtonEmail ||
-                      // ableButtonPhone
                     }
                     onClick={(e) => {
                       e.preventDefault();
