@@ -23,6 +23,7 @@ export interface IChange {
   time: string;
   numberOfGuests: number;
 }
+
 export interface IBookingCustomer {
   _id: string;
   date: string;
@@ -63,6 +64,8 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     useState(false);
   const [ableButtonDate, setAbleButtonDate] = useState(false);
 
+  const [countingTables18, setCountingTables18] = useState(0);
+  const [countingTables21, setCountingTables21] = useState(0);
   //Hämtning av bokningar från bokningsservice
   useEffect(() => {
     //TILL SERVICE
@@ -81,88 +84,69 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         },
       });
     });
-    // axios
-    //   .get<ICustomer[]>(
-    //     "https://school-restaurant-api.azurewebsites.net/customer/" +
-    //       props.booking.customerId,
-
-    //     { headers: { "Content-Type": "application/json" } }
-    //   )
-
-    //   .then((response) => {
-    //     setBookingCustomer({
-    //       _id: props.booking._id,
-    //       date: props.booking.date,
-    //       time: props.booking.time,
-    //       numberOfGuests: props.booking.numberOfGuests,
-    //       customerId: props.booking.customerId,
-    //       customer: {
-    //         name: response.data[0].lastname,
-    //         email: response.data[0].email,
-    //         phone: response.data[0].phone,
-    //       },
-    //     });
-    //   });
   }, []);
 
   useEffect(() => {
     setNotFullTable18(false);
     setNotFullTable21(false);
     setAbleButtonTime(false);
-    let service = new BookingService();
-    service.getBookings().then((response) => {
-      //för att man ska kunna ändra sitt bord till fler utefter hur många man faktiskt
-      //vill boka in tar jag bort antal bord som de redan har bokat först.
-      let counter18: number = 0;
-      let counter21: number = 0;
-      if (bookingCustomer!)
+    let counter18: number = 0;
+    let counter21: number = 0;
+    console.log("jag är här faktiskt!");
+    //för att man ska kunna ändra sitt bord till fler utefter hur många man faktiskt
+    //vill boka in tar jag bort antal bord som de redan har bokat först.
+
+    if (bookingCustomer!)
+      if (bookingCustomer.date === valueFromCalendar) {
         if (
           bookingCustomer.time === "18:00" &&
-          bookingCustomer.numberOfGuests <= 6
+          bookingCustomer.numberOfGuests > 0 &&
+          bookingCustomer.numberOfGuests < 7
         ) {
-          counter18 = -2;
+          counter18 = counter18 - 1;
 
           console.log("är här i iffen");
         } else if (
-          (bookingCustomer.time === "18:00" &&
-            bookingCustomer.numberOfGuests < 6 &&
-            bookingCustomer.numberOfGuests <= 12) ||
-          (bookingCustomer.time === "18:00" &&
-            bookingCustomer.numberOfGuests === 12)
+          bookingCustomer.time === "18:00" &&
+          bookingCustomer.numberOfGuests < 6 &&
+          bookingCustomer.numberOfGuests < 13
         ) {
-          counter18 = -3;
+          counter18 = counter18 - 2;
 
           console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
-          counter18 = -4;
+          counter18 = counter18 - 3;
           console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "21:00" &&
-          bookingCustomer.numberOfGuests <= 6
+          bookingCustomer.numberOfGuests > 0 &&
+          bookingCustomer.numberOfGuests < 7
         ) {
-          counter21 = -2;
+          counter21 = counter21 - 1;
 
           console.log("är här i iffen");
         } else if (
-          (bookingCustomer.time === "21:00" &&
-            bookingCustomer.numberOfGuests < 6 &&
-            bookingCustomer.numberOfGuests <= 12) ||
-          (bookingCustomer.time === "21:00" &&
-            bookingCustomer.numberOfGuests === 12)
+          bookingCustomer.time === "21:00" &&
+          bookingCustomer.numberOfGuests < 6 &&
+          bookingCustomer.numberOfGuests < 13
         ) {
-          counter21 = -3;
+          counter21 = counter21 - 2;
 
           console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
-          counter21 = -4;
+          counter21 = counter21 - 3;
           console.log("är här i iffen");
         }
+      }
+    let service = new BookingService();
+    service.getBookings().then((response) => {
+      console.log(response);
       let bookingArray = response;
       let resultDate = bookingArray.filter(
         (booking) => booking.date === valueFromCalendar
@@ -173,14 +157,16 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       let resultTime21 = resultDate.filter((bookingtime) => {
         return bookingtime.time === "21:00";
       });
+      console.log(resultTime21);
       if (resultTime18.length === 0) {
         setFullTable18(false);
         setNotFullTable18(true);
         setDateBooking(valueFromCalendar);
+        setCountingTables18(0);
         console.log("hejhejhej");
       } else {
         resultTime18.map((booking) => {
-          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+          if (booking.numberOfGuests > 12) {
             counter18 = counter18 + 3;
             if (counter18 >= 15) {
               setFullTable18(true);
@@ -193,90 +179,163 @@ export function PrintBookingAdmin(props: IPrintBooking) {
               console.log("hejhejhej");
             }
           } else if (
-            (booking.numberOfGuests > 6 && booking.numberOfGuests <= 12) ||
-            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+            booking.numberOfGuests > 6 &&
+            booking.numberOfGuests <= 12
           ) {
             counter18 = counter18 + 2;
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
             }
-          } else if (
-            booking.numberOfGuests <= 6 ||
-            valueFromNumberOfGuests <= 6
-          ) {
+          } else if (booking.numberOfGuests < 0 && booking.numberOfGuests < 7) {
             counter18 = counter18 + 1;
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
             }
           }
         });
         console.log(counter18);
+        setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
         setFullTable21(false);
         setNotFullTable21(true);
         setDateBooking(valueFromCalendar);
+        setCountingTables21(0);
         console.log("hejhejhej");
       } else {
         resultTime21.map((booking) => {
-          if (booking.numberOfGuests > 12 || valueFromNumberOfGuests > 12) {
+          console.log(booking);
+          if (booking.numberOfGuests > 12) {
             counter21 = counter21 + 3;
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
+              console.log("if1215");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
+              console.log("if12");
             }
           } else if (
-            (booking.numberOfGuests > 6 && booking.numberOfGuests < 12) ||
-            (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests <= 12)
+            booking.numberOfGuests > 6 &&
+            booking.numberOfGuests < 13
           ) {
             counter21 = counter21 + 2;
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
+              console.log("if615");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
+              console.log("if6");
             }
-          } else if (
-            booking.numberOfGuests <= 6 ||
-            valueFromNumberOfGuests <= 6
-          ) {
+          } else if (booking.numberOfGuests > 0 && booking.numberOfGuests < 7) {
             counter21 = counter21 + 1;
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
-              console.log("hejhej");
+              console.log("if115");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
+              console.log("if1");
             }
           }
         });
         console.log(counter21);
+        setCountingTables21(counter21);
       }
+      console.log(counter21);
     });
-  }, [valueFromCalendar, valueFromNumberOfGuests]);
+    console.log(counter21);
+  }, [valueFromCalendar]);
+
+  //Vid ändring av antal gäster vid bokning ändras knapparna för tider beroende på
+  //om det finns bord
+  useEffect(() => {
+    let counter18 = countingTables18;
+    console.log(counter18);
+    if (valueFromNumberOfGuests >= 0 && valueFromNumberOfGuests < 7) {
+      counter18 = counter18 + 1;
+      if (counter18 > 15) {
+        setFullTable18(true);
+        setNotFullTable18(false);
+      } else {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+      }
+    } else if (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests < 13) {
+      counter18 = counter18 + 2;
+      if (counter18 > 15) {
+        setFullTable18(true);
+        setNotFullTable18(false);
+      } else {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+      }
+    } else if (valueFromNumberOfGuests > 12) {
+      counter18 = counter18 + 3;
+      if (counter18 > 15) {
+        setFullTable18(true);
+        setNotFullTable18(false);
+      } else {
+        setFullTable18(false);
+        setNotFullTable18(true);
+        setDateBooking(valueFromCalendar);
+      }
+    }
+  }, [countingTables18, valueFromNumberOfGuests]);
+
+  useEffect(() => {
+    let counter21 = countingTables21;
+    if (valueFromNumberOfGuests >= 0 && valueFromNumberOfGuests < 7) {
+      counter21 = counter21 + 1;
+      if (counter21 > 15) {
+        setFullTable21(true);
+        setNotFullTable21(false);
+      } else {
+        setFullTable21(false);
+        setNotFullTable21(true);
+      }
+    } else if (valueFromNumberOfGuests > 6 && valueFromNumberOfGuests < 13) {
+      counter21 = counter21 + 2;
+      if (counter21 > 15) {
+        setFullTable21(true);
+        setNotFullTable21(false);
+      } else {
+        setFullTable21(false);
+        setNotFullTable21(true);
+        setDateBooking(valueFromCalendar);
+      }
+    } else if (valueFromNumberOfGuests > 12) {
+      counter21 = counter21 + 3;
+      if (counter21 > 15) {
+        setFullTable21(true);
+        setNotFullTable21(false);
+      } else {
+        setFullTable21(false);
+        setNotFullTable21(true);
+        setDateBooking(valueFromCalendar);
+      }
+    }
+  }, [countingTables21, valueFromNumberOfGuests]);
+
   //funktion för att ta bort bokningar
   function deleteBooking(bookingID: string | undefined) {
     props.deleteBookingAPI(bookingID);
@@ -310,83 +369,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   //api att det inte finns fler än 15 bokningar per tidpunkt/kväll
   const changeDateCalendar = (valueFromCalendar: string) => {
     setValueFromCalendar(valueFromCalendar);
-
-    // setNotFullTable18(false);
-    // setNotFullTable21(false);
-    // setAbleButtonTime(false);
-    // let service = new BookingService();
-    // service.getBookings().then((response) => {
-    //   console.log(response);
-    //   let bookingarray: IBooking[] = response;
-    //   let resultDate = bookingarray.filter(
-    //     (booking) => booking.date === valueFromCalendar
-    //   );
-
-    //   let resultTime18 = resultDate.filter((dateItem) => {
-    //     return dateItem.time == "18:00";
-    //   });
-    //   let resultTime21 = resultDate.filter((dateItem) => {
-    //     return dateItem.time == "21:00";
-    //   });
-    //   console.log(resultTime18.length);
-    //   if (resultTime18.length >= 15) {
-    //     setFullTable18(true);
-    //   } else {
-    //     setFullTable18(false);
-    //     setNotFullTable18(true);
-    //     setDateBooking(valueFromCalendar);
-    //   }
-    //   if (resultTime21.length >= 15) {
-    //     setFullTable21(true);
-    //   } else {
-    //     setFullTable21(false);
-    //     setDateBooking(valueFromCalendar);
-    //     setNotFullTable21(true);
-    //   }
-    //   console.log(resultTime18);
-    //   console.log(resultTime21);
-    //   console.log(fullTable18);
-    //   console.log(fullTable21);
-    // });
-
-    // axios
-    //   .get<IBooking[]>(
-    //     "https://school-restaurant-api.azurewebsites.net/booking/restaurant/624ac35fdf8a9fb11c3ea8ba",
-    //     { headers: { "Content-Type": "application/json" } }
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     let bookingarray: IBooking[] = response.data;
-    //     let resultDate = bookingarray.filter(
-    //       (booking) => booking.date === valueFromCalendar
-    //     );
-
-    //     let resultTime18 = resultDate.filter((dateItem) => {
-    //       return dateItem.time == "18:00";
-    //     });
-    //     let resultTime21 = resultDate.filter((dateItem) => {
-    //       return dateItem.time == "21:00";
-    //     });
-    //     console.log(resultTime18.length);
-    //     if (resultTime18.length >= 15) {
-    //       setFullTable18(true);
-    //     } else {
-    //       setFullTable18(false);
-    //       setDateBooking(valueFromCalendar);
-    //       setAbleButton(true);
-    //     }
-    //     if (resultTime21.length >= 15) {
-    //       setFullTable21(true);
-    //     } else {
-    //       setFullTable21(false);
-    //       setDateBooking(valueFromCalendar);
-    //       setAbleButton(true);
-    //     }
-    //     console.log(resultTime18);
-    //     console.log(resultTime21);
-    //     console.log(fullTable18);
-    //     console.log(fullTable21);
-    //   });
   };
 
   function changeBooking() {
