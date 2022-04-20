@@ -77,6 +77,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           0 +
           (Number(new Date().getMonth()) + 1) +
           "-" +
+          0 +
           Number(new Date().getDate()) +
           1
       );
@@ -95,6 +96,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           "-" +
           new Date().getMonth() +
           "-" +
+          0 +
           (Number(new Date().getDate()) + 1)
       );
     }

@@ -81,6 +81,7 @@ export function Admin() {
           0 +
           (Number(new Date().getMonth()) + 1) +
           "-" +
+          0 +
           Number(new Date().getDate()) +
           1
       );
@@ -99,6 +100,7 @@ export function Admin() {
           "-" +
           new Date().getMonth() +
           "-" +
+          0 +
           (Number(new Date().getDate()) + 1)
       );
     }
