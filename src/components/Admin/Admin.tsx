@@ -68,12 +68,44 @@ export function Admin() {
   const [countingTables18, setCountingTables18] = useState(0);
   const [countingTables21, setCountingTables21] = useState(0);
 
+  const [minDateCalendar, setMinDateCalendar] = useState("");
+  const [buttonPushed18, setButtonPushed18] = useState(false);
+  const [buttonPushed21, setButtonPushed21] = useState(false);
+
   //Funktion för att hämta bokningar från service
   useEffect(() => {
+    if (new Date().getMonth() < 10 && new Date().getDate() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          0 +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          Number(new Date().getDate()) +
+          1
+      );
+    } else if (new Date().getMonth() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          0 +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          new Date().getDate()
+      );
+    } else if (new Date().getDate() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          new Date().getMonth() +
+          "-" +
+          (Number(new Date().getDate()) + 1)
+      );
+    }
+    console.log(minDateCalendar);
     //TILL SERVICE
     let service = new BookingService();
     service.getBookings().then((booking) => {
-      console.log(booking);
       setBookingArray(booking);
       if (renderBoolean === false) {
         setRenderBoolean(true);
@@ -85,9 +117,7 @@ export function Admin() {
 
   //Funktion för att rendera ut bokningar
   useEffect(() => {
-    console.log(bookingArray);
     let bookings = bookingArray?.map((booking) => {
-      console.log(booking);
       return (
         <PrintBookingAdmin
           key={booking._id}
@@ -420,6 +450,7 @@ export function Admin() {
               <form>
                 <input
                   type="date"
+                  min={minDateCalendar}
                   onChange={(e) => {
                     changeDateCalendar(e.target.value);
                     setAbleButtonDate(true);
@@ -452,11 +483,15 @@ export function Admin() {
                 {notFullTable18 ? (
                   <>
                     <button
-                      className="buttonTime"
+                      className={
+                        buttonPushed18 ? "buttonPushedTime" : "buttonTime"
+                      }
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("18:00");
                         setAbleButtonTime(true);
+                        setButtonPushed18(true);
+                        setButtonPushed21(false);
                       }}
                     >
                       18:00
@@ -468,11 +503,15 @@ export function Admin() {
                 {notFullTable21 ? (
                   <>
                     <button
-                      className="buttonTime"
+                      className={
+                        buttonPushed21 ? "buttonPushedTime" : "buttonTime"
+                      }
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeBooking("21:00");
                         setAbleButtonTime(true);
+                        setButtonPushed18(false);
+                        setButtonPushed21(true);
                       }}
                     >
                       21:00

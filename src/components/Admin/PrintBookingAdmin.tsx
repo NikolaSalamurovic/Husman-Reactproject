@@ -66,8 +66,38 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   const [countingTables18, setCountingTables18] = useState(0);
   const [countingTables21, setCountingTables21] = useState(0);
+  const [minDateCalendar, setMinDateCalendar] = useState("");
+
   //Hämtning av bokningar från bokningsservice
   useEffect(() => {
+    if (new Date().getMonth() < 10 && new Date().getDate() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          0 +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          Number(new Date().getDate()) +
+          1
+      );
+    } else if (new Date().getMonth() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          0 +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          new Date().getDate()
+      );
+    } else if (new Date().getDate() < 10) {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          new Date().getMonth() +
+          "-" +
+          (Number(new Date().getDate()) + 1)
+      );
+    }
     //TILL SERVICE
     let service = new CustomerService();
     service.getCustomer(props.booking.customerId).then((customer) => {
@@ -92,9 +122,9 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     setAbleButtonTime(false);
     let counter18: number = 0;
     let counter21: number = 0;
-    console.log("jag är här faktiskt!");
+
     //för att man ska kunna ändra sitt bord till fler utefter hur många man faktiskt
-    //vill boka in tar jag bort antal bord som de redan har bokat först.
+    //vill boka in tas antal bord som de redan är i bokningen bort först.
 
     if (bookingCustomer!)
       if (bookingCustomer.date === valueFromCalendar) {
@@ -104,49 +134,38 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           bookingCustomer.numberOfGuests < 7
         ) {
           counter18 = counter18 - 1;
-
-          console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests < 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
           counter18 = counter18 - 2;
-
-          console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
           counter18 = counter18 - 3;
-          console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 0 &&
           bookingCustomer.numberOfGuests < 7
         ) {
           counter21 = counter21 - 1;
-
-          console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests < 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
           counter21 = counter21 - 2;
-
-          console.log("är här i iffen");
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
           counter21 = counter21 - 3;
-          console.log("är här i iffen");
         }
       }
     let service = new BookingService();
     service.getBookings().then((response) => {
-      console.log(response);
       let bookingArray = response;
       let resultDate = bookingArray.filter(
         (booking) => booking.date === valueFromCalendar
@@ -157,13 +176,12 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       let resultTime21 = resultDate.filter((bookingtime) => {
         return bookingtime.time === "21:00";
       });
-      console.log(resultTime21);
+
       if (resultTime18.length === 0) {
         setFullTable18(false);
         setNotFullTable18(true);
         setDateBooking(valueFromCalendar);
         setCountingTables18(0);
-        console.log("hejhejhej");
       } else {
         resultTime18.map((booking) => {
           if (booking.numberOfGuests > 12) {
@@ -171,12 +189,10 @@ export function PrintBookingAdmin(props: IPrintBooking) {
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
-              console.log("hejhej");
             } else {
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
-              console.log("hejhejhej");
             }
           } else if (
             booking.numberOfGuests > 6 &&
@@ -203,7 +219,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
             }
           }
         });
-        console.log(counter18);
+
         setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
@@ -211,7 +227,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
         setNotFullTable21(true);
         setDateBooking(valueFromCalendar);
         setCountingTables21(0);
-        console.log("hejhejhej");
       } else {
         resultTime21.map((booking) => {
           console.log(booking);
@@ -220,12 +235,10 @@ export function PrintBookingAdmin(props: IPrintBooking) {
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
-              console.log("if1215");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
-              console.log("if12");
             }
           } else if (
             booking.numberOfGuests > 6 &&
@@ -235,33 +248,27 @@ export function PrintBookingAdmin(props: IPrintBooking) {
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
-              console.log("if615");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
-              console.log("if6");
             }
           } else if (booking.numberOfGuests > 0 && booking.numberOfGuests < 7) {
             counter21 = counter21 + 1;
             if (counter21 >= 15) {
               setFullTable21(true);
               setNotFullTable21(false);
-              console.log("if115");
             } else {
               setFullTable21(false);
               setNotFullTable21(true);
               setDateBooking(valueFromCalendar);
-              console.log("if1");
             }
           }
         });
-        console.log(counter21);
+
         setCountingTables21(counter21);
       }
-      console.log(counter21);
     });
-    console.log(counter21);
   }, [valueFromCalendar]);
 
   //Vid ändring av antal gäster vid bokning ändras knapparna för tider beroende på
@@ -422,6 +429,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
               <form>
                 <input
                   type="date"
+                  min={minDateCalendar}
                   onChange={(e) => {
                     changeDateCalendar(e.target.value);
                     setAbleButtonDate(true);
