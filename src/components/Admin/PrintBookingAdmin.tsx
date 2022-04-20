@@ -70,34 +70,41 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   //Hämtning av bokningar från bokningsservice
   useEffect(() => {
-    if (new Date().getMonth() < 10 && new Date().getDate() < 10) {
+    if (new Date().getMonth() + 1 <= 9 && new Date().getDate() <= 9) {
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          0 +
+          "0" +
           (Number(new Date().getMonth()) + 1) +
           "-" +
-          0 +
-          Number(new Date().getDate()) +
-          1
+          "0" +
+          Number(new Date().getDate())
       );
-    } else if (new Date().getMonth() < 10) {
+    } else if (new Date().getMonth() + 1 <= 9 && new Date().getDate() >= 10) {
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          0 +
+          "0" +
           (Number(new Date().getMonth()) + 1) +
           "-" +
           new Date().getDate()
       );
-    } else if (new Date().getDate() < 10) {
+    } else if (new Date().getDate() <= 9 && new Date().getMonth() + 1 >= 10) {
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          new Date().getMonth() +
+          (Number(new Date().getMonth()) + 1) +
           "-" +
-          0 +
-          (Number(new Date().getDate()) + 1)
+          "0" +
+          Number(new Date().getDate())
+      );
+    } else {
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          Number(new Date().getDate())
       );
     }
     //TILL SERVICE

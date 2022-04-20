@@ -74,37 +74,49 @@ export function Admin() {
 
   //Funktion för att hämta bokningar från service
   useEffect(() => {
-    if (new Date().getMonth() < 10 && new Date().getDate() < 10) {
+    if (new Date().getMonth() + 1 <= 9 && new Date().getDate() <= 9) {
+      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          0 +
+          "0" +
           (Number(new Date().getMonth()) + 1) +
           "-" +
-          0 +
-          Number(new Date().getDate()) +
-          1
+          "0" +
+          Number(new Date().getDate())
       );
-    } else if (new Date().getMonth() < 10) {
+    } else if (new Date().getMonth() + 1 <= 9 && new Date().getDate() >= 10) {
+      console.log(new Date().getMonth());
+      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          0 +
+          "0" +
           (Number(new Date().getMonth()) + 1) +
           "-" +
           new Date().getDate()
       );
-    } else if (new Date().getDate() < 10) {
+    } else if (new Date().getDate() <= 9 && new Date().getMonth() + 1 >= 10) {
+      console.log("är jag här?");
       setMinDateCalendar(
         new Date().getFullYear() +
           "-" +
-          new Date().getMonth() +
+          (Number(new Date().getMonth()) + 1) +
           "-" +
-          0 +
-          (Number(new Date().getDate()) + 1)
+          "0" +
+          Number(new Date().getDate())
+      );
+    } else {
+      console.log("är jag här?");
+      setMinDateCalendar(
+        new Date().getFullYear() +
+          "-" +
+          (Number(new Date().getMonth()) + 1) +
+          "-" +
+          Number(new Date().getDate())
       );
     }
-    console.log(minDateCalendar);
+
     //TILL SERVICE
     let service = new BookingService();
     service.getBookings().then((booking) => {
@@ -119,6 +131,7 @@ export function Admin() {
 
   //Funktion för att rendera ut bokningar
   useEffect(() => {
+    console.log(minDateCalendar);
     let bookings = bookingArray?.map((booking) => {
       return (
         <PrintBookingAdmin
