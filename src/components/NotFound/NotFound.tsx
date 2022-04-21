@@ -1,6 +1,7 @@
 import "./notFound.css";
 import { BiMessageAltError } from "react-icons/bi";
 import { StyledButton } from "../StyledComponents/StyledButton";
+import { StyledLink } from "../StyledComponents/StyledLink";
 
 
 export function NotFound() {
@@ -10,7 +11,9 @@ export function NotFound() {
                 <span><BiMessageAltError/></span>
                 <h1>404</h1>
                 <h2>Page not found</h2>
-                <StyledButton>Till startsida</StyledButton>
+                <StyledLink to="/">
+                    <StyledButton>Till startsidan</StyledButton>
+                </StyledLink>
             </div>
         </>
     )
