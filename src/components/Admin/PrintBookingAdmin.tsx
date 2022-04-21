@@ -145,40 +145,34 @@ export function PrintBookingAdmin(props: IPrintBooking) {
           bookingCustomer.numberOfGuests > 0 &&
           bookingCustomer.numberOfGuests < 7
         ) {
-          console.log("är jag här?");
           counter18 = counter18 - 1;
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
-          console.log("är jag här?");
           counter18 = counter18 - 2;
         } else if (
           bookingCustomer.time === "18:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
-          console.log("är jag här?");
           counter18 = counter18 - 3;
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 0 &&
           bookingCustomer.numberOfGuests < 7
         ) {
-          console.log("är jag här?");
           counter21 = counter21 - 1;
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 6 &&
           bookingCustomer.numberOfGuests < 13
         ) {
-          console.log("är jag här?");
           counter21 = counter21 - 2;
         } else if (
           bookingCustomer.time === "21:00" &&
           bookingCustomer.numberOfGuests > 12
         ) {
-          console.log("är jag här?");
           counter21 = counter21 - 3;
         }
       }
@@ -194,7 +188,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       let resultTime21 = resultDate.filter((bookingtime) => {
         return bookingtime.time === "21:00";
       });
-      console.log(resultTime18);
+
       if (resultTime18.length === 0) {
         setFullTable18(false);
         setNotFullTable18(true);
@@ -238,7 +232,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
             }
           }
         });
-        console.log(counter18);
+
         setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
@@ -293,7 +287,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   //om det finns bord
   useEffect(() => {
     let counter18 = countingTables18;
-    console.log(counter18);
+
     if (valueFromNumberOfGuests >= 0 && valueFromNumberOfGuests < 7) {
       counter18 = counter18 + 1;
       if (counter18 > 15) {
@@ -329,7 +323,6 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   useEffect(() => {
     let counter21 = countingTables21;
-    console.log(counter21);
     if (valueFromNumberOfGuests >= 0 && valueFromNumberOfGuests < 7) {
       counter21 = counter21 + 1;
       if (counter21 > 15) {

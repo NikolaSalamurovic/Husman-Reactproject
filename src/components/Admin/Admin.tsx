@@ -126,7 +126,6 @@ export function Admin() {
 
   //Funktion för att rendera ut bokningar
   useEffect(() => {
-    console.log(minDateCalendar);
     let bookings = bookingArray?.map((booking) => {
       return (
         <PrintBookingAdmin
