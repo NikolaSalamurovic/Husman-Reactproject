@@ -1,3 +1,7 @@
+.adminContainer {
+  height: 85vh;
+}
+
 .blurredBackground {
   position: absolute;
   left: 0;

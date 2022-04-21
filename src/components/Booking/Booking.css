@@ -8,6 +8,7 @@
   text-shadow: 2px 2px 16px black;
 }
 
+
 .bookingBorder {
   display: block;
   position: relative;
@@ -21,6 +22,7 @@
   border-radius: 5px;
   min-height: 400px;
 }
+
 
 .formInput {
   margin: auto;
