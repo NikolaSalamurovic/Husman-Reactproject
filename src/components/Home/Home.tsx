@@ -13,33 +13,28 @@ export function Home() {
   return (
     <>
       <section>
-        {/* <div className="container_home">
-          <div className="slide_show">
-            <div class="slide first"></div>
-          </div>
-        </div> */}
         <h2 className="pageTitle">HUSMAN</h2>
         <div className="slider">
           <figure>
             <div className="slide">
-              <img src={image5} alt="" className="imageDesktop" />
-              <img src={imagemo5} alt="" className="imageMobile" />
+              <img src={image5} alt="Bild på köttbullar" className="imageDesktop" />
+              <img src={imagemo5} alt="Bild på köttbullar" className="imageMobile" />
             </div>
             <div className="slide">
-              <img src={image2} alt="" className="imageDesktop" />
-              <img src={imagemo4} alt="" className="imageMobile" />
+              <img src={image3} alt="Bild på pasta" className="imageDesktop" />
+              <img src={imagemo3} alt="Bild på pasta" className="imageMobile" />
             </div>
             <div className="slide">
-              <img src={image3} alt="" className="imageDesktop" />
-              <img src={imagemo3} alt="" className="imageMobile" />
+              <img src={image1} alt="Bild på honung" className="imageDesktop" />
+              <img src={imagemo1} alt="Bild på honung" className="imageMobile" />
             </div>
             <div className="slide">
-              <img src={image4} alt="" className="imageDesktop" />
-              <img src={imagemo2} alt="" className="imageMobile" />
+              <img src={image4} alt="Bild på choklad" className="imageDesktop" />
+              <img src={imagemo2} alt="Bild på choklad" className="imageMobile" />
             </div>
             <div className="slide">
-              <img src={image1} alt="" className="imageDesktop" />
-              <img src={imagemo1} alt="" className="imageMobile" />
+              <img src={image2} alt="Bild på öl" className="imageDesktop" />
+              <img src={imagemo4} alt="Bild på öl" className="imageMobile" />
             </div>
           </figure>
         </div>

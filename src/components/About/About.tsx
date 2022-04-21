@@ -3,7 +3,7 @@ import "./About.css";
 export function About() {
   return (
     <>
-      <div className="adminContainer">
+      <div className="aboutContainer">
         <div className="blurredBackground"></div>
         <div className="containerAbout">
           <section className="aboutCard">

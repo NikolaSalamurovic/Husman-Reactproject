@@ -59,10 +59,18 @@
   
   @media screen and (max-width: 768px) {
   
-    .bookingBorder{
-      width: 50%;
-      height: 45vh;
-      min-height: 500px;
+    .bookingTitle {
+      top: 1vh;
     }
+    .bookingBorder{
+        width: 70%;
+        top: 2vh;
+        min-width: 80%;
+        height: 45vh;
+        min-height: 470px;
+      }
+      .backgroundPicture {
+        top: 80px;
+      }
   }
   

@@ -1,3 +1,7 @@
+.bookingContainer {
+  min-height: 85vh;
+}
+
 .bookingTitle {
   text-align: center;
   display: block;
@@ -7,7 +11,6 @@
   font-size: 4rem;
   text-shadow: 2px 2px 16px black;
 }
-
 
 .bookingBorder {
   display: block;
@@ -22,7 +25,6 @@
   border-radius: 5px;
   min-height: 400px;
 }
-
 
 .formInput {
   margin: auto;
@@ -61,13 +63,22 @@
 
 .cancelBtn {
   font-size: 20px;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 768px) {
+  .bookingTitle {
+    top: 1vh;
+  }
   .bookingBorder {
-    width: 50%;
+    width: 70%;
+    top: 2vh;
+    min-width: 80%;
     height: 45vh;
-    min-height: 500px;
+    min-height: 470px;
+  }
+  .backgroundPicture {
+    top: 80px;
   }
 }
 /*# sourceMappingURL=Booking.css.map */
