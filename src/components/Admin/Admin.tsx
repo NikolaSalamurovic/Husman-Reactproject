@@ -441,6 +441,10 @@ export function Admin() {
     <>
       <div className="containerAdmin">
         <h2 className="headingAdmin">Bokningar</h2>
+        <p className="infoLargeBooking">
+          Obs! Vid bokning fler än 18 personer, gör flera bokningar med samma
+          e-mail.
+        </p>
         <StyledButton
           className="buttonDeleteChange"
           onClick={() => {
@@ -449,7 +453,7 @@ export function Admin() {
         >
           Boka ny bokning
         </StyledButton>
-        {/* <article className="newBooking"> */}
+
         <ul className={changeInputNew ? "newBooking showingNew" : "hiddenNew"}>
           <li>
             <div>
@@ -568,9 +572,6 @@ export function Admin() {
                     required
                     value={changeCustomer.email}
                     onChange={handleChangeCustomer}
-                    // onClick={() => {
-                    //   setAbleButtonEmail(true);
-                    // }}
                   />
                   <p className="validationMessage">{validationMessageEmail}</p>
                   <StyledInput
@@ -603,7 +604,6 @@ export function Admin() {
             </div>
           </li>
         </ul>
-        {/* </article> */}
         <section className="sectionAdmin">{printBookings}</section>
       </div>
     </>

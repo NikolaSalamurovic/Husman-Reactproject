@@ -250,6 +250,12 @@ export function Booking() {
       <div className="bookingContainer">
         <div className="backgroundPicture"></div>
         <h1 className="bookingTitle">Bokning</h1>
+        <div className="containerLargeBooking">
+          <p className="infoLargeBooking">
+            Vid bokning fler än 18 personer, kontakta restaurangen via telefon
+            eller mail.
+          </p>
+        </div>
         <div className="bookingBorder">
           <form onSubmit={onSubmit}>
             <input
