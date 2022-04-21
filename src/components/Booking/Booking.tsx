@@ -148,9 +148,6 @@ export function Booking() {
   const onSubmit = handleSubmit(data => console.log(errors))
 
 
- function clickclick(){
-   console.log(123)
- }
  function resetInputs(){
    reset({
       firstName: '',
@@ -272,7 +269,7 @@ export function Booking() {
                   <StyledInput className="formInputs"
                     type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
                       {
-                      clickclick(); setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
+                      setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
                       })
                     }
                     }
