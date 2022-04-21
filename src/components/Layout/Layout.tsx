@@ -25,19 +25,19 @@ export function Layout() {
           <nav>
             <ul>
               <StyledLink to="/">
-                <li>Home</li>
+                <li>Hem</li>
+              </StyledLink>
+              <StyledLink to="/About">
+                <li>Om oss</li>
               </StyledLink>
               <StyledLink to="/Booking">
-                <li>Booking</li>
+                <li>Boka bord</li>
               </StyledLink>
               <StyledLink to="/Contact">
-                <li>Contact</li>
+                <li>Kontakta oss</li>
               </StyledLink>
               <StyledLink to="/Admin">
                 <li>Admin</li>
-              </StyledLink>
-              <StyledLink to="/About">
-                <li>About us</li>
               </StyledLink>
             </ul>
           </nav>
@@ -46,19 +46,19 @@ export function Layout() {
         <div className={openMenu}>
           <ul>
             <StyledLink to="/" onClick={toggleClass}>
-              <li>Home</li>
+              <li>Hem</li>
+            </StyledLink>
+            <StyledLink to="/About" onClick={toggleClass}>
+              <li>Om oss</li>
             </StyledLink>
             <StyledLink to="/Booking" onClick={toggleClass}>
-              <li>Booking</li>
+              <li>Boka bord</li>
             </StyledLink>
             <StyledLink to="/Contact" onClick={toggleClass}>
-              <li>Contact</li>
+              <li>Kontakta oss</li>
             </StyledLink>
             <StyledLink to="/Admin" onClick={toggleClass}>
               <li>Admin</li>
-            </StyledLink>
-            <StyledLink to="/About" onClick={toggleClass}>
-              <li>About us</li>
             </StyledLink>
           </ul>
         </div>
