@@ -48,7 +48,9 @@
 }
 
 .newBooking {
-  width: 25%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   margin: 10px;
   padding: 10px;
   border: 5px solid #4f5b6261;
@@ -79,6 +81,16 @@ ul li div form .hiddenCustomer {
 
 .validationMessage {
   font-style: italic;
+}
+
+.buttonPushedTime {
+  background-color: lightgreen;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 768px) {
