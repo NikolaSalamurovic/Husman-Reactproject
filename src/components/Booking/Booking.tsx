@@ -12,6 +12,7 @@ import { StyledInput } from "../StyledComponents/StyledInput";
 import { BookingService } from "../../services/BookingService";
 
 export function Booking() {
+  const [times, setTimes] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
@@ -119,6 +120,23 @@ export function Booking() {
 
   }
 
+  useEffect(() => {
+    if(checkTableCount("18:00") && checkTableCount("21:00")){
+      setTimes("Välj tid");  
+    }
+    else if (checkTableCount("18:00") === false && checkTableCount("21:00") === true ){
+      setTimes("Välj tid")
+    }
+    else if (checkTableCount("18:00") === true && checkTableCount("21:00") === false ){
+      setTimes("Välj tid")
+    }
+      else {
+        setTimes("Inga tider");
+    }
+  },[customerInfo.numberOfGuests])
+
+
+  
   function uploadBooking() {
     let bookinginfo: IBookingUpload = {
       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
@@ -148,6 +166,7 @@ export function Booking() {
   const onSubmit = handleSubmit(data => console.log(errors))
 
 
+
  function resetInputs(){
    reset({
       firstName: '',
@@ -164,6 +183,16 @@ export function Booking() {
     console.log(select)
     
  }
+
+ function resetGuests(){
+  reset({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '', 
+    selectedTime: "",
+  })
+ }
  function checkedValid(){
   if (buttonDisabled === false){
     setButtonDisabled(true)} 
@@ -171,6 +200,7 @@ export function Booking() {
       setButtonDisabled(false)
     }
  }
+
 
  function resetTime(){
   var select = document.getElementById("selectedTime") as HTMLSelectElement;
@@ -192,112 +222,112 @@ export function Booking() {
 
   return (
     <>
-      <div className="bookingContainer">
-        <div className="backgroundPicture"></div>
-        <h1 className="bookingTitle">Bokning</h1>
-        <div className="bookingBorder">
-          <form onSubmit={onSubmit}
-          >
-            <input type="date" className="bookingDate" onClick={resetInputs} onChange={(e) => {setSelectedDate(e.target.value)}} ></input>
-            <div>
-            {selectedDate.length > 0 && (
-                  <div className="formGuests">
-                    <select
-                      {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests" className="guestNumber" onChange={(e) =>
-                        setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value, time:""})
-                      }
-                    >
-                      <option value="0">Antal gäster*</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                    </select>
-                  </div>)}
-              {customerInfo.numberOfGuests > 0 && (
-                <div className="timeDiv">
-                  <select name="" id="selectedTime" onChange={(e) => setCustomerInfo({...customerInfo, time: e.target.value, date: selectedDate})}>
-                          {!(customerInfo.time === "18:00" ||customerInfo.time === "21:00") && 
-                          <option value={"0"}>Välj tid*</option>}
-                    {selectedDate.length > 0 && checkTableCount("18:00") && (
-                          <option value={"18:00"}>18:00</option>
-                      )}
-                    {selectedDate.length > 0 && checkTableCount("21:00") && (
-                          <option value={"21:00"}>21:00</option>
-                      )}
+    <div className="bookingContainer">
+      <div className="backgroundPicture"></div>
+      <h1 className="bookingTitle">Bokning</h1>
+      <div className="bookingBorder">
+        <form onSubmit={onSubmit}
+        >
+          <input type="date" className="bookingDate" onClick={resetInputs} onChange={(e) => {setSelectedDate(e.target.value)}} ></input>
+          <div>
+          {selectedDate.length > 0 && (
+                <div className="formGuests">
+                  <select
+                    {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests" className="guestNumber" onChange={(e) =>
+                      {setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value, time:""}); resetGuests(); {setButtonDisabled(false); checkTableCount("18:00"); checkTableCount("21:00")}}
+                    }
+                  >
+                    <option value="0">Antal gäster*</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
                   </select>
-                </div>  
-              )}
+                </div>)}
+            {customerInfo.numberOfGuests > 0 && (
+              <div className="timeDiv">
+                <select name="" id="selectedTime" onChange={(e) => setCustomerInfo({...customerInfo, time: e.target.value, date: selectedDate})}>
+                        {!(customerInfo.time === "18:00" ||customerInfo.time === "21:00") && 
+                        <option value={"0"}>{times}</option>}
+                  {selectedDate.length > 0 && checkTableCount("18:00") && (
+                        <option value={"18:00"}>18:00</option>
+                    )}
+                  {selectedDate.length > 0 && checkTableCount("21:00") && (
+                        <option value={"21:00"}>21:00</option>
+                    )}
+                </select>
+              </div>  
+            )}
 
-              {selectedDate.length > 0 && (customerInfo.time=== "18:00" || customerInfo.time === "21:00") && (
+            {selectedDate.length > 0 && (customerInfo.time=== "18:00" || customerInfo.time === "21:00") && (
+              <div>
+                <div className="formInput">
+                  <StyledInput className="formInputs"
+                    type="text" {...register("firstName")} placeholder="Förnamn*" onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn*"onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer*"onChange={(e) =>
+                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                  <StyledInput className="formInputs"
+                    type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
+                      {
+                      setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
+                      })
+                    }
+                    }
+                  />
+                </div>
                 <div>
-                  <div className="formInput">
-                    <StyledInput className="formInputs"
-                      type="text" {...register("firstName")} placeholder="Förnamn*" onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn*"onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer*"onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
-                        {
-                        setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
-                        })
-                      }
-                      }
-                    />
-                  </div>
                   <div>
-                    <div>
-                      <input type="checkbox" className="gdprInput" onClick={checkedValid}/> Genom att klicka i rutan godkänner jag <a href="https://gdprinfo.eu/sv/sv-article-6" target="_blank">villkoren</a> och samtycker härmed att Husman lagrar de personliga uppgifterna skrivna ovan.* 
-                    </div>
-                      <button type="submit" className="submitBtn" 
-                      disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests || !buttonDisabled}
-                      onClick={uploadBooking}>
-                        Boka
-                      </button>
-                      <button className="cancelBtn" onClick={() => {
-                          reset();
-                          cancelBooking();
-                        }}
-                      >
-                        Avbryt
-                      </button>
+                    <input type="checkbox" className="gdprInput" onClick={checkedValid}/> Genom att klicka i rutan godkänner jag <a href="https://gdprinfo.eu/sv/sv-article-6" target="_blank">villkoren</a> och samtycker härmed att Husman lagrar de personliga uppgifterna skrivna ovan.* 
                   </div>
-                  </div>
-                )}
-              </div>
-            </form>
-          </div>
+                    <button type="submit" className="submitBtn" 
+                    disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests || !buttonDisabled}
+                    onClick={uploadBooking}>
+                      Boka
+                    </button>
+                    <button className="cancelBtn" onClick={() => {
+                        reset();
+                        cancelBooking();
+                      }}
+                    >
+                      Avbryt
+                    </button>
+                </div>
+                </div>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
