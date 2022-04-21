@@ -58,13 +58,12 @@ export function Booking() {
     });
   }, [selectedDate]);
 
-
   useEffect(() => {
     console.log(customerInfo);
   }, [customerInfo]);
 
   useEffect(() => {
-    if(customerInfo.time === ""){
+    if (customerInfo.time === "") {
       resetTime();
     }
   }, [customerInfo.time]);
@@ -75,38 +74,49 @@ export function Booking() {
     );
     let earlyBooking = bookings.filter((booking) => booking.time === "18:00");
     let lateBooking = bookings.filter((booking) => booking.time === "21:00");
-    let earlyTwoTable = bookings.filter((booking) => booking.time === "18:00" && booking.numberOfGuests>=7 && booking.numberOfGuests<13)
-    let earlyThreeTable = bookings.filter((booking) => booking.time === "18:00" && booking.numberOfGuests>=13)
-    let lateTwoTable = bookings.filter((booking) => booking.time === "21:00" && booking.numberOfGuests>=7 && booking.numberOfGuests<13)
-    let lateThreeTable = bookings.filter((booking) => booking.time === "21:00" && booking.numberOfGuests>=13)
+    let earlyTwoTable = bookings.filter(
+      (booking) =>
+        booking.time === "18:00" &&
+        booking.numberOfGuests >= 7 &&
+        booking.numberOfGuests < 13
+    );
+    let earlyThreeTable = bookings.filter(
+      (booking) => booking.time === "18:00" && booking.numberOfGuests >= 13
+    );
+    let lateTwoTable = bookings.filter(
+      (booking) =>
+        booking.time === "21:00" &&
+        booking.numberOfGuests >= 7 &&
+        booking.numberOfGuests < 13
+    );
+    let lateThreeTable = bookings.filter(
+      (booking) => booking.time === "21:00" && booking.numberOfGuests >= 13
+    );
 
-
-    if(earlyTwoTable){
-      for(let i = 0; i < earlyTwoTable.length; i++){
-        earlyBooking.push(earlyTwoTable[i])
+    if (earlyTwoTable) {
+      for (let i = 0; i < earlyTwoTable.length; i++) {
+        earlyBooking.push(earlyTwoTable[i]);
       }
     }
-    if(earlyThreeTable){
-      for(let i = 0; i < earlyThreeTable.length; i++){
+    if (earlyThreeTable) {
+      for (let i = 0; i < earlyThreeTable.length; i++) {
         earlyBooking.push(earlyThreeTable[i]);
         earlyBooking.push(earlyThreeTable[i]);
       }
     }
 
-    if(lateTwoTable){
-      for(let i = 0; i < lateTwoTable.length; i++){
-        lateBooking.push(lateTwoTable[i])
+    if (lateTwoTable) {
+      for (let i = 0; i < lateTwoTable.length; i++) {
+        lateBooking.push(lateTwoTable[i]);
       }
     }
-    if(lateThreeTable){
-      for(let i = 0; i < lateThreeTable.length; i++){
+    if (lateThreeTable) {
+      for (let i = 0; i < lateThreeTable.length; i++) {
         lateBooking.push(lateThreeTable[i]);
         lateBooking.push(lateThreeTable[i]);
       }
     }
 
-    
-    
     let tempArray = [];
     for (let i = 0; 15 - earlyBooking.length > i; i++) {
       tempArray.push("18:00");
@@ -115,28 +125,28 @@ export function Booking() {
       tempArray.push("21:00");
     }
     setAvailableBookings(tempArray);
-    console.log(tempArray)
-    console.log(bookingArray)
-
+    console.log(tempArray);
+    console.log(bookingArray);
   }
 
   useEffect(() => {
-    if(checkTableCount("18:00") && checkTableCount("21:00")){
-      setTimes("Välj tid");  
+    if (checkTableCount("18:00") && checkTableCount("21:00")) {
+      setTimes("Välj tid");
+    } else if (
+      checkTableCount("18:00") === false &&
+      checkTableCount("21:00") === true
+    ) {
+      setTimes("Välj tid");
+    } else if (
+      checkTableCount("18:00") === true &&
+      checkTableCount("21:00") === false
+    ) {
+      setTimes("Välj tid");
+    } else {
+      setTimes("Inga tillgängliga tider");
     }
-    else if (checkTableCount("18:00") === false && checkTableCount("21:00") === true ){
-      setTimes("Välj tid")
-    }
-    else if (checkTableCount("18:00") === true && checkTableCount("21:00") === false ){
-      setTimes("Välj tid")
-    }
-      else {
-        setTimes("Inga tider");
-    }
-  },[customerInfo.numberOfGuests])
+  }, [customerInfo.numberOfGuests]);
 
-
-  
   function uploadBooking() {
     let bookinginfo: IBookingUpload = {
       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
@@ -160,82 +170,116 @@ export function Booking() {
     });
   }
 
-  const { register, handleSubmit, control, reset, formState: {errors} } = useForm({
-    mode: "onChange"
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
   });
-  const onSubmit = handleSubmit(data => console.log(errors))
+  const onSubmit = handleSubmit((data) => console.log(errors));
 
-
-
- function resetInputs(){
-   reset({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      numberOfGuests: 0, 
+  function resetInputs() {
+    reset({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      numberOfGuests: 0,
       selectedTime: "",
-    })
+    });
     var select = document.getElementById("selectedTime") as HTMLSelectElement;
-    if(select){
+    if (select) {
       select.value = "0";
     }
-    console.log(select)
-    
- }
-
- function resetGuests(){
-  reset({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '', 
-    selectedTime: "",
-  })
- }
- function checkedValid(){
-  if (buttonDisabled === false){
-    setButtonDisabled(true)} 
-    else {
-      setButtonDisabled(false)
-    }
- }
-
-
- function resetTime(){
-  var select = document.getElementById("selectedTime") as HTMLSelectElement;
-  if(select){
-    select.value = "0";
+    console.log(select);
   }
- }
 
- function checkTableCount(timeString:string){
-  if(availableBookings.filter((timeslot) => timeslot === timeString).length > 0 && customerInfo.numberOfGuests<7){
-    return true;
-  } else if (availableBookings.filter((timeslot) => timeslot === timeString).length > 1 && customerInfo.numberOfGuests>6 && customerInfo.numberOfGuests<13){
-    return true;
-  } else if (availableBookings.filter((timeslot) => timeslot === timeString).length > 2 && customerInfo.numberOfGuests>=13){
-    return true;
-  } 
-  return false;
- }
+  function resetGuests() {
+    reset({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      selectedTime: "",
+    });
+  }
+  function checkedValid() {
+    if (buttonDisabled === false) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }
+
+  function resetTime() {
+    var select = document.getElementById("selectedTime") as HTMLSelectElement;
+    if (select) {
+      select.value = "0";
+    }
+  }
+
+  function checkTableCount(timeString: string) {
+    if (
+      availableBookings.filter((timeslot) => timeslot === timeString).length >
+        0 &&
+      customerInfo.numberOfGuests < 7
+    ) {
+      return true;
+    } else if (
+      availableBookings.filter((timeslot) => timeslot === timeString).length >
+        1 &&
+      customerInfo.numberOfGuests > 6 &&
+      customerInfo.numberOfGuests < 13
+    ) {
+      return true;
+    } else if (
+      availableBookings.filter((timeslot) => timeslot === timeString).length >
+        2 &&
+      customerInfo.numberOfGuests >= 13
+    ) {
+      return true;
+    }
+    return false;
+  }
 
   return (
     <>
-    <div className="bookingContainer">
-      <div className="backgroundPicture"></div>
-      <h1 className="bookingTitle">Bokning</h1>
-      <div className="bookingBorder">
-        <form onSubmit={onSubmit}
-        >
-          <input type="date" className="bookingDate" onClick={resetInputs} onChange={(e) => {setSelectedDate(e.target.value)}} ></input>
-          <div>
-          {selectedDate.length > 0 && (
+      <div className="bookingContainer">
+        <div className="backgroundPicture"></div>
+        <h1 className="bookingTitle">Bokning</h1>
+        <div className="bookingBorder">
+          <form onSubmit={onSubmit}>
+            <input
+              type="date"
+              className="bookingDate"
+              onClick={resetInputs}
+              onChange={(e) => {
+                setSelectedDate(e.target.value);
+              }}
+            ></input>
+            <div>
+              {selectedDate.length > 0 && (
                 <div className="formGuests">
                   <select
-                    {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests" className="guestNumber" onChange={(e) =>
-                      {setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value, time:""}); resetGuests(); {setButtonDisabled(false); checkTableCount("18:00"); checkTableCount("21:00")}}
-                    }
+                    {...register("numberOfGuests", { required: true, min: 1 })}
+                    name="numberOfGuests"
+                    className="guestNumber"
+                    onChange={(e) => {
+                      setCustomerInfo({
+                        ...customerInfo,
+                        numberOfGuests: +e.target.value,
+                        time: "",
+                      });
+                      resetGuests();
+                      {
+                        setButtonDisabled(false);
+                        checkTableCount("18:00");
+                        checkTableCount("21:00");
+                      }
+                    }}
                   >
                     <option value="0">Antal gäster*</option>
                     <option value="1">1</option>
@@ -257,74 +301,145 @@ export function Booking() {
                     <option value="17">17</option>
                     <option value="18">18</option>
                   </select>
-                </div>)}
-            {customerInfo.numberOfGuests > 0 && (
-              <div className="timeDiv">
-                <select name="" id="selectedTime" onChange={(e) => setCustomerInfo({...customerInfo, time: e.target.value, date: selectedDate})}>
-                        {!(customerInfo.time === "18:00" ||customerInfo.time === "21:00") && 
-                        <option value={"0"}>{times}</option>}
-                  {selectedDate.length > 0 && checkTableCount("18:00") && (
-                        <option value={"18:00"}>18:00</option>
-                    )}
-                  {selectedDate.length > 0 && checkTableCount("21:00") && (
-                        <option value={"21:00"}>21:00</option>
-                    )}
-                </select>
-              </div>  
-            )}
-
-            {selectedDate.length > 0 && (customerInfo.time=== "18:00" || customerInfo.time === "21:00") && (
-              <div>
-                <div className="formInput">
-                  <StyledInput className="formInputs"
-                    type="text" {...register("firstName")} placeholder="Förnamn*" onChange={(e) =>
-                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
-                        },
-                      })
-                    }
-                  />
-                  <StyledInput className="formInputs"
-                    type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn*"onChange={(e) =>
-                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
-                        },
-                      })
-                    }
-                  />
-                  <StyledInput className="formInputs"
-                    type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer*"onChange={(e) =>
-                      setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
-                        },
-                      })
-                    }
-                  />
-                  <StyledInput className="formInputs"
-                    type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
-                      {
-                      setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
-                      })
-                    }
-                    }
-                  />
-                </div>
-                <div>
-                  <div>
-                    <input type="checkbox" className="gdprInput" onClick={checkedValid}/> Genom att klicka i rutan godkänner jag <a href="https://gdprinfo.eu/sv/sv-article-6" target="_blank">villkoren</a> och samtycker härmed att Husman lagrar de personliga uppgifterna skrivna ovan.* 
-                  </div>
-                    <button type="submit" className="submitBtn" 
-                    disabled={!customerInfo.customer.lastname || !customerInfo.customer.name || !customerInfo.customer.email || !customerInfo.customer.phone || !customerInfo.numberOfGuests || !buttonDisabled}
-                    onClick={uploadBooking}>
-                      Boka
-                    </button>
-                    <button className="cancelBtn" onClick={() => {
-                        reset();
-                        cancelBooking();
-                      }}
-                    >
-                      Avbryt
-                    </button>
-                </div>
                 </div>
               )}
+              {customerInfo.numberOfGuests > 0 && (
+                <div className="timeDiv">
+                  <select
+                    name=""
+                    id="selectedTime"
+                    onChange={(e) =>
+                      setCustomerInfo({
+                        ...customerInfo,
+                        time: e.target.value,
+                        date: selectedDate,
+                      })
+                    }
+                  >
+                    {!(
+                      customerInfo.time === "18:00" ||
+                      customerInfo.time === "21:00"
+                    ) && <option value={"0"}>{times}</option>}
+                    {selectedDate.length > 0 && checkTableCount("18:00") && (
+                      <option value={"18:00"}>18:00</option>
+                    )}
+                    {selectedDate.length > 0 && checkTableCount("21:00") && (
+                      <option value={"21:00"}>21:00</option>
+                    )}
+                  </select>
+                </div>
+              )}
+
+              {selectedDate.length > 0 &&
+                (customerInfo.time === "18:00" ||
+                  customerInfo.time === "21:00") && (
+                  <div>
+                    <div className="formInput">
+                      <StyledInput
+                        className="formInputs"
+                        type="text"
+                        {...register("firstName")}
+                        placeholder="Förnamn*"
+                        onChange={(e) =>
+                          setCustomerInfo({
+                            ...customerInfo,
+                            customer: {
+                              ...customerInfo.customer,
+                              name: e.target.value,
+                            },
+                          })
+                        }
+                      />
+                      <StyledInput
+                        className="formInputs"
+                        type="text"
+                        {...register("lastName", { required: true, min: 4 })}
+                        placeholder="Efternamn*"
+                        onChange={(e) =>
+                          setCustomerInfo({
+                            ...customerInfo,
+                            customer: {
+                              ...customerInfo.customer,
+                              lastname: e.target.value,
+                            },
+                          })
+                        }
+                      />
+                      <StyledInput
+                        className="formInputs"
+                        type="tel"
+                        {...register("phone", { required: true })}
+                        placeholder="Telefon-nummer*"
+                        onChange={(e) =>
+                          setCustomerInfo({
+                            ...customerInfo,
+                            customer: {
+                              ...customerInfo.customer,
+                              phone: e.target.value,
+                            },
+                          })
+                        }
+                      />
+                      <StyledInput
+                        className="formInputs"
+                        type="email"
+                        {...register("email", { required: true })}
+                        placeholder="Email*"
+                        onChange={(e) => {
+                          setCustomerInfo({
+                            ...customerInfo,
+                            customer: {
+                              ...customerInfo.customer,
+                              email: e.target.value,
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          className="gdprInput"
+                          onClick={checkedValid}
+                        />{" "}
+                        Genom att klicka i rutan godkänner jag{" "}
+                        <a
+                          href="https://gdprinfo.eu/sv/sv-article-6"
+                          target="_blank"
+                        >
+                          villkoren
+                        </a>{" "}
+                        och samtycker härmed att Husman lagrar de personliga
+                        uppgifterna skrivna ovan.*
+                      </div>
+                      <button
+                        type="submit"
+                        className="submitBtn"
+                        disabled={
+                          !customerInfo.customer.lastname ||
+                          !customerInfo.customer.name ||
+                          !customerInfo.customer.email ||
+                          !customerInfo.customer.phone ||
+                          !customerInfo.numberOfGuests ||
+                          !buttonDisabled
+                        }
+                        onClick={uploadBooking}
+                      >
+                        Boka
+                      </button>
+                      <button
+                        className="cancelBtn"
+                        onClick={() => {
+                          reset();
+                          cancelBooking();
+                        }}
+                      >
+                        Avbryt
+                      </button>
+                    </div>
+                  </div>
+                )}
             </div>
           </form>
         </div>
