@@ -279,52 +279,6 @@ export function Booking() {
                   />
                 </div>
                 <div>
-                  <div className="formGuests">
-                    <select
-                      {...register("numberOfGuests", {required: true, min: 1,})} name="numberOfGuests" className="guestNumber" onChange={(e) =>
-                        setCustomerInfo({...customerInfo,numberOfGuests: +e.target.value,})
-                      }
-                    >
-                      <option value="0">Antal gäster*</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
-                  </div>
-                  <div className="formInput">
-                    <StyledInput className="formInputs"
-                      type="text" {...register("firstName")} placeholder="Förnamn*" onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,name: e.target.value
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="text"{...register("lastName", {required: true, min: 4,})} placeholder="Efternamn*"onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,lastname: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="tel" {...register("phone", {required: true})} placeholder="Telefon-nummer*"onChange={(e) =>
-                        setCustomerInfo({...customerInfo,customer: {...customerInfo.customer,phone: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <StyledInput className="formInputs"
-                      type="email" {...register("email", {required: true})} placeholder="Email*" onChange={(e) =>
-                        {
-                        clickclick(); setCustomerInfo({...customerInfo, customer: {...customerInfo.customer, email: e.target.value,} ,
-                        })
-                      }
-                      }
-                    />
-                  </div>
                   <div>
                     <input type="checkbox" className="gdprInput" onClick={checkedValid}/> Genom att klicka i rutan godkänner jag <a href="https://gdprinfo.eu/sv/sv-article-6" target="_blank">villkoren</a> och samtycker härmed att Husman lagrar de personliga uppgifterna skrivna ovan.* 
                   </div>
@@ -341,11 +295,11 @@ export function Booking() {
                       Avbryt
                     </button>
                 </div>
+                </div>
               )}
             </div>
           </form>
         </div>
-      </div>
     </>
   );
 }
