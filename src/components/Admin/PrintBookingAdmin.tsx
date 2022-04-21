@@ -194,7 +194,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
       let resultTime21 = resultDate.filter((bookingtime) => {
         return bookingtime.time === "21:00";
       });
-
+      console.log(resultTime18);
       if (resultTime18.length === 0) {
         setFullTable18(false);
         setNotFullTable18(true);
@@ -225,19 +225,20 @@ export function PrintBookingAdmin(props: IPrintBooking) {
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
             }
-          } else if (booking.numberOfGuests < 0 && booking.numberOfGuests < 7) {
+          } else if (booking.numberOfGuests > 0 && booking.numberOfGuests < 7) {
             counter18 = counter18 + 1;
             if (counter18 >= 15) {
               setFullTable18(true);
               setNotFullTable18(false);
             } else {
+              console.log("border vara här?");
               setFullTable18(false);
               setNotFullTable18(true);
               setDateBooking(valueFromCalendar);
             }
           }
         });
-
+        console.log(counter18);
         setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
@@ -406,134 +407,136 @@ export function PrintBookingAdmin(props: IPrintBooking) {
 
   return (
     <>
-      <article className="containerBooking">
-        <ul className="bookingList">
-          <li className="nameBooking">
-            Sällskap: {bookingCustomer?.customer.name}
-          </li>
-          <li>Datum: {bookingCustomer?.date}</li>
-          <li>Tid: Kl:{bookingCustomer?.time}</li>
-          <li>Antal gäster: {bookingCustomer?.numberOfGuests}</li>
+      <div className="containerBooking">
+        <article className="articleBooking">
+          <ul className="bookingList">
+            <li className="nameBooking">
+              Sällskap: {bookingCustomer?.customer.name}
+            </li>
+            <li>Datum: {bookingCustomer?.date}</li>
+            <li>Tid: Kl:{bookingCustomer?.time}</li>
+            <li>Antal gäster: {bookingCustomer?.numberOfGuests}</li>
 
-          <li>Email: {bookingCustomer?.customer.email}</li>
-          <li>Telefon: {bookingCustomer?.customer.phone}</li>
-          <li>
-            <StyledButton
-              className="buttonDeleteChange"
-              onClick={() => {
-                deleteBooking(bookingCustomer?._id);
-              }}
-            >
-              Ta bort bokning
-            </StyledButton>
-          </li>
-        </ul>
-        <StyledButton
-          className="buttonDeleteChange"
-          onClick={() => {
-            changeBooking();
-          }}
-        >
-          Ändra bokning
-        </StyledButton>
+            <li>Email: {bookingCustomer?.customer.email}</li>
+            <li>Telefon: {bookingCustomer?.customer.phone}</li>
+            <li>
+              <StyledButton
+                className="buttonDeleteChange"
+                onClick={() => {
+                  deleteBooking(bookingCustomer?._id);
+                }}
+              >
+                Ta bort bokning
+              </StyledButton>
+            </li>
+          </ul>
+          <StyledButton
+            className="buttonDeleteChange"
+            onClick={() => {
+              changeBooking();
+            }}
+          >
+            Ändra bokning
+          </StyledButton>
 
-        <ul className={changeInputChange ? "showingChange" : "hiddenChange"}>
-          <li>
-            <div>
-              <h2 className="changeBookingHeading">
-                Ändra i bokningen nedan:{" "}
-              </h2>
-              <p className="changeBookingParagraph">(Fyll i samtliga fält)</p>
-              <form>
-                <input
-                  type="date"
-                  min={minDateCalendar}
-                  onChange={(e) => {
-                    changeDateCalendar(e.target.value);
-                    setAbleButtonDate(true);
-                  }}
-                />
-                <div className="containerInputAdmin">
-                  <label
-                    className="labelNumberOfGuests"
-                    htmlFor="numberOfGuests"
-                  >
-                    {`Antal gäster: `}
-                  </label>
+          <ul className={changeInputChange ? "showingChange" : "hiddenChange"}>
+            <li>
+              <div>
+                <h2 className="changeBookingHeading">
+                  Ändra i bokningen nedan:{" "}
+                </h2>
+                <p className="changeBookingParagraph">(Fyll i samtliga fält)</p>
+                <form>
                   <input
-                    type="number"
-                    min="1"
-                    max="18"
-                    name="numberOfGuests"
-                    value={changeObject.numberOfGuests}
-                    onChange={handleChange}
+                    type="date"
+                    min={minDateCalendar}
+                    onChange={(e) => {
+                      changeDateCalendar(e.target.value);
+                      setAbleButtonDate(true);
+                    }}
                   />
-                </div>
-                {fullTable18 && fullTable21 ? (
-                  <>
-                    <p>Det finns inga tider</p>
-                  </>
-                ) : (
-                  <></>
-                )}
-
-                {notFullTable18 ? (
-                  <>
-                    <button
-                      className="buttonTime"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTimeBooking("18:00");
-                        setAbleButtonTime(true);
-                      }}
+                  <div className="containerInputAdmin">
+                    <label
+                      className="labelNumberOfGuests"
+                      htmlFor="numberOfGuests"
                     >
-                      18:00
-                    </button>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {notFullTable21 ? (
-                  <>
-                    <button
-                      className="buttonTime"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTimeBooking("21:00");
-                        setAbleButtonTime(true);
-                      }}
-                    >
-                      21:00
-                    </button>
-                  </>
-                ) : (
-                  <></>
-                )}
+                      {`Antal gäster: `}
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="18"
+                      name="numberOfGuests"
+                      value={changeObject.numberOfGuests}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {fullTable18 && fullTable21 ? (
+                    <>
+                      <p>Det finns inga tider</p>
+                    </>
+                  ) : (
+                    <></>
+                  )}
 
-                <button
-                  className="buttonSubmit"
-                  disabled={
-                    !ableButtonTime ||
-                    !ableButtonNumberOfGuests ||
-                    !ableButtonDate
-                  }
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log(valueFromCalendar);
-                    addChange(
-                      bookingCustomer?._id,
-                      bookingCustomer?.customerId,
-                      changeObject.numberOfGuests
-                    );
-                  }}
-                >
-                  Skicka ändring
-                </button>
-              </form>
-            </div>
-          </li>
-        </ul>
-      </article>
+                  {notFullTable18 ? (
+                    <>
+                      <button
+                        className="buttonTime"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setTimeBooking("18:00");
+                          setAbleButtonTime(true);
+                        }}
+                      >
+                        18:00
+                      </button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {notFullTable21 ? (
+                    <>
+                      <button
+                        className="buttonTime"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setTimeBooking("21:00");
+                          setAbleButtonTime(true);
+                        }}
+                      >
+                        21:00
+                      </button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
+                  <button
+                    className="buttonSubmit"
+                    disabled={
+                      !ableButtonTime ||
+                      !ableButtonNumberOfGuests ||
+                      !ableButtonDate
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      console.log(valueFromCalendar);
+                      addChange(
+                        bookingCustomer?._id,
+                        bookingCustomer?.customerId,
+                        changeObject.numberOfGuests
+                      );
+                    }}
+                  >
+                    Skicka ändring
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </div>
     </>
   );
 }
