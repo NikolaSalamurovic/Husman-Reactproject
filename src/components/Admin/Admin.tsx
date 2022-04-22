@@ -236,7 +236,7 @@ export function Admin() {
             }
           }
         });
-        console.log(counter18);
+        console.log("Antal bord bokade kl.18: " + counter18);
         setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
@@ -280,7 +280,7 @@ export function Admin() {
             }
           }
         });
-        console.log(counter21);
+        console.log("Antal bord bokade kl.21: " + counter21);
         setCountingTables21(counter21);
       }
     });
@@ -388,7 +388,6 @@ export function Admin() {
     setAbleButtonTime(false);
     setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
-    console.log(e.target.value);
     setChangeObject({ ...changeObject, [name]: e.target.value });
     setValueFromNumberOfGuests(Number(e.target.value));
   }
@@ -396,7 +395,6 @@ export function Admin() {
   //input för kund-info
   function handleChangeCustomer(e: ChangeEvent<HTMLInputElement>) {
     let name: string = e.target.name;
-    console.log(e.target.value);
     setChangeCustomer({ ...changeCustomer, [name]: e.target.value });
   }
 
@@ -432,7 +430,6 @@ export function Admin() {
 
       let service = new BookingService();
       service.postBookings(bookingObject).then((response) => {
-        console.log(response);
         alert("Tack för bokningen, du skickas till startsidan");
         navigation("/");
       });

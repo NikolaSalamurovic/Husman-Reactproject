@@ -392,6 +392,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
     setValueFromCalendar(valueFromCalendar);
   };
 
+  //funktion för att toggla ändra-bokning knapp
   function changeBooking() {
     if (changeInputChange === true) {
       setChangeInputChange(false);
