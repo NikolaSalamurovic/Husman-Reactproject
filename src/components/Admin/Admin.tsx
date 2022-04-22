@@ -1,6 +1,5 @@
-import { ChangeEvent, JSXElementConstructor, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { JsxElement } from "typescript";
 import { IBooking } from "../../models/IBooking";
 import { IBookingUpload } from "../../models/IBookingUpload";
 import { BookingService } from "../../services/BookingService";
@@ -8,7 +7,6 @@ import { StyledButton } from "../StyledComponents/StyledButton";
 import { StyledInput } from "../StyledComponents/StyledInput";
 import "./Admin.css";
 import { PrintBookingAdmin } from "./PrintBookingAdmin";
-
 export interface IBookingCustomer {
   _id: string;
   date: string;
@@ -368,6 +366,8 @@ export function Admin() {
             setDeleteBoolean(false);
           } else {
             setDeleteBoolean(true);
+            alert("Bokningen har tagits bort, du skickas till startsidan");
+            navigation("/");
           }
         });
       }
