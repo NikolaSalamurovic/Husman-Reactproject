@@ -1,5 +1,6 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, JSXElementConstructor, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { JsxElement } from "typescript";
 import { IBooking } from "../../models/IBooking";
 import { IBookingUpload } from "../../models/IBookingUpload";
 import { BookingService } from "../../services/BookingService";
@@ -20,16 +21,18 @@ export interface IBookingCustomer {
   };
 }
 export interface IChange {
+  restaurantId: "624ac35fdf8a9fb11c3ea8ba";
   date: string;
   time: string;
   numberOfGuests: number;
+  customer: string;
 }
 
 export function Admin() {
   const [bookingArray, setBookingArray] = useState<IBooking[]>([]);
   const [deleteBoolean, setDeleteBoolean] = useState(false);
   const [renderBoolean, setRenderBoolean] = useState(false);
-  const [printBookings, setPrintBookings] = useState<any>(<></>);
+  const [printBookings, setPrintBookings] = useState<JSX.Element[]>();
   const [dateBooking, setDateBooking] = useState<string>("");
   const [timeBooking, setTimeBooking] = useState<string>("");
   const [changeInputNew, setChangeInputNew] = useState(false);
@@ -46,7 +49,7 @@ export function Admin() {
   const [valueFromCalendar, setValueFromCalendar] = useState("");
   const [valueFromNumberOfGuests, setValueFromNumberOfGuests] =
     useState<number>(0);
-  const [changeObject, setChangeObject] = useState<any>({
+  const [changeObject, setChangeObject] = useState<IChange>({
     restaurantId: "624ac35fdf8a9fb11c3ea8ba",
     date: dateBooking,
     time: timeBooking,
@@ -64,16 +67,18 @@ export function Admin() {
     useState("");
   const [validationMessageEmail, setValidationMessageEmail] = useState("");
   const [validationMessagePhone, setValidationMessagePhone] = useState("");
-
+  //Räknar antal bord
   const [countingTables18, setCountingTables18] = useState(0);
   const [countingTables21, setCountingTables21] = useState(0);
-
+  //Mininumdatum som dagens datum i kalender
   const [minDateCalendar, setMinDateCalendar] = useState("");
   const [buttonPushed18, setButtonPushed18] = useState(false);
   const [buttonPushed21, setButtonPushed21] = useState(false);
 
-  //Funktion för att hämta bokningar från service
+  //Funktion för att hämta bokningar från service//
   useEffect(() => {
+    //Uppdatering av korrekt datum i kalender för att man inte
+    //ska kunna boka innan dagens datum
     if (new Date().getMonth() + 1 <= 9 && new Date().getDate() <= 9) {
       setMinDateCalendar(
         new Date().getFullYear() +
@@ -139,7 +144,7 @@ export function Admin() {
     setPrintBookings(bookings);
   }, [renderBoolean]);
 
-  //funktion för att ändra bokning genom api-anrop genom service
+  //funktion för att ändra bokning genom api-anrop via service
   const navigation = useNavigate();
   function changeBooking(
     bookingid: string | undefined,
@@ -148,11 +153,6 @@ export function Admin() {
     bookingtime: string,
     numberofguests: number
   ) {
-    console.log(bookingid);
-    console.log(bookingcustomerid);
-    console.log(date);
-    console.log(bookingtime);
-    console.log(numberofguests);
     let updatedBooking = {
       id: bookingid,
       restaurantId: "624ac35fdf8a9fb11c3ea8ba",
@@ -236,7 +236,7 @@ export function Admin() {
             }
           }
         });
-        console.log(counter18);
+        console.log("Antal bord bokade kl.18: " + counter18);
         setCountingTables18(counter18);
       }
       if (resultTime21.length === 0) {
@@ -280,7 +280,7 @@ export function Admin() {
             }
           }
         });
-        console.log(counter21);
+        console.log("Antal bord bokade kl.21: " + counter21);
         setCountingTables21(counter21);
       }
     });
@@ -357,7 +357,7 @@ export function Admin() {
     }
   }, [countingTables21, valueFromNumberOfGuests]);
 
-  //funktion för att ta bort bokning genom api-anrop till serveice
+  //funktion för att ta bort bokning genom api-anrop till service
   function deleteBooking(bookingid: string | undefined) {
     for (let i = 0; i < bookingArray.length; i++) {
       if (bookingid === bookingArray[i]._id) {
@@ -383,12 +383,11 @@ export function Admin() {
       setChangeInputNew(true);
     }
   }
-  //input för antal gäster
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  //funktion för handle input för antal gäster
+  function handleChangeNumberOfGuests(e: ChangeEvent<HTMLInputElement>) {
     setAbleButtonTime(false);
     setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
-    console.log(e.target.value);
     setChangeObject({ ...changeObject, [name]: e.target.value });
     setValueFromNumberOfGuests(Number(e.target.value));
   }
@@ -396,7 +395,6 @@ export function Admin() {
   //input för kund-info
   function handleChangeCustomer(e: ChangeEvent<HTMLInputElement>) {
     let name: string = e.target.name;
-    console.log(e.target.value);
     setChangeCustomer({ ...changeCustomer, [name]: e.target.value });
   }
 
@@ -406,15 +404,16 @@ export function Admin() {
   };
   //validering för kund-info
   function printNewBooking() {
-    console.log(changeCustomer.phone);
     if (changeCustomer.name.length < 2) {
-      setValidationMessageName("Minst 2 tecken");
+      setValidationMessageName("Det måste vara minst 2 tecken i förnamnet");
     } else if (changeCustomer.lastname.length < 2) {
-      setValidationMessageLastname("Minst 2 tecken");
+      setValidationMessageLastname(
+        "Det måste vara minst 2 tecken i efternamnet"
+      );
     } else if (changeCustomer.email.includes("@") === false) {
-      setValidationMessageEmail("Måste vara en email");
+      setValidationMessageEmail("Det måste vara en email (xxxx@xxx.xx)");
     } else if (changeCustomer.phone.length < 5) {
-      setValidationMessagePhone("Telefonnummer krävs");
+      setValidationMessagePhone("Fullständigt telefonnummer krävs");
     } else {
       let bookingObject: IBookingUpload = {
         restaurantId: "624ac35fdf8a9fb11c3ea8ba",
@@ -431,7 +430,6 @@ export function Admin() {
 
       let service = new BookingService();
       service.postBookings(bookingObject).then((response) => {
-        console.log(response);
         alert("Tack för bokningen, du skickas till startsidan");
         navigation("/");
       });
@@ -441,6 +439,10 @@ export function Admin() {
     <>
       <div className="containerAdmin">
         <h2 className="headingAdmin">Bokningar</h2>
+        <p className="infoLargeBooking">
+          Obs! Vid bokning fler än 18 personer, gör flera bokningar med samma
+          e-mail.
+        </p>
         <StyledButton
           className="buttonDeleteChange"
           onClick={() => {
@@ -449,7 +451,7 @@ export function Admin() {
         >
           Boka ny bokning
         </StyledButton>
-        {/* <article className="newBooking"> */}
+
         <ul className={changeInputNew ? "newBooking showingNew" : "hiddenNew"}>
           <li>
             <div>
@@ -479,7 +481,7 @@ export function Admin() {
                     max="18"
                     name="numberOfGuests"
                     value={changeObject.numberOfGuests}
-                    onChange={handleChange}
+                    onChange={handleChangeNumberOfGuests}
                   />
                 </div>
                 {fullTable18 && fullTable21 ? (
@@ -563,14 +565,9 @@ export function Admin() {
                     placeholder="E-mail"
                     name="email"
                     className="styledInputAdmin"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    title="please enter valid email [test@test.com]."
                     required
                     value={changeCustomer.email}
                     onChange={handleChangeCustomer}
-                    // onClick={() => {
-                    //   setAbleButtonEmail(true);
-                    // }}
                   />
                   <p className="validationMessage">{validationMessageEmail}</p>
                   <StyledInput
@@ -603,7 +600,6 @@ export function Admin() {
             </div>
           </li>
         </ul>
-        {/* </article> */}
         <section className="sectionAdmin">{printBookings}</section>
       </div>
     </>

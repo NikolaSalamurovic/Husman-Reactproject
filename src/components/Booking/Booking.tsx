@@ -6,8 +6,7 @@ import { IBooking } from "../../models/IBooking";
 import { IBookingUpload } from "../../models/IBookingUpload";
 import { useNavigate } from "react-router-dom";
 import "./Booking.css";
-import { useForm, useFormState } from "react-hook-form";
-import { StyledButton } from "../StyledComponents/StyledButton";
+import { useForm } from "react-hook-form";
 import { StyledInput } from "../StyledComponents/StyledInput";
 import { BookingService } from "../../services/BookingService";
 
@@ -125,8 +124,6 @@ export function Booking() {
       tempArray.push("21:00");
     }
     setAvailableBookings(tempArray);
-    console.log(tempArray);
-    console.log(bookingArray);
   }
 
   useEffect(() => {
@@ -162,7 +159,6 @@ export function Booking() {
     };
     let service = new BookingService();
     service.postBookings(bookinginfo).then((response) => {
-      console.log(response);
       alert(
         "Du har nu bokat ett bord och kommer att skickas vidare till startsidan."
       );
@@ -194,7 +190,6 @@ export function Booking() {
     if (select) {
       select.value = "0";
     }
-    console.log(select);
   }
 
   function resetGuests() {
@@ -250,6 +245,12 @@ export function Booking() {
       <div className="bookingContainer">
         <div className="backgroundPicture"></div>
         <h1 className="bookingTitle">Bokning</h1>
+        <div className="containerLargeBooking">
+          <p className="infoLargeBooking">
+            Vid bokning fler än 18 personer, kontakta restaurangen via telefon
+            eller mail.
+          </p>
+        </div>
         <div className="bookingBorder">
           <form onSubmit={onSubmit}>
             <input

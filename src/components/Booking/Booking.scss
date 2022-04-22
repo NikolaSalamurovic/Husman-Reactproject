@@ -1,76 +1,104 @@
 .bookingContainer {
   min-height: 85vh;
 }
-.bookingTitle{
-    text-align: center;
-    display: block;
-    position: relative;
-    top: 9vh;
-    color: white;
-    font-size: 4rem;
-    text-shadow: 2px 2px 16px black;
+.bookingTitle {
+  text-align: center;
+  display: block;
+  position: relative;
+  top: 9vh;
+  color: white;
+  font-size: 4rem;
+  text-shadow: 2px 2px 16px black;
+}
+
+.containerLargeBooking {
+  position: relative;
+  top: 10vh;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.infoLargeBooking {
+  text-align: center;
+  width: fit-content;
+
+  border: 5px solid #4f5b6261;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  background-color: rgba(255, 255, 255, 0.708);
+}
+.bookingBorder {
+  display: block;
+  position: relative;
+  margin: auto;
+  width: 500px;
+  top: 10vh;
+  height: 30vh;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.763);
+  border: 5px solid #4f5b6261;
+  border-radius: 5px;
+  min-height: 400px;
+}
+.formInput {
+  margin: auto;
+  width: auto;
+}
+.formInputs {
+  width: 70% !important;
+}
+.backgroundPicture {
+  position: absolute;
+  left: auto;
+  top: 15vh;
+  min-height: 85vh;
+  width: 100%;
+  background-image: url("../.././assets/3353899.jpg");
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: cover;
+  filter: blur(5px);
+}
+.guestNumber {
+  width: 100px;
+  height: 20px;
+  text-align: center;
+}
+.submitBtn {
+  margin-right: 30px;
+  margin-top: 15px;
+  font-size: 20px;
+}
+.cancelBtn {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .bookingTitle {
+    top: 1vh;
   }
-  .bookingBorder{
-    display: block;
-    position: relative;
+
+  .containerLargeBooking {
+    top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .infoLargeBooking {
+    width: 80%;
     margin: auto;
-    width: 500px;
-    top: 10vh;
-    height: 30vh;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.763);
-    border: 5px solid #4f5b6261;
-    border-radius: 5px;
-    min-height: 400px;
   }
-  .formInput{
-    margin: auto;
-    width: auto;
+  .bookingBorder {
+    width: 80%;
+    top: 2vh;
+    min-width: 80%;
+    height: 45vh;
+    min-height: 470px;
   }
-  .formInputs{
-    width: 70% !important;
+  .backgroundPicture {
+    top: 80px;
   }
-  .backgroundPicture{
-    position: absolute;
-    left: auto;
-    top: 15vh;
-    min-height: 85vh;
-    width: 100%;
-    background-image: url("../.././assets/3353899.jpg");
-    background-repeat: repeat;
-    background-position: center center;
-    background-size: cover;
-    filter: blur(5px);
-  }
-  .guestNumber{
-    width: 100px;
-    height: 20px;
-    text-align: center;
-  }
-  .submitBtn{
-    margin-right: 30px;
-    margin-top: 15px;
-    font-size: 20px;
-  }
-  .cancelBtn{
-    font-size: 20px;
-    margin-top: 30px;
-  }
-  
-  @media screen and (max-width: 768px) {
-  
-    .bookingTitle {
-      top: 1vh;
-    }
-    .bookingBorder{
-        width: 70%;
-        top: 2vh;
-        min-width: 80%;
-        height: 45vh;
-        min-height: 470px;
-      }
-      .backgroundPicture {
-        top: 80px;
-      }
-  }
-  
+}
