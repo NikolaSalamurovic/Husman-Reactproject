@@ -63,9 +63,11 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   const [ableButtonNumberOfGuests, setAbleButtonNumberOfGuests] =
     useState(false);
   const [ableButtonDate, setAbleButtonDate] = useState(false);
-
+  //Räknar antal bord
   const [countingTables18, setCountingTables18] = useState(0);
   const [countingTables21, setCountingTables21] = useState(0);
+
+  //Mininumdatum som dagens datum i kalender
   const [minDateCalendar, setMinDateCalendar] = useState("");
 
   //Hämtning av bokningar från bokningsservice
@@ -361,7 +363,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
   }
 
   //funktion för att fånga ändring input antalet gäster
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChangeNumberOfGuests(e: ChangeEvent<HTMLInputElement>) {
     setAbleButtonNumberOfGuests(true);
     let name: string = e.target.name;
 
@@ -461,7 +463,7 @@ export function PrintBookingAdmin(props: IPrintBooking) {
                       max="18"
                       name="numberOfGuests"
                       value={changeObject.numberOfGuests}
-                      onChange={handleChange}
+                      onChange={handleChangeNumberOfGuests}
                     />
                   </div>
                   {fullTable18 && fullTable21 ? (

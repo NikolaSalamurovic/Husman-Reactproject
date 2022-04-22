@@ -74,6 +74,7 @@ ul li div form .containerCustomer {
 
 ul li div form .containerCustomer .styledInputAdmin {
   width: 200px;
+  margin-bottom: 5px;
 }
 
 ul li div form .containerCustomer .bookNewButton {
@@ -89,7 +90,11 @@ ul li div form .hiddenCustomer {
 }
 
 .validationMessage {
+  margin-top: 0;
   font-style: italic;
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 7px;
 }
 
 .buttonPushedTime {
